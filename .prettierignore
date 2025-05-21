@@ -1,6 +1,47 @@
-# Add files here to ignore them from prettier formatting
-/dist
-/coverage
-/.nx/cache
-/.nx/workspace-data
-.angular
+# ─────────────────────────────
+# Core folders to ignore
+# ─────────────────────────────
+node_modules/
+dist/
+coverage/
+build/
+e2e/
+tmp/
+temp/
+.nx/
+.nx/cache/
+.nx/workspace-data
+.angular/
+.cache/
+
+# ─────────────────────────────
+# Lockfiles (not formatted)
+# ─────────────────────────────
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# ─────────────────────────────
+# Static/binary files (skip formatting)
+# ─────────────────────────────
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.ico
+*.mp4
+*.webm
+*.gif
+
+# ─────────────────────────────
+# Non-source folders
+# ─────────────────────────────
+apps/**/src/assets/
+apps/**/src/mocks/
+mocks/
+*.mock.json
+
+# Optional:
+# ignore IDE/editor files
+.idea/
+.vscode/

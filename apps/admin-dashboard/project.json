@@ -18,7 +18,18 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/admin-dashboard/public"
+            "input": "apps/admin-dashboard/src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/admin-dashboard/src/mocks",
+            "output": "mocks"
+          },
+          {
+            "glob": "favicon.ico",
+            "input": "apps/admin-dashboard/src",
+            "output": "/"
           }
         ],
         "styles": ["apps/admin-dashboard/src/styles.css"],

@@ -63,6 +63,26 @@
       "linter": "eslint",
       "style": "css",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "inlineStyle": true,
+      "skipTests": true,
+      "changeDetection": "OnPush"
+    },
+    "@nx/angular:service": {
+      "skipTests": true
+    },
+    "@nx/angular:pipe": {
+      "skipTests": true
+    },
+    "@nx/angular:directive": {
+      "skipTests": true
+    },
+    "@nx/angular:interceptor": {
+      "skipTests": true
+    },
+    "@nx/angular:resolver": {
+      "skipTests": true
     }
   }
 }
