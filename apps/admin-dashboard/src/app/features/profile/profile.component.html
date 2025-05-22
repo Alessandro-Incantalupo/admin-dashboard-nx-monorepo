@@ -1,0 +1,28 @@
+<app-breadcrumb class="text-white mb-4" [items]="breadcrumbItems()"/>
+
+<div class="flex items-center justify-center min-h-screen">
+
+  <div class="text-center">
+    <!-- Profile Info -->
+    <app-profile-info [userName]="username()" email="me@lanno.dev" [userRole]="userRole()"
+                      avatarUrl="https://avatars.githubusercontent.com/u/12519008?v=4"/>
+
+    <!-- Theme Selector -->
+    <app-theme-selector></app-theme-selector>
+
+    <!-- Logout Button -->
+    <div class="my-2 mx-4">
+      <button (click)="logout()"
+              class="w-full text-red-500 font-semibold text-xs px-3 py-2 rounded-md hover:bg-red-50">
+        Logout
+      </button>
+    </div>
+
+    <!-- Homepage Button -->
+    <div class="my-2 mx-4">
+      <button app-button routerLink="/" impact="bold" tone="primary" shape="rounded" size="medium">
+        Homepage
+      </button>
+    </div>
+  </div>
+</div>

@@ -20,13 +20,13 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@core/admin-dashboard": ["apps/admin-dashboard/src/app/core/*"],
-      "@shared/admin-dashboard": ["apps/admin-dashboard/src/app/shared/*"],
-      "@layouts/admin-dashboard": ["apps/admin-dashboard/src/app/layouts/*"],
-      "@features/admin-dashboard": ["apps/admin-dashboard/src/app/features/*"],
-      "@environments/admin-dashboard": ["apps/admin-dashboard/src/app/environments/*"]
-    },
+      "@root/*": ["package.json"],
+      "@core/*": ["apps/admin-dashboard/src/app/core/*"],
+      "@shared/*": ["apps/admin-dashboard/src/app/shared/*"],
+      "@layouts/*": ["apps/admin-dashboard/src/app/layouts/*"],
+      "@features/*": ["apps/admin-dashboard/src/app/features/*"],
+      "@environments/*": ["apps/admin-dashboard/src/environments/*"]
+    }
   },
   "exclude": ["tmp"]
 }
-

@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+  <div>
+    <label>Name</label>
+    <input
+      formControlName="name"
+      type="text"
+      class="input"
+      [class.border-red-500]="submitted() && form.get('name')?.invalid"
+    />
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input
+      formControlName="email"
+      type="email"
+      class="input"
+      [class.border-red-500]="submitted() && form.get('email')?.invalid"
+    />
+  </div>
+
+  <div>
+    <label>Role</label>
+    <select formControlName="role" class="input">
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add User</button>
+
+  {{ loggedValue() }}
+</form>
