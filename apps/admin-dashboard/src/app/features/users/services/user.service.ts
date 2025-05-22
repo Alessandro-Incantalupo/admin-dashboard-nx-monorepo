@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { injectBaseUrl } from '@core/CIF/inject-base-url';
 import { map } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { User, UsersResponse } from '../models/user.model';
 
 @Injectable({
@@ -18,10 +17,9 @@ export class UsersService {
   );
 
   getUsers() {
-    return this.http.get<UsersResponse>(this.usersUrl).pipe(
-      delay(600), // remove in prod
-      map(response => response.data)
-    );
+    return this.http
+      .get<UsersResponse>(this.usersUrl)
+      .pipe(map(response => response.data));
   }
 
   addUser(user: User) {

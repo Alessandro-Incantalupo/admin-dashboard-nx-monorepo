@@ -33,20 +33,26 @@ export const UsersStore = signalStore(
     hasError: computed(() => !!error()),
   })),
   withMethods((state, userService = inject(UsersService)) => {
-    const loadUsers = rxMethod<void>(() => {
-      patchState(state, { loading: true, error: null });
-
-      return userService.getUsers().pipe(
-        tapResponse({
-          next: users => patchState(state, { users, loading: false }),
-          error: () =>
-            patchState(state, {
-              loading: false,
-              error: 'Failed to load users',
-            }),
-        })
-      );
-    });
+    const loadUsers = rxMethod<void>(
+      pipe(
+        tap(() => {
+          patchState(state, { loading: true, error: null });
+        }),
+        switchMap(() =>
+          userService.getUsers().pipe(
+            tapResponse({
+              next: users => patchState(state, { users, loading: false }),
+              error: error => {
+                patchState(state, {
+                  loading: false,
+                  error: 'Failed to load users',
+                });
+              },
+            })
+          )
+        )
+      )
+    );
 
     const addUser = rxMethod<User>(
       pipe(
