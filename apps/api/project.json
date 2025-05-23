@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/api/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun run apps/api/src/server.ts",
+        "cwd": "."
+      }
+    },
+    "build": {
+      "executor": "@nx/js:esbuild",
+      "options": {
+        "outputPath": "dist/apps/api",
+        "main": "apps/api/src/server.ts",
+        "tsConfig": "apps/api/tsconfig.json",
+        "bundle": true,
+        "platform": "node",
+        "target": "node18",
+        "external": ["hono"]
+      }
+    }
+  },
+  "tags": ["type:api", "scope:server"]
+}
