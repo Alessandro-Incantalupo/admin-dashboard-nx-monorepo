@@ -4,8 +4,8 @@ import {
   input,
   output,
 } from '@angular/core';
+import { User } from '@models';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { User } from '@features/users/models/user.model';
 
 @Component({
   selector: 'app-user-table',

@@ -1,4 +1,4 @@
-import app from './index.ts';
+import app from './index';
 
 Bun.serve({
   fetch: app.fetch,

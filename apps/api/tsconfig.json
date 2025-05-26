@@ -10,8 +10,6 @@
     "resolveJsonModule": true,
     "types": ["bun"], // ✅ important: adds Bun global types
     "outDir": "../../dist/out-tsc",
-    "rootDir": "./src",
-
     // Strictness
     "strict": true,
     "skipLibCheck": true,

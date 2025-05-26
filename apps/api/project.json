@@ -12,7 +12,7 @@
       }
     },
     "build": {
-      "executor": "@nx/js:esbuild",
+      "executor": "@nx/esbuild:esbuild",
       "options": {
         "outputPath": "dist/apps/api",
         "main": "apps/api/src/server.ts",

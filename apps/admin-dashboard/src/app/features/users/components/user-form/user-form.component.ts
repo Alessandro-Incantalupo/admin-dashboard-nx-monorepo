@@ -49,12 +49,8 @@ export class UserFormComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
         map(value => value.toUpperCase())
       )
-      .subscribe(val => {
-        this.loggedValue.set(val);
-      });
+      .subscribe(val => {});
   }
-
-  loggedValue = signal('');
 
   onSubmit() {
     this.submitted.set(true);
