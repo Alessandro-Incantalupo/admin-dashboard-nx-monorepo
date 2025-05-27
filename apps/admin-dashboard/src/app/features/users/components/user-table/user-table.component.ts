@@ -5,11 +5,10 @@ import {
   output,
 } from '@angular/core';
 import { User } from '@models';
-import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-user-table',
-  imports: [SvgIconComponent],
+  imports: [],
   templateUrl: './user-table.component.html',
   styles: `
     :host {

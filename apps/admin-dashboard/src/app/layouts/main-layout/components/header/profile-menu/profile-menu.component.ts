@@ -1,20 +1,19 @@
-import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { PATHS } from '@core/constants/routes';
-import { ThemeService } from '@core/services/theme.service';
+import { ThemeStore } from '@core/state/theme.store';
 import { AuthService } from '@features/auth/services/auth.service';
 import { ClickOutsideDirective } from '@shared/directives/click-outside.directive';
 import { SvgIconComponent } from 'angular-svg-icon';
 @Component({
   selector: 'app-profile-menu',
-  imports: [NgClass, SvgIconComponent, RouterLink, ClickOutsideDirective],
+  imports: [SvgIconComponent, ClickOutsideDirective],
   templateUrl: './profile-menu.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileMenuComponent {
-  themeService = inject(ThemeService);
+  themeStore = inject(ThemeStore);
   authService = inject(AuthService);
   router = inject(Router);
 
@@ -37,54 +36,8 @@ export class ProfileMenuComponent {
     },
   ];
 
-  public themeColors = [
-    {
-      name: 'base',
-      code: '#e11d48',
-    },
-    {
-      name: 'yellow',
-      code: '#f59e0b',
-    },
-    {
-      name: 'green',
-      code: '#22c55e',
-    },
-    {
-      name: 'blue',
-      code: '#3b82f6',
-    },
-    {
-      name: 'orange',
-      code: '#ea580c',
-    },
-    {
-      name: 'red',
-      code: '#cc0022',
-    },
-    {
-      name: 'violet',
-      code: '#6d28d9',
-    },
-  ];
-
-  public themeMode = ['light', 'dark'];
-
   public toggleMenu(): void {
     this.isOpen = !this.isOpen;
-  }
-
-  toggleThemeMode() {
-    this.themeService.theme.update(theme => {
-      const mode = !this.themeService.isDark ? 'dark' : 'light';
-      return { ...theme, mode: mode };
-    });
-  }
-
-  toggleThemeColor(color: string) {
-    this.themeService.theme.update(theme => {
-      return { ...theme, color: color };
-    });
   }
 
   getDropdownClasses() {

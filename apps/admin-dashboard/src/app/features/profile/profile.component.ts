@@ -1,18 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { AuthService } from '../auth/services/auth.service';
-import { SvgIconComponent } from 'angular-svg-icon';
-import { ButtonComponent } from '../../shared/button/button.component';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
-import { ThemeSelectorComponent } from './theme-selector/theme-selector.component';
+import { ButtonComponent } from '../../shared/button/button.component';
+import { AuthService } from '../auth/services/auth.service';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
+import { ThemeSelectorComponent } from './theme-selector/theme-selector.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styles: [],
   imports: [
-    SvgIconComponent,
     ButtonComponent,
     RouterLink,
     BreadcrumbComponent,
@@ -38,12 +36,14 @@ export default class ProfileComponent {
     this.userRole.set(this.userData?.['role']);
 
     // Get username from route parameters
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(params => {
       const currentUsername = params['username'] || this.username();
       this.username.set(currentUsername);
 
       // ✅ Update breadcrumbs dynamically
-      this.breadcrumbItems.set([{ label: 'Profile', route: `/profile/${currentUsername}` }]);
+      this.breadcrumbItems.set([
+        { label: 'Profile', route: `/profile/${currentUsername}` },
+      ]);
     });
   }
 

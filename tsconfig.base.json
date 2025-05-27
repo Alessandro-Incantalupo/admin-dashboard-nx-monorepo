@@ -26,7 +26,6 @@
       "@environments/*": ["apps/admin-dashboard/src/environments/*"],
       "@features/*": ["apps/admin-dashboard/src/app/features/*"],
       "@layouts/*": ["apps/admin-dashboard/src/app/layouts/*"],
-      "@root/*": ["package.json"],
       "@shared/*": ["apps/admin-dashboard/src/app/shared/*"]
     }
   },

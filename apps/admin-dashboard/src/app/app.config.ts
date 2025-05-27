@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
 // import packageJson from '@root/package.json';
+import { ThemeStore } from '@core/state/theme.store';
 import { provideAngularSvgIcon } from 'angular-svg-icon';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
@@ -51,5 +52,6 @@ export const appConfig: ApplicationConfig = {
       },
       loader: TranslocoHttpLoader,
     }),
+    ThemeStore,
   ],
 };
