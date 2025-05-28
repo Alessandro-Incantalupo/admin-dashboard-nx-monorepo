@@ -51,13 +51,13 @@ export class ProfileMenuComponent {
   }
 
   signIn() {
-    this.router.navigate([PATHS.SIGN_IN]);
+    this.router.navigate([PATHS.AUTH, PATHS.SIGN_IN]);
   }
 
   toProfile(link: string) {
     const userData = this.authService.getUserData(); // Get the user object
     const username = userData?.username || 'Guest'; // Extract the username
-    this.router.navigate([PATHS.PROFILE + '/' + username], {
+    this.router.navigate([PATHS.PROFILE, username], {
       state: { userData: this.authService.getUserData() },
     });
   }

@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ThemeStore } from '@core/state/theme.store';
 import { SvgIconComponent } from 'angular-svg-icon';
 
@@ -10,6 +10,4 @@ import { SvgIconComponent } from 'angular-svg-icon';
 })
 export class ThemeSelectorComponent {
   themeStore = inject(ThemeStore);
-
-  themeChanged = output<{ color: string; mode: string }>();
 }
