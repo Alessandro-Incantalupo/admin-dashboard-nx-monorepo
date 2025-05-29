@@ -1,7 +1,6 @@
 import { computed, inject } from '@angular/core';
 import { tapResponse } from '@ngrx/operators';
 import {
-  patchState,
   signalStore,
   withComputed,
   withHooks,
@@ -10,24 +9,37 @@ import {
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
+import {
+  CallState,
+  updateState,
+  withDevtools,
+} from '@angular-architects/ngrx-toolkit';
+
 import { UsersService } from '@features/users/services/user.service';
 import { pipe, switchMap, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import {
+  setUsersError,
+  setUsersLoaded,
+  setUsersLoading,
+  withUsersCallState,
+} from './features/withUserCallState';
 
 type State = {
   users: User[];
-  loading: boolean;
   error: string | null;
+  usersCallState: CallState;
 };
 
 const initialState: State = {
   users: [],
-  loading: false,
   error: null,
+  usersCallState: 'init',
 };
 
 export const UsersStore = signalStore(
   withState(initialState),
+  withDevtools('Users Store'),
   withComputed(({ users, error }) => ({
     hasUsers: computed(() => users().length > 0),
     hasError: computed(() => !!error()),
@@ -35,19 +47,23 @@ export const UsersStore = signalStore(
   withMethods((state, userService = inject(UsersService)) => {
     const loadUsers = rxMethod<void>(
       pipe(
-        tap(() => {
-          patchState(state, { loading: true, error: null });
-        }),
+        tap(() => updateState(state, 'Users: Loading', setUsersLoading())),
         switchMap(() =>
           userService.getUsers().pipe(
             tapResponse({
-              next: users => patchState(state, { users, loading: false }),
-              error: error => {
-                patchState(state, {
-                  loading: false,
-                  error: 'Failed to load users',
-                });
-              },
+              next: users =>
+                updateState(
+                  state,
+                  'Users: Load Success',
+                  { users },
+                  setUsersLoaded()
+                ),
+              error: () =>
+                updateState(
+                  state,
+                  'Users: Load Error',
+                  setUsersError('Failed to load users')
+                ),
             })
           )
         )
@@ -56,61 +72,16 @@ export const UsersStore = signalStore(
 
     const addUser = rxMethod<User>(
       pipe(
-        tap(() => patchState(state, { loading: true })),
         switchMap(newUser =>
           userService.addUser(newUser).pipe(
             tapResponse({
               next: user =>
-                patchState(state, {
+                updateState(state, 'Users: Add', {
                   users: [...state.users(), user],
-                  loading: false,
                 }),
               error: () =>
-                patchState(state, {
+                updateState(state, 'Users: Add Error', {
                   error: 'Failed to add user',
-                  loading: false,
-                }),
-            })
-          )
-        )
-      )
-    );
-    const updateUser = rxMethod<User>(
-      pipe(
-        tap(() => patchState(state, { loading: true, error: null })),
-        switchMap(updatedUser =>
-          userService.updateUser(updatedUser).pipe(
-            tapResponse({
-              next: user =>
-                patchState(state, {
-                  users: state.users().map(u => (u.id === user.id ? user : u)),
-                  loading: false,
-                }),
-              error: () =>
-                patchState(state, {
-                  error: 'Failed to update user',
-                  loading: false,
-                }),
-            })
-          )
-        )
-      )
-    );
-    const deleteUser = rxMethod<string>(
-      pipe(
-        tap(() => patchState(state, { loading: true, error: null })),
-        switchMap(userId =>
-          userService.deleteUser(userId).pipe(
-            tapResponse({
-              next: () =>
-                patchState(state, {
-                  users: state.users().filter(u => u.id !== userId),
-                  loading: false,
-                }),
-              error: () =>
-                patchState(state, {
-                  error: 'Failed to delete user',
-                  loading: false,
                 }),
             })
           )
@@ -118,7 +89,45 @@ export const UsersStore = signalStore(
       )
     );
 
-    const reset = () => patchState(state, initialState);
+    const updateUser = rxMethod<User>(
+      pipe(
+        switchMap(updatedUser =>
+          userService.updateUser(updatedUser).pipe(
+            tapResponse({
+              next: user =>
+                updateState(state, 'Users: Update', {
+                  users: state.users().map(u => (u.id === user.id ? user : u)),
+                }),
+              error: () =>
+                updateState(state, 'Users: Update Error', {
+                  error: 'Failed to update user',
+                }),
+            })
+          )
+        )
+      )
+    );
+
+    const deleteUser = rxMethod<string>(
+      pipe(
+        switchMap(userId =>
+          userService.deleteUser(userId).pipe(
+            tapResponse({
+              next: () =>
+                updateState(state, 'Users: Delete', {
+                  users: state.users().filter(u => u.id !== userId),
+                }),
+              error: () =>
+                updateState(state, 'Users: Delete Error', {
+                  error: 'Failed to delete user',
+                }),
+            })
+          )
+        )
+      )
+    );
+
+    const reset = () => updateState(state, 'Users: Reset', initialState);
 
     return { loadUsers, reset, addUser, updateUser, deleteUser };
   }),
@@ -126,5 +135,6 @@ export const UsersStore = signalStore(
     onInit: () => {
       loadUsers();
     },
-  }))
+  })),
+  withUsersCallState()
 );
