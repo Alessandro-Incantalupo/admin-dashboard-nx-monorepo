@@ -1,6 +1,7 @@
 // apps/api/src/index.ts
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import auth from './routes/auth';
 import usersRoute from './routes/users';
 
 const app = new Hono();
@@ -8,5 +9,6 @@ const app = new Hono();
 app.use('*', cors());
 app.get('/', c => c.text('🟢 API is alive'));
 app.route('/users', usersRoute);
+app.route('/auth', auth);
 
 export default app;

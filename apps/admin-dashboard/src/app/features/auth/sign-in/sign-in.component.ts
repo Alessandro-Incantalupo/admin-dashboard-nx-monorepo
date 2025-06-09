@@ -1,10 +1,14 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { SvgIconComponent } from 'angular-svg-icon';
+import { Component, effect, inject, signal } from '@angular/core';
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ButtonComponent } from '../../../shared/button/button.component';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { SvgIconComponent } from 'angular-svg-icon';
 import { PATHS } from '../../../core/constants/routes';
+import { ButtonComponent } from '../../../shared/button/button.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,31 +25,36 @@ export default class SignInComponent {
   submitted = false;
   passwordTextType!: boolean;
   loginError = signal<string | null>(null); // Store login error
+  protected PATHS = PATHS;
 
-  // Reactive Form
   form = this.nnfb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
 
+  readonly handleRedirect = effect(() => {
+    const status = this.authService.loginStatus();
+    const user = this.authService.userData();
+
+    if (status === 'success' && user) {
+      const username = user.username ?? user.email?.split('@')[0];
+      if (!username) return;
+      this.router.navigate([PATHS.PROFILE, username], {
+        state: { userData: user },
+      });
+    }
+
+    if (status === 'error') {
+      this.loginError.set(this.authService.error());
+    }
+  });
+
   onSubmit() {
     this.submitted = true;
-    this.loginError.set(null); // Clear previous errors
-
     if (this.form.invalid) return;
 
-    this.isLoading.set(true);
     const { email, password } = this.form.value;
-
-    const success = this.authService.login(email!, password!);
-    if (success) {
-      this.form.markAsPristine();
-      const userData = this.authService.getUserData();
-      this.router.navigate([PATHS.PROFILE, userData.username], { state: { userData } });
-    } else {
-      this.loginError.set('Invalid email or password');
-      this.isLoading.set(false);
-    }
+    this.authService.login({ email, password });
   }
 
   // Helper function to check form field validity
@@ -57,6 +66,4 @@ export default class SignInComponent {
   togglePasswordTextType() {
     this.passwordTextType = !this.passwordTextType;
   }
-
-  protected readonly PATHS = PATHS;
 }

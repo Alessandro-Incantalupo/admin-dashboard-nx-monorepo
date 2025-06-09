@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
 // import packageJson from '@root/package.json';
+import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { LoadingInterceptor } from '@core/interceptors/loading.interceptor';
 import { ThemeStore } from '@core/state/theme.store';
 import { provideAngularSvgIcon } from 'angular-svg-icon';
@@ -25,7 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
 
     // Adds HttpClient so we can make HTTP requests in services
-    provideHttpClient(withInterceptors([LoadingInterceptor])),
+    provideHttpClient(withInterceptors([LoadingInterceptor, authInterceptor])),
 
     // Provides Angular's change detection system (required by default)
     // The `eventCoalescing: true` option optimizes performance by batching multiple events
