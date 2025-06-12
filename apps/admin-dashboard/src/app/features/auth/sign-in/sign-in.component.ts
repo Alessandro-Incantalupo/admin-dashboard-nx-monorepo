@@ -7,8 +7,8 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { PATHS } from '../../../core/constants/routes';
+import { AuthService } from '../../../core/services/auth.service';
 import { ButtonComponent } from '../../../shared/button/button.component';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',

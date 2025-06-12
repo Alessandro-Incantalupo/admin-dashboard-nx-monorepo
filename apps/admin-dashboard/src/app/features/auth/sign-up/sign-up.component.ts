@@ -1,9 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { SvgIconComponent } from 'angular-svg-icon';
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { SvgIconComponent } from 'angular-svg-icon';
+import { AuthService } from '../../../core/services/auth.service';
 import { ButtonComponent } from '../../../shared/button/button.component';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,7 +29,9 @@ export default class SignUpComponent {
     confirmPassword: ['', [Validators.required]],
   });
 
-  passwordsMatch = computed(() => this.form.value.password === this.form.value.confirmPassword);
+  passwordsMatch = computed(
+    () => this.form.value.password === this.form.value.confirmPassword
+  );
 
   register() {
     console.log('Registering user:', this.form.value);

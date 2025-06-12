@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 import { ButtonComponent } from '../../shared/button/button.component';
-import { AuthService } from '../auth/services/auth.service';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { ThemeSelectorComponent } from './theme-selector/theme-selector.component';
 

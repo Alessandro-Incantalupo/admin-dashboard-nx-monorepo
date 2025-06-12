@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { PATHS } from '@core/constants/routes';
+import { AuthService } from '@core/services/auth.service';
 import { ThemeStore } from '@core/state/theme.store';
-import { AuthService } from '@features/auth/services/auth.service';
 import { ClickOutsideDirective } from '@shared/directives/click-outside.directive';
 import { SvgIconComponent } from 'angular-svg-icon';
 @Component({
