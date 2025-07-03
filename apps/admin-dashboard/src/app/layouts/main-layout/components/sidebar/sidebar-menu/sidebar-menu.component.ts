@@ -1,16 +1,16 @@
-import { Component, inject } from '@angular/core';
-import { MenuService } from '../../../services/menu.service';
-import { SvgIconComponent } from 'angular-svg-icon';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { SubMenuItem } from '../../../../../core/models/menu.model';
 import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLinkActive } from '@angular/router';
+import { SvgIconComponent } from 'angular-svg-icon';
+import { toast } from 'ngx-sonner';
+import { SubMenuItem } from '../../../../../core/models/menu.model';
+import { MenuService } from '../../../services/menu.service';
 import { SidebarSubmenuComponent } from './sidebar-submenu/sidebar-submenu.component';
 
 @Component({
   selector: 'app-sidebar-menu',
   imports: [
     SvgIconComponent,
-    RouterLink,
     RouterLinkActive,
     NgTemplateOutlet,
     SidebarSubmenuComponent,
@@ -20,8 +20,19 @@ import { SidebarSubmenuComponent } from './sidebar-submenu/sidebar-submenu.compo
 })
 export class SidebarMenuComponent {
   menuService = inject(MenuService);
+  router = inject(Router);
 
-  public toggleMenu(subMenu: SubMenuItem) {
-    this.menuService.toggleMenu(subMenu);
+  toggleMenu(item: SubMenuItem) {
+    if (item.disabled) {
+      toast.info('Feature under development');
+      return;
+    }
+    if (item.children && item.children.length > 0) {
+      item.expanded = !item.expanded;
+      return;
+    }
+    if (item.route) {
+      this.router.navigate([item.route]);
+    }
   }
 }

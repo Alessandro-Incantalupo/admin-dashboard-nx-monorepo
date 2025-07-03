@@ -7,6 +7,7 @@ export interface SubMenuItem {
   expanded?: boolean;
   active?: boolean;
   children?: Array<SubMenuItem>;
+  disabled?: boolean;
 }
 
 export interface CustomMenuItem extends MenuItem {
@@ -15,4 +16,5 @@ export interface CustomMenuItem extends MenuItem {
   selected?: boolean;
   active?: boolean;
   items: Array<SubMenuItem>;
+  disabled?: boolean;
 }

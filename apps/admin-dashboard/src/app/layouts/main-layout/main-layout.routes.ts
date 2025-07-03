@@ -8,11 +8,6 @@ import { MenuService } from './services/menu.service';
 // and allows for potential child routes to be added under 'children'.
 // Using `export default` ensures that `loadChildren` can dynamically import this module correctly.
 export default [
-  // {
-  //   path: PATHS.AUTH,
-  //   loadChildren: () => import('../../features/auth/auth.routes'),
-  // },
-
   {
     path: '',
     // pathMatch: 'full',
