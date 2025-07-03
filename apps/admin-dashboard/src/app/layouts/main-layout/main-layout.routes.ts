@@ -3,14 +3,14 @@ import { PATHS } from '../../core/constants/routes';
 import { MainLayoutComponent } from './main-layout.component';
 import { MenuService } from './services/menu.service';
 
-// Exporting the default array of routes for the MainLayoutComponent
-// This array includes a route with an empty path that uses MainLayoutComponent
-// and allows for potential child routes to be added under 'children'.
-// Using `export default` ensures that `loadChildren` can dynamically import this module correctly.
 export default [
   {
     path: '',
-    // pathMatch: 'full',
+    pathMatch: 'full', // Ensure exact match for the root path
+    redirectTo: PATHS.USERS, // Redirect to the default route
+  },
+  {
+    path: '',
     component: MainLayoutComponent,
     providers: [MenuService],
     // canActivateChild: [AuthGuard],
