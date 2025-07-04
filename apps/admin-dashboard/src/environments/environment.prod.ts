@@ -1,4 +1,4 @@
 export const environment = {
   mode: 'production',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://admin-dashboard-api-yffe.onrender.com',
 };

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
+import { environment } from '@environments/environment';
 import { tapResponse } from '@ngrx/operators';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { switchMap, tap } from 'rxjs';
@@ -21,7 +22,7 @@ export class AuthService {
       }),
       switchMap(({ email, password }) =>
         this.http
-          .post<{ token: string }>('http://localhost:3000/auth/login', {
+          .post<{ token: string }>(environment.baseUrl + '/auth/login', {
             email,
             password,
           })
