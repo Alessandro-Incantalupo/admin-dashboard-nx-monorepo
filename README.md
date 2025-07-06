@@ -2,6 +2,13 @@
 
 A **production-ready enterprise admin dashboard** built with modern Angular architecture and best practices, showcasing advanced frontend development skills and full-stack capabilities.
 
+## 🌐 **Live Demo**
+
+- 🚀 **Frontend Demo**: [admin-dashboard-nx-monorepo.vercel.app](https://admin-dashboard-nx-monorepo.vercel.app)
+- 🔗 **Backend API**: [admin-dashboard-api-yffe.onrender.com](https://admin-dashboard-api-yffe.onrender.com)
+
+> **Note for Recruiters**: The live demo showcases the full-stack application with real API integration. The frontend consumes data from the backend API, demonstrating end-to-end functionality.
+
 ## 🎯 **Key Highlights for Recruiters**
 
 - ✅ **Modern Angular 19** with standalone components and signal-based state management
@@ -76,6 +83,11 @@ A **production-ready enterprise admin dashboard** built with modern Angular arch
 
 ## 🛠️ **Getting Started**
 
+### **🌐 Try the Live Demo**
+
+- **Frontend**: [admin-dashboard-nx-monorepo.vercel.app](https://admin-dashboard-nx-monorepo.vercel.app)
+- **API**: [admin-dashboard-api-yffe.onrender.com](https://admin-dashboard-api-yffe.onrender.com)
+
 ### **Prerequisites**
 
 ```bash
@@ -87,7 +99,7 @@ pnpm (recommended package manager)
 
 ```bash
 # Clone and install dependencies
-git clone <repository-url>
+git clone https://github.com/Alessandro-Incantalupo/admin-dashboard-nx-monorepo
 cd admin-dashboard-nx-monorepo
 pnpm install
 
@@ -182,15 +194,21 @@ export class ProfileInfoComponent {
 - **Consistency** - Design system approach with utility-first CSS
 - **Accessibility** - WCAG compliant components out of the box
 
-## 🎯 **Interview Talking Points**
+## 🚀 **Deployment & DevOps**
 
-1. **Monorepo Architecture** - Discuss benefits of code sharing and build optimization
-2. **State Management** - Compare NgRx Signals vs traditional NgRx Store
-3. **Component Design** - Explain standalone components and modern Angular patterns
-4. **API Integration** - Discuss error handling, loading states, and type safety
-5. **Testing Strategy** - Jest and Playwright setup for comprehensive testing
-6. **Performance Optimization** - Lazy loading, change detection strategies
-7. **Developer Experience** - Tooling setup, code quality, and team collaboration
+### **Production Deployments**
+
+- **Frontend**: Deployed on **Vercel** with automatic deployments from Git
+- **Backend**: Deployed on **Render** with continuous deployment
+- **Integration**: Frontend configured to consume the production API
+
+### **Deployment Features**
+
+- ✅ **Automatic deployments** from Git commits
+- ✅ **Environment-specific configurations**
+- ✅ **Production build optimizations**
+- ✅ **HTTPS/SSL enabled** on both frontend and backend
+- ✅ **CORS properly configured** for cross-origin requests
 
 ## 📈 **Development Status & Roadmap**
 
@@ -205,6 +223,7 @@ export class ProfileInfoComponent {
 ### **🚧 In Progress / Planned**
 
 - ⚙️ **Testing Implementation** - Unit tests with Jest, E2E tests with Playwright
+- ⚙️ **Enterprise Authentication** - KeyCloak integration with OAuth 2.0, JWT tokens, and role-based access control
 - ⚙️ **Performance Optimization** - Bundle analysis and optimization
 - ⚙️ **Accessibility Audit** - WCAG compliance testing and improvements
 - ⚙️ **Documentation** - Component documentation and API docs
