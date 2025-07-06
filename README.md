@@ -1,101 +1,214 @@
-# AdminDashboardNxMonorepo
+# Admin Dashboard NX Monorepo
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A **production-ready enterprise admin dashboard** built with modern Angular architecture and best practices, showcasing advanced frontend development skills and full-stack capabilities.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## 🎯 **Key Highlights for Recruiters**
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- ✅ **Modern Angular 19** with standalone components and signal-based state management
+- ✅ **Nx Monorepo** architecture with shared libraries and dependency management
+- ✅ **Full-stack implementation** with REST API backend and frontend consuming it
+- ✅ **Enterprise-grade patterns** including CRUD operations, user management, and role-based features
+- ⚙️ **Production-ready tooling setup** with ESLint, Prettier, Jest, and Playwright configured
+- ✅ **Modern UI/UX** with TailwindCSS, PrimeNG, and responsive design
 
-## Run tasks
+## 🏗️ **Architecture Overview**
 
-To run the dev server for your app, use:
-
-```sh
-npx nx serve admin-dashboard
+```
+├── apps/
+│   ├── admin-dashboard/          # Angular 19 Frontend Application
+│   ├── admin-dashboard-e2e/      # Playwright E2E Tests (configured)
+│   └── api/                      # Backend REST API (Hono.js)
+├── libs/
+│   ├── models/                   # Shared TypeScript Models
+│   └── app-info/                 # Shared Application Info
+└── tools/                        # Nx Workspace Tooling
 ```
 
-To create a production bundle:
+### **Frontend Architecture (Angular 19)**
 
-```sh
-npx nx build admin-dashboard
+- **Standalone Components** with modern Angular patterns
+- **Signal Store** for reactive state management (NgRx Signals)
+- **Feature-based folder structure** with lazy loading
+- **Shared UI components** with PrimeNG and custom components
+- **Internationalization** with Transloco
+- **Responsive design** with TailwindCSS and custom themes
+
+### **Backend Architecture**
+
+- **REST API** built with Hono.js framework
+- **TypeScript-first** with shared models from libs
+- **CRUD operations** for user management
+- **Structured data layer** with type-safe interfaces
+
+### **Monorepo Benefits**
+
+- **Code sharing** between frontend and backend (shared models)
+- **Consistent tooling** across all projects
+- **Optimized build pipeline** with Nx caching and task orchestration
+- **Scalable architecture** ready for additional apps and libraries
+
+## 🚀 **Technical Skills Demonstrated**
+
+### **Frontend Development**
+
+- **Angular 19** - Latest features including standalone components, new control flow, signals
+- **State Management** - NgRx Signals for reactive, signal-based state management
+- **Component Architecture** - Reusable components with proper encapsulation
+- **Responsive Design** - Mobile-first approach with TailwindCSS
+- **Form Handling** - Reactive forms with validation
+- **HTTP Client** - REST API integration with proper error handling
+- **Routing** - Feature-based routing with guards and lazy loading
+
+### **Development Tools & Best Practices**
+
+- **TypeScript** - Strict typing and advanced TypeScript features
+- **Testing Setup** - Jest and Playwright configured for unit and E2E testing
+- **Code Quality** - ESLint, Prettier, and custom rules for Angular
+- **Build Tools** - Nx workspace with optimized build pipeline
+- **Version Control** - Git with proper commit conventions
+
+### **UI/UX Design**
+
+- **Modern Design System** - Consistent theming with CSS custom properties
+- **Component Library** - PrimeNG integration with custom styling
+- **Accessibility** - WCAG compliant components and navigation
+- **Performance** - Optimized bundle sizes and lazy loading
+
+## 🛠️ **Getting Started**
+
+### **Prerequisites**
+
+```bash
+Node.js 18+
+pnpm (recommended package manager)
 ```
 
-To see all available targets to run for a project, run:
+### **Installation & Development**
 
-```sh
-npx nx show project admin-dashboard
+```bash
+# Clone and install dependencies
+git clone <repository-url>
+cd admin-dashboard-nx-monorepo
+pnpm install
+
+# Start development servers
+pnpm nx serve admin-dashboard  # Frontend (http://localhost:4200)
+pnpm nx serve api             # Backend API (http://localhost:3000)
+
+# Testing (when implemented)
+pnpm nx test admin-dashboard      # Unit tests
+pnpm nx e2e admin-dashboard-e2e   # E2E tests
+
+# Build for production
+pnpm nx build admin-dashboard
+pnpm nx build api
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## 🎨 **Features Showcase**
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### **User Management System**
 
-## Add new projects
+- **CRUD Operations** - Create, read, update, delete users
+- **Role-based Access** - Admin and user role management
+- **Status Management** - Active/inactive user status
+- **Profile Management** - User profile with avatar and details
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+### **Modern UI Components**
 
-Use the plugin's generator to create new projects.
+- **Responsive Dashboard** - Clean, modern admin interface
+- **Data Tables** - Sortable, filterable user tables
+- **Form Controls** - Reactive forms with validation
+- **Navigation** - Sidebar navigation with route highlighting
+- **Theming** - Light/dark theme support
 
-To generate a new application, use:
+### **State Management**
 
-```sh
-npx nx g @nx/angular:app demo
+- **Signal Store** - Modern reactive state management
+- **HTTP Integration** - API calls with loading states
+- **Error Handling** - Graceful error states and user feedback
+
+## 📊 **Project Structure Deep Dive**
+
+### **Shared Libraries Strategy**
+
+```typescript
+// libs/models - Shared TypeScript interfaces
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'user';
+  status: 'active' | 'inactive';
+}
+
+// Used in both frontend and backend for type safety
 ```
 
-To generate a new library, use:
+### **Component Architecture Example**
 
-```sh
-npx nx g @nx/angular:lib mylib
+```typescript
+// Signal-based component with modern Angular patterns
+@Component({
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `...`,
+})
+export class ProfileInfoComponent {
+  private userStore = inject(UserStore);
+
+  userName = computed(() => this.userStore.currentUser()?.name);
+  avatarUrl = computed(() => this.generateAvatarUrl());
+}
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+## 🔧 **Technical Decisions & Rationale**
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### **Why Nx Monorepo?**
 
-## Set up CI!
+- **Code Sharing** - Shared models prevent duplication and ensure type safety
+- **Build Optimization** - Intelligent caching and task orchestration
+- **Scalability** - Easy to add new apps and libraries
+- **Developer Experience** - Consistent tooling and commands
 
-### Step 1
+### **Why Angular Signals?**
 
-To connect to Nx Cloud, run the following command:
+- **Performance** - Fine-grained reactivity without zone.js overhead
+- **Modern Patterns** - Future-proof architecture aligned with Angular's direction
+- **Developer Experience** - Simpler mental model than RxJS for state management
 
-```sh
-npx nx connect
-```
+### **Why PrimeNG + TailwindCSS?**
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+- **Rapid Development** - Pre-built components with customizable styling
+- **Consistency** - Design system approach with utility-first CSS
+- **Accessibility** - WCAG compliant components out of the box
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 🎯 **Interview Talking Points**
 
-### Step 2
+1. **Monorepo Architecture** - Discuss benefits of code sharing and build optimization
+2. **State Management** - Compare NgRx Signals vs traditional NgRx Store
+3. **Component Design** - Explain standalone components and modern Angular patterns
+4. **API Integration** - Discuss error handling, loading states, and type safety
+5. **Testing Strategy** - Jest and Playwright setup for comprehensive testing
+6. **Performance Optimization** - Lazy loading, change detection strategies
+7. **Developer Experience** - Tooling setup, code quality, and team collaboration
 
-Use the following command to configure a CI workflow for your workspace:
+## 📈 **Development Status & Roadmap**
 
-```sh
-npx nx g ci-workflow
-```
+### **✅ Completed**
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- ✅ **Core Architecture** - Nx monorepo with Angular 19 and backend API
+- ✅ **UI Framework** - PrimeNG components with TailwindCSS styling
+- ✅ **State Management** - NgRx Signals implementation
+- ✅ **User Features** - CRUD operations and user management
+- ✅ **Code Quality Setup** - ESLint, Prettier, TypeScript strict mode
 
-## Install Nx Console
+### **🚧 In Progress / Planned**
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+- ⚙️ **Testing Implementation** - Unit tests with Jest, E2E tests with Playwright
+- ⚙️ **Performance Optimization** - Bundle analysis and optimization
+- ⚙️ **Accessibility Audit** - WCAG compliance testing and improvements
+- ⚙️ **Documentation** - Component documentation and API docs
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+**This project demonstrates enterprise-level Angular development skills, modern architecture patterns, and full-stack development capabilities suitable for senior frontend developer positions.**
