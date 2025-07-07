@@ -59,6 +59,7 @@ export const pages: CustomMenuItem[] = [
             route: `${PATHS.FEATURES_UI}/${PATHS.FEATURES_TABLE}`,
           }, // Concatenated route
         ],
+        disabled: true,
       },
     ],
   },
