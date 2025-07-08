@@ -1,4 +1,43 @@
 {
   "nxConsole.generateAiAgentRules": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  
+  // Windows-specific performance optimizations
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/tmp/**": true,
+    "**/.nx/**": true,
+    "**/coverage/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/tmp": true,
+    "**/.nx": true,
+    "**/coverage": true
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/tmp": true,
+    "**/.nx": true
+  },
+  
+  // TypeScript performance for Windows
+  "typescript.preferences.includePackageJsonAutoImports": "off",
+  "typescript.suggest.autoImports": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.surveys.enabled": false,
+  "typescript.workspaceSymbols.scope": "currentProject",
+  "files.simpleDialog.enable": true,
+  "explorer.incrementalNaming": "smart",
+  "files.eol": "\n",
+  
+
+  
+  // TypeScript specific for Windows
+  "typescript.tsc.autoDetect": "off",
+  "typescript.npm": "off"
+
 }
