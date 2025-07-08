@@ -11,10 +11,7 @@ export class UsersService {
   private readonly http = inject(HttpClient);
   private readonly createUrlRemote = injectBaseUrl();
 
-  private readonly usersUrl = this.createUrlRemote(
-    '/mocks/Users.json',
-    () => `/users`
-  );
+  private readonly usersUrl = this.createUrlRemote(`/users`, () => `/users`);
 
   getUsers() {
     return this.http
