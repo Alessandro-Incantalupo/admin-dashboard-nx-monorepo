@@ -37,11 +37,8 @@ export default class SignInComponent {
     const user = this.authService.userData();
 
     if (status === 'success' && user) {
-      const username = user.username ?? user.email?.split('@')[0];
-      if (!username) return;
-      this.router.navigate([PATHS.PROFILE, username], {
-        state: { userData: user },
-      });
+      // Redirect to dashboard instead of profile
+      this.router.navigate(['/']);
     }
 
     if (status === 'error') {

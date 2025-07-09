@@ -18,7 +18,8 @@ import { User } from '@models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserTableComponent {
-  users = input.required<User[]>();
-  editAction = output<User>();
-  deleteAction = output<User>();
+  readonly users = input.required<User[]>();
+  readonly readOnly = input<boolean>(false);
+  readonly editAction = output<User>();
+  readonly deleteAction = output<User>();
 }

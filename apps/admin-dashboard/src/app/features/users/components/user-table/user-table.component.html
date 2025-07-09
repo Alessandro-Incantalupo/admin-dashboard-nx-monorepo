@@ -28,18 +28,22 @@
           <td class="border-b p-3 capitalize">{{ user.role || '-' }}</td>
 
           <td class="space-x-2 border-b p-3">
-            <button
-              class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1 text-xs font-semibold"
-              (click)="editAction.emit(user)"
-            >
-              Edit
-            </button>
-            <button
-              class="rounded-md bg-red-600 px-3 py-1 text-xs font-semibold text-white hover:bg-red-700"
-              (click)="deleteAction.emit(user)"
-            >
-              Delete
-            </button>
+            @if (!readOnly()) {
+              <button
+                class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1 text-xs font-semibold"
+                (click)="editAction.emit(user)"
+              >
+                Edit
+              </button>
+              <button
+                class="rounded-md bg-red-600 px-3 py-1 text-xs font-semibold text-white hover:bg-red-700"
+                (click)="deleteAction.emit(user)"
+              >
+                Delete
+              </button>
+            } @else {
+              <span class="text-muted-foreground text-xs">View Only</span>
+            }
           </td>
         </tr>
       } @empty {
