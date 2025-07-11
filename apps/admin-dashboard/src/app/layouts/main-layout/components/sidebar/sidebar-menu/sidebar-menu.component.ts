@@ -3,10 +3,10 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { toast } from 'ngx-sonner';
+import { ChipModule } from 'primeng/chip';
 import { SubMenuItem } from '../../../../../core/models/menu.model';
 import { MenuService } from '../../../services/menu.service';
 import { SidebarSubmenuComponent } from './sidebar-submenu/sidebar-submenu.component';
-
 @Component({
   selector: 'app-sidebar-menu',
   imports: [
@@ -14,6 +14,7 @@ import { SidebarSubmenuComponent } from './sidebar-submenu/sidebar-submenu.compo
     RouterLinkActive,
     NgTemplateOutlet,
     SidebarSubmenuComponent,
+    ChipModule,
   ],
   templateUrl: './sidebar-menu.component.html',
   styles: ``,

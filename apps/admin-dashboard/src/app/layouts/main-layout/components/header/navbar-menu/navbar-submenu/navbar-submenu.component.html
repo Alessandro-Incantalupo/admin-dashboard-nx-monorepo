@@ -26,6 +26,17 @@
               <svg-icon src="{{ item.icon }}" [svgClass]="'h-5 w-5'"></svg-icon>
             }
             <span class="ml-1">{{ item.label }}</span>
+            @if (item.disabled) {
+              <p-chip
+                class="mx-2 flex items-center px-4 py-0.5 text-[11px] tracking-wide"
+              >
+                <span
+                  class="rounded-full border-0 bg-gradient-to-r from-yellow-200 to-yellow-300 px-1 py-1 font-semibold text-yellow-900 shadow-sm"
+                >
+                  Soon™
+                </span>
+              </p-chip>
+            }
           </div>
         </button>
       </ng-template>
@@ -45,6 +56,17 @@
                 </span>
               }
               <span class="ml-1">{{ item.label }}</span>
+              @if (item.disabled) {
+                <p-chip
+                  class="mx-2 flex items-center px-4 py-0.5 text-[11px] tracking-wide"
+                >
+                  <span
+                    class="rounded-full border-0 bg-gradient-to-r from-yellow-200 to-yellow-300 px-1 py-1 font-semibold text-yellow-900 shadow-sm"
+                  >
+                    Soon™
+                  </span>
+                </p-chip>
+              }
             </div>
             <span>
               <svg-icon

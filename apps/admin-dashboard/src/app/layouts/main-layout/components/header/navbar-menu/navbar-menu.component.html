@@ -3,18 +3,19 @@
     <!-- Button -->
     <button
       [ngClass]="
-      menu.selected || menu.active
-        ? 'bg-primary text-primary-foreground'
-        : 'text-muted-foreground/50 hover:bg-card hover:text-muted-foreground '
-    "
-      class="mr-2 inline-flex rounded-md px-3 py-2 text-sm font-medium">
+        menu.selected || menu.active
+          ? 'bg-primary text-primary-foreground'
+          : 'text-muted-foreground/50 hover:bg-card hover:text-muted-foreground'
+      "
+      class="mr-2 inline-flex rounded-md px-3 py-2 text-sm font-medium"
+    >
       <span>{{ menu.group }}</span>
     </button>
     <!-- Dropdown  -->
     <app-navbar-submenu
-      class="dropdown-content absolute top-[100%] min-w-[200px] origin-top-left z-10"
-      [submenu]="menu.items">
-
+      class="dropdown-content absolute top-[100%] z-10 min-w-[200px] origin-top-left"
+      [submenu]="menu.items"
+    >
     </app-navbar-submenu>
   </div>
 }

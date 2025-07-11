@@ -3,11 +3,12 @@ import { Component, inject, input } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { toast } from 'ngx-sonner';
+import { ChipModule } from 'primeng/chip';
 import { SubMenuItem } from '../../../../../../core/models/menu.model';
 
 @Component({
   selector: 'app-navbar-submenu',
-  imports: [NgTemplateOutlet, RouterLinkActive, SvgIconComponent],
+  imports: [NgTemplateOutlet, RouterLinkActive, SvgIconComponent, ChipModule],
   templateUrl: './navbar-submenu.component.html',
   styles: ``,
 })
