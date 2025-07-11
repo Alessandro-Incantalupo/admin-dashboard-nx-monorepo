@@ -3,14 +3,12 @@
     class="w-full rounded border px-3 py-2"
     formControlName="name"
     placeholder="Name"
-    [class.border-red-500]="submitted() && form.get('name')?.invalid"
   />
   <input
     class="w-full rounded border px-3 py-2"
     formControlName="email"
     placeholder="Email"
     type="email"
-    [class.border-red-500]="submitted() && form.get('email')?.invalid"
   />
   <select class="w-full rounded border px-3 py-2" formControlName="role">
     <option value="user">User</option>
@@ -21,10 +19,19 @@
     <option value="active">Active</option>
     <option value="inactive">Inactive</option>
   </select>
-  <button
-    type="submit"
-    class="bg-primary hover:bg-primary/90 rounded px-4 py-2 text-white"
-  >
-    Add User
-  </button>
+  <div class="flex gap-2 pt-2">
+    <button
+      type="submit"
+      class="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+    >
+      Save
+    </button>
+    <button
+      type="button"
+      class="rounded bg-gray-300 px-4 py-2"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+  </div>
 </form>

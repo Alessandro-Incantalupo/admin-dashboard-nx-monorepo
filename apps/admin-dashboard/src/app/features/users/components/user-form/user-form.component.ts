@@ -35,11 +35,10 @@ export class UserFormComponent implements OnInit {
   readonly submitted = signal(false);
 
   readonly form = this.fb.group({
-    name: this.fb.control('', { validators: [Validators.required] }),
-    email: this.fb.control('', {
-      validators: [Validators.required, Validators.email],
-    }),
-    role: this.fb.control('', { validators: [Validators.required] }),
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    role: ['user', Validators.required],
+    status: ['active'],
   });
 
   ngOnInit() {
@@ -60,17 +59,19 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
+    const value = this.form.value;
+
     const newUser: User = {
       id: crypto.randomUUID(),
-      status: 'active',
-      name: this.form.value.name ?? '',
-      email: this.form.value.email ?? '',
-      role: (this.form.value.role as 'admin' | 'user') ?? 'user',
+      name: value.name ?? '',
+      email: value.email ?? '',
+      role: value.role as 'admin' | 'user' | 'guest',
+      status: value.status as 'active' | 'inactive',
     };
 
     this.userStore.addUser(newUser);
     toast.success('User added');
-    this.form.reset({ role: 'user' });
+    this.form.reset({ role: 'user', status: 'active' });
     this.submitted.set(false);
   }
 }

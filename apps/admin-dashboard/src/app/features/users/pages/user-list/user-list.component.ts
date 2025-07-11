@@ -1,10 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
+  ElementRef,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import { EditFormComponent } from '@features/users/components/edit-form/edit-form.component';
 import { UserTableComponent } from '@features/users/components/user-table/user-table.component';
 import { User } from '@features/users/models/user.model';
 import { UsersStore } from '@features/users/state/user.store';
@@ -14,7 +18,12 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
 
 @Component({
   selector: 'app-user-list',
-  imports: [TranslocoDirective, UserTableComponent, UserFormComponent],
+  imports: [
+    TranslocoDirective,
+    UserTableComponent,
+    UserFormComponent,
+    EditFormComponent,
+  ],
   templateUrl: './user-list.component.html',
   styles: `
     :host {
@@ -26,7 +35,10 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
 export default class UserListComponent {
   protected userStore = inject(UsersStore);
   protected authStore = inject(AuthService);
+  readonly formSection = viewChild<ElementRef<HTMLDivElement>>('formSection');
+
   readonly showForm = signal(false);
+  readonly editingUser = signal<User | null>(null);
 
   readonly demoCredentials = [
     {
@@ -42,6 +54,19 @@ export default class UserListComponent {
       description: 'Can view and edit users',
     },
   ] as const;
+
+  constructor() {
+    effect(() => {
+      if (this.showForm() && this.formSection()) {
+        this.formSection().nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        const input = this.formSection().nativeElement.querySelector('input');
+        input?.focus();
+      }
+    });
+  }
 
   quickLogin(userType: 'admin' | 'user') {
     const credentials = this.demoCredentials.find(
@@ -63,6 +88,19 @@ export default class UserListComponent {
     return this.authStore.getRoleDescription();
   }
 
+  canEditUser(user: User): boolean {
+    const currentUser = this.authStore.userData();
+    const role = currentUser?.role ?? 'guest';
+
+    const editRules = {
+      admin: () => true,
+      user: () => user.email !== currentUser?.email && user.role === 'user',
+      guest: () => false,
+    } as const;
+
+    return (editRules[role] ?? editRules.guest)();
+  }
+
   onEdit(user: User) {
     if (!this.authStore.canEdit()) {
       toast.error('Unauthorized', {
@@ -70,7 +108,18 @@ export default class UserListComponent {
       });
       return;
     }
-    console.log('Edit user:', user);
+
+    this.editingUser.set(user);
+  }
+
+  saveEdit(user: User) {
+    this.userStore.updateUser(user);
+    toast.success('User updated!', {
+      description: `User "${user.name}" has been updated.`,
+      duration: 4000,
+      position: 'top-right',
+    });
+    this.editingUser.set(null);
   }
 
   onDelete(user: User) {
@@ -80,7 +129,24 @@ export default class UserListComponent {
       });
       return;
     }
+
+    // Confirmation dialog
+    const confirmed = confirm(
+      `Are you sure you want to delete user "${user.name}"?`
+    );
+    if (!confirmed) {
+      toast.info('Delete cancelled', {
+        description: `User "${user.name}" was not deleted.`,
+      });
+      return;
+    }
+
     this.userStore.deleteUser(user.id);
+    toast.success('User deleted!', {
+      description: `User "${user.name}" has been removed from the system.`,
+      duration: 4000,
+      position: 'top-right',
+    });
   }
 
   toggleForm() {
@@ -95,7 +161,9 @@ export default class UserListComponent {
 
   addUser() {
     if (!this.authStore.canCreate()) {
-      toast.error('Unauthorized');
+      toast.error('Unauthorized', {
+        description: 'Only admins can add users.',
+      });
       return;
     }
     this.userStore.addUser({
