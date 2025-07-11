@@ -8,7 +8,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "bun --env-file=.env run apps/api/src/server.ts",
-
         "cwd": "."
       }
     },
@@ -22,6 +21,27 @@
         "platform": "node",
         "target": "node18",
         "external": ["hono"]
+      }
+    },
+    "docker-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t registry.digitalocean.com/registry.digitalocean.com/admin-api-registry/admin-dashboard-api:latest -f apps/api/Dockerfile .",
+        "cwd": "."
+      }
+    },
+    "docker-push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker push registry.digitalocean.com/registry.digitalocean.com/admin-api-registry/admin-dashboard-api:latest",
+        "cwd": "."
+      }
+    },
+    "docker-deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run api:docker-build && nx run api:docker-push",
+        "cwd": "."
       }
     }
   },

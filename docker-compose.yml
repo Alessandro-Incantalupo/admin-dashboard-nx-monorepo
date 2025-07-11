@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+    # Optionally, add volumes for development live reload
+    # volumes:
+    #   - ./apps/api:/app
