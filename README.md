@@ -5,7 +5,7 @@ A **production-ready enterprise admin dashboard** built with modern Angular arch
 ## 🌐 **Live Demo**
 
 - 🚀 **Frontend Demo**: [admin-dashboard-nx-monorepo.vercel.app](https://admin-dashboard-nx-monorepo.vercel.app)
-- 🔗 **Backend API**: [admin-dashboard-api-yffe.onrender.com](https://admin-dashboard-api-yffe.onrender.com)
+- 🔗 **Backend API**: [admin-dashboard-api-yffe.onrender.com](nx-angular-admin-vu22n.ondigitalocean.app)
 
 > **Note for Recruiters**: The live demo showcases the full-stack application with real API integration. The frontend consumes data from the backend API, demonstrating end-to-end functionality.
 
@@ -86,7 +86,7 @@ A **production-ready enterprise admin dashboard** built with modern Angular arch
 ### **🌐 Try the Live Demo**
 
 - **Frontend**: [admin-dashboard-nx-monorepo.vercel.app](https://admin-dashboard-nx-monorepo.vercel.app)
-- **API**: [admin-dashboard-api-yffe.onrender.com](https://admin-dashboard-api-yffe.onrender.com)
+- **API**: [admin-dashboard-api-yffe.onrender.com](nx-angular-admin-vu22n.ondigitalocean.app)
 
 ### **Prerequisites**
 
