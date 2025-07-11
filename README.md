@@ -196,10 +196,18 @@ export class ProfileInfoComponent {
 
 ## 🚀 **Deployment & DevOps**
 
+### **CI/CD & Dockerized Deployments**
+
+- **Dockerized Backend**: The backend API is containerized using Docker for consistent deployments.
+- **Automated CI/CD**: GitHub Actions workflows build and push Docker images on every commit.
+- **DigitalOcean Deployment**: The latest Docker image is deployed to DigitalOcean App Platform, ensuring a live, production-ready API.
+- **Seamless Updates**: Every push to the main branch triggers a new deployment, keeping the live API up-to-date.
+
+> **Tip:** See the `.github/workflows/` directory for the CI/CD pipeline configuration and `api/Dockerfile` for the backend container setup.
+
 ### **Production Deployments**
 
 - **Frontend**: Deployed on **Vercel** with automatic deployments from Git
-- **Backend**: Deployed on **Render** with continuous deployment
 - **Integration**: Frontend configured to consume the production API
 
 ### **Deployment Features**
