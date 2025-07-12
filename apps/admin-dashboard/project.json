@@ -28,7 +28,7 @@
           },
           {
             "glob": "favicon.ico",
-            "input": "apps/admin-dashboard/src",
+            "input": "apps/admin-dashboard/public",
             "output": "/"
           }
         ],
