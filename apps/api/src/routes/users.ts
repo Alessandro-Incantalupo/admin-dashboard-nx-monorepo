@@ -1,9 +1,12 @@
+import { getNextResetMs } from '@app-info';
 import { Hono } from 'hono';
-import { users } from '../data/users';
+import { users as usersData } from '../data/users';
 
 const usersRoute = new Hono();
 
-// Note: we're mutating the array from import, which works for now
+let users = [...usersData];
+const initialUsers = JSON.parse(JSON.stringify(usersData));
+
 usersRoute.get('/', c => {
   return c.json({
     data: users,
@@ -41,5 +44,19 @@ usersRoute.delete('/:id', c => {
   users.splice(index, 1);
   return c.json({ deleted: true });
 });
+
+// Reset endpoint
+usersRoute.post('/reset', c => {
+  users = JSON.parse(JSON.stringify(initialUsers));
+  return c.json({ reset: true, users });
+});
+
+// Optional: auto-reset every hour
+const intervalMs = 1000 * 60 * 60;
+
+setTimeout(function scheduleReset() {
+  users = JSON.parse(JSON.stringify(initialUsers));
+  setTimeout(scheduleReset, intervalMs);
+}, getNextResetMs());
 
 export default usersRoute;

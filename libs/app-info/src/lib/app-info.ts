@@ -4,3 +4,9 @@ export const APP_INFO = {
   license: 'MIT',
   author: 'Alessandro Incantalupo',
 };
+
+export function getNextResetMs(intervalMs = 1000 * 60 * 60) {
+  const now = Date.now();
+  const next = Math.ceil(now / intervalMs) * intervalMs;
+  return next - now;
+}

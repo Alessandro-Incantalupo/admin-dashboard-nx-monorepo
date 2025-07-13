@@ -15,6 +15,7 @@ import {
   withDevtools,
 } from '@angular-architects/ngrx-toolkit';
 
+import { getNextResetMs } from '@app-info';
 import { UsersService } from '@features/users/services/user.service';
 import { pipe, switchMap, tap } from 'rxjs';
 import { User } from '../models/user.model';
@@ -127,9 +128,32 @@ export const UsersStore = signalStore(
       )
     );
 
+    const resetDemoData = rxMethod<void>(
+      pipe(
+        switchMap(() =>
+          userService.resetDemoData().pipe(
+            tapResponse({
+              next: () => {
+                loadUsers();
+              },
+              error: () =>
+                updateState(state, 'Users: Reset Error', {
+                  error: 'Failed to reset demo data',
+                }),
+            })
+          )
+        )
+      )
+    );
+
+    const intervalMs = 1000 * 60 * 60;
+    setTimeout(() => {
+      loadUsers();
+      setInterval(() => loadUsers(), intervalMs);
+    }, getNextResetMs());
     const reset = () => updateState(state, 'Users: Reset', initialState);
 
-    return { loadUsers, reset, addUser, updateUser, deleteUser };
+    return { loadUsers, reset, addUser, updateUser, deleteUser, resetDemoData };
   }),
   withHooks(({ loadUsers }) => ({
     onInit: () => {

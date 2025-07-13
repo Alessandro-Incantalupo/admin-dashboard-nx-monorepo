@@ -6,6 +6,7 @@
     "empty": "No users found.",
     "addUser": "Add User",
     "hideForm": "Hide Form",
-    "addUserForm": "Add User Form"
+    "addUserForm": "Add User Form",
+    "reset-demo": "Reset Demo Data"
   }
 }

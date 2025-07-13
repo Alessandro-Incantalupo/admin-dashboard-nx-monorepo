@@ -30,4 +30,7 @@ export class UsersService {
   deleteUser(userId: string) {
     return this.http.delete(`${this.usersUrl}/${userId}`);
   }
+  resetDemoData() {
+    return this.http.post(this.usersUrl + '/reset', {});
+  }
 }
