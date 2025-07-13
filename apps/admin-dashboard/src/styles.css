@@ -9,6 +9,7 @@ layer(base);
 /** Plugins **/
 @import "./assets/styles/apexchart.css";
 
+@plugin "daisyui";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/aspect-ratio";
