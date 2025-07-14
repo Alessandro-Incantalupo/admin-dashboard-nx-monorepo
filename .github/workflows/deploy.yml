@@ -22,9 +22,6 @@ jobs:
           registry: registry.digitalocean.com
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build API and dependencies
-        run: pnpm exec nx build api
       - name: Build Docker Image
         run: docker build -t registry.digitalocean.com/admin-api-registry-v1/admin-api:latest -f apps/api/Dockerfile .
 
