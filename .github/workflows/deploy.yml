@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'apps/api/**'
-
 jobs:
   deploy:
     name: Build & Push Docker Image
@@ -26,8 +23,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Build API and dependencies
+        run: pnpm exec nx build api
       - name: Build Docker Image
-        run: docker build -t registry.digitalocean.com/admin-api-registry/admin-api:latest -f apps/api/Dockerfile .
+        run: docker build -t registry.digitalocean.com/admin-api-registry-v1/admin-api:latest -f apps/api/Dockerfile .
 
       - name: Push Docker Image
-        run: docker push registry.digitalocean.com/admin-api-registry/admin-api:latest
+        run: docker push registry.digitalocean.com/admin-api-registry-v1/admin-api:latest

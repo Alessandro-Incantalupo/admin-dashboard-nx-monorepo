@@ -4,18 +4,6 @@
   "sourceRoot": "libs/app-info/src",
   "projectType": "library",
   "tags": [],
-  "targets": {
-    "build": {
-      "executor": "@nx/esbuild:esbuild",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/app-info",
-        "main": "libs/app-info/src/index.ts",
-        "tsConfig": "libs/app-info/tsconfig.lib.json",
-        "assets": ["libs/app-info/*.md"],
-        "format": ["cjs"],
-        "generatePackageJson": true
-      }
-    }
-  }
+  "// targets": "to see all targets run: nx show project models --web",
+  "targets": {}
 }

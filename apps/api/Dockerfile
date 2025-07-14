@@ -6,10 +6,10 @@ WORKDIR /app
 # Copy only the api app and monorepo libs it depends on
 COPY apps/api ./apps/api
 COPY libs ./libs
-COPY package.json ./
+COPY package.json tsconfig.base.json ./
 
 # Install only production dependencies
-RUN bun install --production
+RUN bun install
 
 # Set environment variables (optional, can be overridden by deployment platform)
 ENV PORT=3000

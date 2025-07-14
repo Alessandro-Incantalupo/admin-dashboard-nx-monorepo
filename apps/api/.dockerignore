@@ -1,5 +1,6 @@
 # Ignore node_modules everywhere
 **/node_modules
+apps/admin-dashboard-e2e
 
 # Ignore Bun's cache if present
 **/.bun
