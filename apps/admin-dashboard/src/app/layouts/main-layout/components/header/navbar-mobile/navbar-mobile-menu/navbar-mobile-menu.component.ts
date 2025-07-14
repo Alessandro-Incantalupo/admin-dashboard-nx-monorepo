@@ -1,0 +1,51 @@
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { SubMenuItem } from '@core/models/menu.model';
+import { MenuService } from '@layouts/main-layout/services/menu.service';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { toast } from 'ngx-sonner';
+import { ChipModule } from 'primeng/chip';
+import { NavbarMobileSubmenuComponent } from '../navbar-mobile-submenu/navbar-mobile-submenu.component';
+
+@Component({
+  selector: 'app-navbar-mobile-menu',
+  templateUrl: './navbar-mobile-menu.component.html',
+  imports: [
+    AngularSvgIconModule,
+    NgTemplateOutlet,
+    NavbarMobileSubmenuComponent,
+    ChipModule,
+  ],
+  standalone: true,
+})
+export class NavbarMobileMenuComponent {
+  public menuService = inject(MenuService);
+  router = inject(Router);
+
+  public toggleMenu(item: SubMenuItem): void {
+    if (item.disabled) {
+      console.log('Feature under development');
+      toast.info('Feature under development', {
+        position: 'top-center',
+      });
+      return;
+    }
+    if (item.children && item.children.length > 0) {
+      item.expanded = !item.expanded;
+      return;
+    }
+    if (item.route) {
+      console.log('Navigating to route:', item.route);
+
+      this.router.navigate([item.route]);
+    }
+  }
+
+  public closeMenu(item?: SubMenuItem): void {
+    if (item?.disabled) {
+      return;
+    }
+    this.menuService.showMobileMenu = false;
+  }
+}
