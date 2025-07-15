@@ -1,32 +1,26 @@
-name: Test API Build
+name: Test DigitalOcean Registry Cleanup
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-      - feature/github-actions
-    paths:
-      - 'apps/api/**'
-      - 'libs/**'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 jobs:
-  build:
+  cleanup:
+    name: Clean DigitalOcean Registry
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Install doctl
+        run: |
+          sudo snap install doctl
+          doctl auth init -t ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.17.0'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build API with Nx
-        run: pnpm exec nx run api:build
+      - name: Delete all images from DigitalOcean Registry
+        run: |
+          REPO="admin-api-registry-v1/admin-api"
+          TAGS=$(doctl registry repository list-tags $REPO --format Tag --no-header)
+          for TAG in $TAGS; do
+            echo "Deleting tag: $TAG"
+            doctl registry repository delete-tag $REPO $TAG --force
+          done
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
