@@ -8,10 +8,6 @@ on:
       - 'apps/api/**'
       - 'libs/**'
 
-    paths:
-      - 'apps/api/**'
-      - 'libs/**'
-
 jobs:
   deploy:
     name: Build & Push Docker Image
