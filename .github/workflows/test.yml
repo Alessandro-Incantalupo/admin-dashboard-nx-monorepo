@@ -14,13 +14,11 @@ jobs:
           sudo snap install doctl
           doctl auth init -t ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Delete all images from DigitalOcean Registry
+      - name: Clean Up DigitalOcean Registry
         run: |
-          REPO="admin-api-registry-v1/admin-api"
+          REPO="admin-api"
           TAGS=$(doctl registry repository list-tags $REPO --format Tag --no-header)
           for TAG in $TAGS; do
             echo "Deleting tag: $TAG"
             doctl registry repository delete-tag $REPO $TAG --force
           done
-        env:
-          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
