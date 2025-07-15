@@ -31,6 +31,20 @@ jobs:
       - name: Build API with Nx
         run: pnpm exec nx run api:build
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.17.0'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build API with Nx
+        run: pnpm exec nx run api:build
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -40,6 +54,17 @@ jobs:
           registry: registry.digitalocean.com
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Clean Up DigitalOcean Registry
+        run: |
+          REPO="admin-api-registry-v1/admin-api"
+          TAGS=$(doctl registry repository list-tags $REPO --format Tag --no-header)
+          for TAG in $TAGS; do
+            echo "Deleting tag: $TAG"
+            doctl registry repository delete-tag $REPO $TAG --force
+          done
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
         run: docker build -t registry.digitalocean.com/admin-api-registry-v1/admin-api:latest -f apps/api/Dockerfile .
