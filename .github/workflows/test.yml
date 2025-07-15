@@ -1,0 +1,32 @@
+name: Test API Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - feature/github-actions
+    paths:
+      - 'apps/api/**'
+      - 'libs/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.17.0'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build API with Nx
+        run: pnpm exec nx run api:build
