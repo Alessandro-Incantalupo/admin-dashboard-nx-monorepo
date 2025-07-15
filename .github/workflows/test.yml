@@ -1,11 +1,11 @@
 name: Test DigitalOcean Registry Cleanup
 
 on:
-  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
 
 jobs:
   cleanup:
-    name: Clean DigitalOcean Registry
+    name: Clean DigitalOcean Registry (All Images)
     runs-on: ubuntu-latest
 
     steps:
@@ -14,11 +14,11 @@ jobs:
           sudo snap install doctl
           doctl auth init -t ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Clean Up DigitalOcean Registry
+      - name: Delete all images (tagged and untagged) from DigitalOcean Registry
         run: |
           REPO="admin-api"
-          TAGS=$(doctl registry repository list-tags $REPO --format Tag --no-header)
-          for TAG in $TAGS; do
-            echo "Deleting tag: $TAG"
-            doctl registry repository delete-tag $REPO $TAG --force
+          DIGESTS=$(doctl registry repository list-manifests $REPO --format Digest --no-header)
+          for DIGEST in $DIGESTS; do
+            echo "Deleting digest: $DIGEST"
+            doctl registry repository delete-manifest $REPO $DIGEST --force
           done
