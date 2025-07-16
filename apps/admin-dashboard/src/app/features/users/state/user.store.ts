@@ -17,6 +17,7 @@ import {
 
 import { getNextResetMs } from '@app-info';
 import { UsersService } from '@features/users/services/user.service';
+import { toast } from 'ngx-sonner';
 import { pipe, switchMap, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import {
@@ -60,6 +61,7 @@ export const UsersStore = signalStore(
                   setUsersLoaded()
                 ),
               error: () =>
+                toast.error('Failed to load users') ||
                 updateState(
                   state,
                   'Users: Load Error',
@@ -80,10 +82,12 @@ export const UsersStore = signalStore(
                 updateState(state, 'Users: Add', {
                   users: [...state.users(), user],
                 }),
-              error: () =>
+              error: () => {
+                toast.error('Failed to add user');
                 updateState(state, 'Users: Add Error', {
                   error: 'Failed to add user',
-                }),
+                });
+              },
             })
           )
         )
@@ -100,6 +104,7 @@ export const UsersStore = signalStore(
                   users: state.users().map(u => (u.id === user.id ? user : u)),
                 }),
               error: () =>
+                toast.error('Failed to update user') ||
                 updateState(state, 'Users: Update Error', {
                   error: 'Failed to update user',
                 }),
@@ -119,6 +124,7 @@ export const UsersStore = signalStore(
                   users: state.users().filter(u => u.id !== userId),
                 }),
               error: () =>
+                toast.error('Failed to delete user') ||
                 updateState(state, 'Users: Delete Error', {
                   error: 'Failed to delete user',
                 }),
@@ -137,6 +143,7 @@ export const UsersStore = signalStore(
                 loadUsers();
               },
               error: () =>
+                toast.error('Failed to reset demo data') ||
                 updateState(state, 'Users: Reset Error', {
                   error: 'Failed to reset demo data',
                 }),
