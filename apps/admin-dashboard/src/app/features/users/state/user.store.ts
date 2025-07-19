@@ -16,8 +16,8 @@ import {
 } from '@angular-architects/ngrx-toolkit';
 
 import { User } from '@admin-dashboard-nx-monorepo/models';
-import { HttpErrorResponse } from '@angular/common/http';
 import { getNextResetMs } from '@app-info';
+import { getHttpErrorMessage } from '@core/utils/http-error-message.util';
 import { UsersService } from '@features/users/services/user.service';
 import { toast } from 'ngx-sonner';
 import { debounceTime, pipe, switchMap, tap } from 'rxjs';
@@ -66,12 +66,10 @@ export const UsersStore = signalStore(
                 setUsersLoaded();
               },
               error: err => {
-                const message =
-                  err instanceof HttpErrorResponse && err.status === 429
-                    ? 'Too many requests. Please wait and try again.'
-                    : err instanceof Error
-                      ? err.message
-                      : 'Failed to load users';
+                const message = getHttpErrorMessage(
+                  err,
+                  'Failed to load users'
+                );
 
                 toast.error(message);
                 setUsersError(message);
@@ -101,13 +99,7 @@ export const UsersStore = signalStore(
                 });
               },
               error: err => {
-                const message =
-                  err instanceof HttpErrorResponse && err.status === 429
-                    ? 'Too many requests. Please wait and try again.'
-                    : err instanceof Error
-                      ? err.message
-                      : 'Failed to add user';
-
+                const message = getHttpErrorMessage(err, 'Failed to add user');
                 toast.error(message);
                 setUsersAddError(message);
               },
@@ -136,12 +128,10 @@ export const UsersStore = signalStore(
                 });
               },
               error: err => {
-                const message =
-                  err instanceof HttpErrorResponse && err.status === 429
-                    ? 'Too many requests. Please wait and try again.'
-                    : err instanceof Error
-                      ? err.message
-                      : 'Failed to update user';
+                const message = getHttpErrorMessage(
+                  err,
+                  'Failed to update user'
+                );
 
                 toast.error(message);
                 setUsersUpdateError(message);
@@ -172,13 +162,10 @@ export const UsersStore = signalStore(
                 setUsersDeleteLoaded();
               },
               error: err => {
-                const message =
-                  err instanceof HttpErrorResponse && err.status === 429
-                    ? 'Too many requests. Please wait and try again.'
-                    : err instanceof Error
-                      ? err.message
-                      : 'Failed to delete user';
-
+                const message = getHttpErrorMessage(
+                  err,
+                  'Failed to delete user'
+                );
                 toast.error(message);
                 setUsersDeleteError(message);
               },
@@ -193,6 +180,8 @@ export const UsersStore = signalStore(
         tap(() => {
           setUsersResetLoading();
         }),
+        debounceTime(500),
+
         switchMap(() =>
           userService.resetDemoData().pipe(
             tapResponse({
@@ -201,13 +190,10 @@ export const UsersStore = signalStore(
                 setUsersResetLoaded();
               },
               error: err => {
-                const message =
-                  err instanceof HttpErrorResponse && err.status === 429
-                    ? 'Too many requests. Please wait and try again.'
-                    : err instanceof Error
-                      ? err.message
-                      : 'Failed to reset demo data';
-
+                const message = getHttpErrorMessage(
+                  err,
+                  'Failed to reset demo data'
+                );
                 toast.error(message);
                 setUsersResetError(message);
               },
