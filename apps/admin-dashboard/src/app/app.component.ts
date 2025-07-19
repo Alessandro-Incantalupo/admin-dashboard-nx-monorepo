@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SpinnerService } from '@core/services/spinner.service';
 import { NgxSonnerToaster } from 'ngx-sonner';
@@ -13,8 +13,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 })
 export class AppComponent {
   title = 'admin-dashboard';
+  readonly spinner = inject(SpinnerService);
 
-  constructor(private spinner: SpinnerService) {
+  constructor() {
     this.spinner.dispatch(true);
     setTimeout(() => this.spinner.dispatch(false), 30000);
   }

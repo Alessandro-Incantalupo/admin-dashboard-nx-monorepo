@@ -1,3 +1,4 @@
+import { User } from '@admin-dashboard-nx-monorepo/models';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -13,7 +14,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '@core/services/auth.service';
-import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-edit-form',

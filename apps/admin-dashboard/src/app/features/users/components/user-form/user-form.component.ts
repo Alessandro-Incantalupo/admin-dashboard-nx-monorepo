@@ -1,3 +1,4 @@
+import { User } from '@admin-dashboard-nx-monorepo/models';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +13,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { User } from '@features/users/models/user.model';
 import { UsersStore } from '@features/users/state/user.store';
 import { toast } from 'ngx-sonner';
 import { map } from 'rxjs';
@@ -70,7 +70,6 @@ export class UserFormComponent implements OnInit {
     };
 
     this.userStore.addUser(newUser);
-    toast.success('User added');
     this.form.reset({ role: 'user', status: 'active' });
     this.submitted.set(false);
   }

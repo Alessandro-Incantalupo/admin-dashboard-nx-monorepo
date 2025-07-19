@@ -1,3 +1,4 @@
+import { User } from '@admin-dashboard-nx-monorepo/models';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +11,6 @@ import {
 import { AuthService } from '@core/services/auth.service';
 import { EditFormComponent } from '@features/users/components/edit-form/edit-form.component';
 import { UserTableComponent } from '@features/users/components/user-table/user-table.component';
-import { User } from '@features/users/models/user.model';
 import { UsersStore } from '@features/users/state/user.store';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { toast } from 'ngx-sonner';
@@ -114,11 +114,6 @@ export default class UserListComponent {
 
   saveEdit(user: User) {
     this.userStore.updateUser(user);
-    toast.success('User updated!', {
-      description: `User "${user.name}" has been updated.`,
-      duration: 4000,
-      position: 'top-right',
-    });
     this.editingUser.set(null);
   }
 
@@ -142,11 +137,6 @@ export default class UserListComponent {
     }
 
     this.userStore.deleteUser(user.id);
-    toast.success('User deleted!', {
-      description: `User "${user.name}" has been removed from the system.`,
-      duration: 4000,
-      position: 'top-right',
-    });
   }
 
   toggleForm() {
@@ -172,11 +162,6 @@ export default class UserListComponent {
       email: 'new@example.com',
       role: 'user',
       status: 'active',
-    });
-    toast.success('User created!', {
-      description: 'The user has been added to the system.',
-      duration: 4000,
-      position: 'top-right',
     });
   }
 }

@@ -104,7 +104,7 @@ cd admin-dashboard-nx-monorepo
 pnpm install
 
 # Start development servers
-pnpm nx serve admin-dashboard  # Frontend (http://localhost:4200)
+pnpm nx serve admin-dashboard  # Frontend (http://localhost:4300)
 pnpm nx serve api             # Backend API (http://localhost:3000)
 
 # Testing (when implemented)
