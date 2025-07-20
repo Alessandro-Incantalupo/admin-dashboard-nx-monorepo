@@ -5,13 +5,13 @@ A **production-ready enterprise admin dashboard** built with modern Angular arch
 ## 🌐 **Live Demo**
 
 - 🚀 **Frontend Demo**: [admin-dashboard-nx-monorepo.vercel.app](https://admin-dashboard-nx-monorepo.vercel.app)
-- 🔗 **Backend API**: [nx-angular-admin-vu22n.ondigitalocean.app](nx-angular-admin-vu22n.ondigitalocean.app)
+- 🔗 **Backend API**: [nx-angular-admin-vu22n.ondigitalocean.app](https://nx-angular-admin-vu22n.ondigitalocean.app/)
 
 > **Note for Recruiters**: The live demo showcases the full-stack application with real API integration. The frontend consumes data from the backend API, demonstrating end-to-end functionality.
 
 ## 🎯 **Key Highlights for Recruiters**
 
-- ✅ **Modern Angular 19** with standalone components and signal-based state management
+- ✅ **Modern Angular 20** with standalone components and signal-based state management
 - ✅ **Nx Monorepo** architecture with shared libraries and dependency management
 - ✅ **Full-stack implementation** with REST API backend and frontend consuming it
 - ✅ **Enterprise-grade patterns** including CRUD operations, user management, and role-based features
@@ -22,7 +22,7 @@ A **production-ready enterprise admin dashboard** built with modern Angular arch
 
 ```
 ├── apps/
-│   ├── admin-dashboard/          # Angular 19 Frontend Application
+│   ├── admin-dashboard/          # Angular 20 Frontend Application
 │   ├── admin-dashboard-e2e/      # Playwright E2E Tests (configured)
 │   └── api/                      # Backend REST API (Hono.js)
 ├── libs/
@@ -31,7 +31,7 @@ A **production-ready enterprise admin dashboard** built with modern Angular arch
 └── tools/                        # Nx Workspace Tooling
 ```
 
-### **Frontend Architecture (Angular 19)**
+### **Frontend Architecture (Angular 20)**
 
 - **Standalone Components** with modern Angular patterns
 - **Signal Store** for reactive state management (NgRx Signals)
@@ -58,7 +58,7 @@ A **production-ready enterprise admin dashboard** built with modern Angular arch
 
 ### **Frontend Development**
 
-- **Angular 19** - Latest features including standalone components, new control flow, signals
+- **Angular 20** - Latest features including standalone components, new control flow, signals
 - **State Management** - NgRx Signals for reactive, signal-based state management
 - **Component Architecture** - Reusable components with proper encapsulation
 - **Responsive Design** - Mobile-first approach with TailwindCSS
@@ -222,7 +222,7 @@ export class ProfileInfoComponent {
 
 ### **✅ Completed**
 
-- ✅ **Core Architecture** - Nx monorepo with Angular 19 and backend API
+- ✅ **Core Architecture** - Nx monorepo with Angular 20 and backend API
 - ✅ **UI Framework** - PrimeNG components with TailwindCSS styling
 - ✅ **State Management** - NgRx Signals implementation
 - ✅ **User Features** - CRUD operations and user management

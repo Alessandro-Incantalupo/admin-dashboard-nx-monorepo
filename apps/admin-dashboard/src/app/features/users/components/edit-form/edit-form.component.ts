@@ -1,5 +1,5 @@
 import { User } from '@admin-dashboard-nx-monorepo/models';
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,12 +13,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-edit-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './edit-form.component.html',
   styles: `
     :host {
