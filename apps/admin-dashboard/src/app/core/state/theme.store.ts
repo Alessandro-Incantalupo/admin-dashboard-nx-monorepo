@@ -1,4 +1,4 @@
-import { computed } from '@angular/core';
+import { computed, effect } from '@angular/core';
 import {
   patchState,
   signalStore,
@@ -39,19 +39,15 @@ export const ThemeStore = signalStore(
         const saved = localStorage.getItem('theme');
         if (saved) {
           const parsed: State = JSON.parse(saved);
-          patchState(state, parsed); // Use patchState to merge the parsed theme
-          applyToDOM(parsed);
-        } else {
-          applyToDOM({ mode: state.mode(), color: state.color() });
+          patchState(state, parsed);
         }
       } catch (error) {
         console.error('Failed to load theme from localStorage:', error);
-        applyToDOM({ mode: state.mode(), color: state.color() });
       }
     };
 
     const setTheme = (theme: Partial<State>) => {
-      patchState(state, theme); // Use patchState to update the theme
+      patchState(state, theme);
       try {
         localStorage.setItem(
           'theme',
@@ -60,27 +56,14 @@ export const ThemeStore = signalStore(
       } catch (error) {
         console.error('Failed to save theme to localStorage:', error);
       }
-      applyToDOM({ mode: state.mode(), color: state.color() });
     };
 
     const toggleMode = () => {
       patchState(state, { mode: state.mode() === 'dark' ? 'light' : 'dark' });
-      applyToDOM({ mode: state.mode(), color: state.color() });
     };
 
     const setColor = (color: string) => {
       patchState(state, { color });
-      applyToDOM({ mode: state.mode(), color: state.color() });
-    };
-
-    const applyToDOM = (theme: State) => {
-      const html = document.querySelector('html');
-      if (html) {
-        html.className = theme.mode;
-        html.setAttribute('data-theme', theme.color);
-      } else {
-        console.warn('Failed to apply theme to DOM: <html> element not found.');
-      }
     };
 
     const getThemeColors = () => themeColors;
@@ -96,8 +79,36 @@ export const ThemeStore = signalStore(
     };
   }),
   withHooks(store => ({
+    // Automatically apply theme updates
     onInit: () => {
       store.loadTheme();
+
+      // This effect runs whenever the theme mode or color changes in the store.
+      effect(() => {
+        // Get the current mode ('light' or 'dark') from the store signal
+        const mode = store.mode();
+        // Get the current color theme (e.g., 'base', 'blue', etc.) from the store signal
+        const color = store.color();
+
+        // Reference to the <html> element (document root)
+        const root = document.documentElement;
+
+        // Remove both 'light' and 'dark' classes to reset the state
+        root.classList.remove('light', 'dark');
+        // Add the current mode as a class to <html> (either 'light' or 'dark')
+        root.classList.add(mode);
+        // Set the data-theme attribute to the current color (e.g., data-theme="blue")
+        root.setAttribute('data-theme', color);
+
+        // --- Force browser to repaint styles ---
+        // Hide the <html> element (triggers a layout flush)
+        root.style.display = 'none';
+        // Access offsetHeight to force a reflow (browser applies style changes immediately)
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        root.offsetHeight;
+        // Restore the <html> element's display property
+        root.style.display = '';
+      });
     },
   }))
 );

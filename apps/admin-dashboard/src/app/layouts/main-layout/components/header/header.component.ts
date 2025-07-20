@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ThemeStore } from '@core/state/theme.store';
 import { MenuService } from '@layouts/main-layout/services/menu.service';
 import { SvgIconComponent } from 'angular-svg-icon';
@@ -16,6 +16,7 @@ import { ProfileMenuComponent } from './profile-menu/profile-menu.component';
   ],
   templateUrl: './header.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   public menuService = inject(MenuService);

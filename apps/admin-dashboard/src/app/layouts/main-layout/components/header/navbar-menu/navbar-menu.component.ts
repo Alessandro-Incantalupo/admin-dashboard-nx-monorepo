@@ -1,4 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomMenuItem } from '@core/models/menu.model';
 import { ChipModule } from 'primeng/chip';
@@ -10,6 +15,7 @@ import { NavbarSubmenuComponent } from './navbar-submenu/navbar-submenu.componen
   imports: [NavbarSubmenuComponent, ChipModule],
   templateUrl: './navbar-menu.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarMenuComponent {
   menuService = inject(MenuService);
