@@ -16,12 +16,19 @@ export const pages: CustomMenuItem[] = [
         label: 'Auth',
         route: `${PATHS.AUTH}/${PATHS.SIGN_UP}`, // Concatenated route
         children: [
-          { label: 'Sign up', route: `${PATHS.AUTH}/${PATHS.SIGN_UP}` }, // Concatenated route
-          { label: 'Sign in', route: `${PATHS.AUTH}/${PATHS.SIGN_IN}` }, // Concatenated route
+          {
+            label: 'Sign up',
+            route: `${PATHS.AUTH}/${PATHS.SIGN_UP}`,
+          }, // Concatenated route
+          {
+            label: 'Sign in',
+            route: `${PATHS.AUTH}/${PATHS.SIGN_IN}`,
+          }, // Concatenated route
           {
             label: 'Sign in template driven',
             route: `${PATHS.AUTH}/${PATHS.SIGN_IN_TEMPLATE_DRIVEN}`, // Concatenated route
           },
+
           // {
           //   label: 'Forgot Password',
           //   route: `${PATHS.AUTH}/${PATHS.FORGOT_PASSWORD}`, // Concatenated route
@@ -38,6 +45,7 @@ export const pages: CustomMenuItem[] = [
           //   disabled: true,
           // },
         ],
+        disabled: true,
       },
       {
         icon: 'assets/icons/heroicons/outline/exclamation-triangle.svg',

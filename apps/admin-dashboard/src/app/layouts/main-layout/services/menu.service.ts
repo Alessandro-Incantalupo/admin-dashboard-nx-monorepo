@@ -1,10 +1,12 @@
 import { Injectable, OnDestroy, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { pages } from '@core/constants/menu';
+import { CustomMenuItem, SubMenuItem } from '@core/models/menu.model';
 import { Subscription } from 'rxjs';
-import { CustomMenuItem, SubMenuItem } from '../../../core/models/menu.model';
-import { pages } from '../../../core/constants/menu';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class MenuService implements OnDestroy {
   private _showSidebar = signal(true);
   private _showMobileMenu = signal(false);
@@ -15,12 +17,12 @@ export class MenuService implements OnDestroy {
     /** Set dynamic menu */
     this._pagesMenu.set(pages);
 
-    let sub = this.router.events.subscribe((event) => {
+    let sub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         /** Expand menu base on active route */
-        this._pagesMenu().forEach((menu) => {
+        this._pagesMenu().forEach(menu => {
           let activeGroup = false;
-          menu.items.forEach((subMenu) => {
+          menu.items.forEach(subMenu => {
             const active = this.isActive(subMenu.route);
             subMenu.expanded = active;
             subMenu.active = active;
@@ -39,11 +41,9 @@ export class MenuService implements OnDestroy {
   get showSideBar() {
     return this._showSidebar();
   }
-
   get showMobileMenu() {
     return this._showMobileMenu();
   }
-
   get pagesMenu() {
     return this._pagesMenu();
   }
@@ -51,7 +51,6 @@ export class MenuService implements OnDestroy {
   set showSideBar(value: boolean) {
     this._showSidebar.set(value);
   }
-
   set showMobileMenu(value: boolean) {
     this._showMobileMenu.set(value);
   }
@@ -70,13 +69,13 @@ export class MenuService implements OnDestroy {
   }
 
   private expand(items: Array<any>) {
-    items.forEach((item) => {
+    items.forEach(item => {
       item.expanded = this.isActive(item.route);
       if (item.children) this.expand(item.children);
     });
   }
 
-  private isActive(instruction: any): boolean {
+  public isActive(instruction: any): boolean {
     return this.router.isActive(this.router.createUrlTree([instruction]), {
       paths: 'subset',
       queryParams: 'subset',
