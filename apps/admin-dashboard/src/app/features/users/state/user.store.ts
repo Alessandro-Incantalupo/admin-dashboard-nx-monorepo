@@ -52,6 +52,13 @@ export const UsersStore = signalStore(
   withDevtools('Users Store'),
   withComputed(({ users }) => ({
     hasUsers: computed(() => users().length > 0),
+    roles: computed(() => {
+      const uniqueRoles = Array.from(new Set(users().map(user => user.role)));
+      return uniqueRoles.map(role => ({
+        label: role.charAt(0).toUpperCase() + role.slice(1),
+        value: role,
+      }));
+    }),
   })),
   withMethods((state, userService = inject(UsersService)) => {
     const loadUsers = rxMethod<void>(

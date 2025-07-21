@@ -142,6 +142,11 @@
           (deleteAction)="onDelete($event)"
         ></app-user-table>
 
+        <app-prime-ng-table
+          [users]="userStore.users()"
+          [roles]="userStore.roles()"
+        ></app-prime-ng-table>
+
         @if (editingUser()) {
           <div
             class="fixed inset-0 z-50 flex items-center justify-center bg-black/40"

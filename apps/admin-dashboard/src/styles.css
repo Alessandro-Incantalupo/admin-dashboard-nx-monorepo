@@ -8,6 +8,7 @@ layer(base);
 
 /** Plugins **/
 @import "./assets/styles/apexchart.css";
+@import "primeicons/primeicons.css";
 
 @plugin "daisyui";
 @plugin "@tailwindcss/forms";
@@ -161,6 +162,7 @@ layer(base);
 @layer base {
   :root {
     --background: #ffffff;
+    --background-color: #000000;
     --foreground: #0c1420;
     --card: #f1f5f9;
     --card-foreground: #000000;
@@ -291,4 +293,72 @@ select {
 [type="checkbox"],
 [type="radio"] {
   @apply border-border bg-background checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus:ring-primary h-4 w-4 rounded-sm focus:ring-2;
+}
+
+/* Editable input fields */
+p-cellEditor input[pInputText] {
+  border: 1px solid var(--foreground); /* Dynamic border color */
+  border-radius: 4px; /* Rounds the corners */
+  padding: 8px; /* Adds padding inside the input */
+  background-color: var(--muted-foreground); /* Dynamic background color */
+  box-shadow: inset 0 1px 3px var(--shadow-custom); /* Custom shadow for depth */
+  width: 100%; /* Ensures the input takes full width */
+  color: var(--foreground); /* Dynamic text color */
+  font-family: var(--font-poppins); /* Applies dynamic font */
+}
+
+/* Highlight editable fields when focused */
+p-cellEditor input[pInputText]:focus {
+  border-color: var(--input-focus-border); /* Dynamic focus border color */
+  outline: none; /* Removes default outline */
+  box-shadow: 0 0 5px var(--input-focus-shadow); /* Dynamic glow effect */
+}
+
+/* Editable dropdown fields */
+p-cellEditor input[p-select] {
+  border: 1px solid var(--foreground); /* Dynamic border color */
+  border-radius: 4px; /* Rounds the corners */
+  padding: 8px; /* Adds padding inside the dropdown */
+  background-color: var(--muted-foreground); /* Dynamic background color */
+  width: 100%; /* Ensures the dropdown takes full width */
+  color: var(--muted-foreground); /* Dynamic text color */
+  font-family: var(--font-nunito); /* Applies dynamic font */
+} /* Editable dropdown fields */
+
+/* Output fields */
+p-cellEditor span {
+  display: block;
+  padding: 8px;
+  background-color: var(--card-foreground); /* Dynamic background color */
+  border: 1px solid transparent; /* Transparent border for consistency */
+  border-radius: 4px;
+  color: var(--card-foreground); /* Dynamic text color */
+  font-family: var(--font-poppins); /* Applies dynamic font */
+}
+
+/* Center align the last table header */
+p-table th:last-child {
+  text-align: center;
+}
+
+/* Add spacing for table rows */
+p-table .p-datatable-tbody > tr > td {
+  padding: 16px 20px; /* Adds padding inside table cells */
+  vertical-align: middle; /* Ensures content is vertically centered */
+  background-color: var(--color-background); /* Dynamic row background */
+  color: var(--color-foreground); /* Dynamic text color */
+}
+
+/* Optional: Add spacing between rows */
+p-table .p-datatable-tbody > tr {
+  margin-bottom: 8px; /* Adds space between rows */
+}
+
+/* Adjust header and footer spacing for consistency */
+p-table .p-datatable-thead > tr > th,
+p-table .p-datatable-tfoot > tr > td {
+  padding: 16px 20px; /* Matches row spacing */
+  background-color: var(--color-card); /* Dynamic header/footer background */
+  color: var(--color-card-foreground); /* Dynamic text color */
+  font-family: var(--font-nunito); /* Applies dynamic font */
 }

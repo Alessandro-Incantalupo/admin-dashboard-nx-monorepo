@@ -13,6 +13,7 @@ import { EditFormComponent } from '@features/users/components/edit-form/edit-for
 import { UserTableComponent } from '@features/users/components/user-table/user-table.component';
 import { UsersStore } from '@features/users/state/user.store';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { PrimeNgTableComponent } from '@shared/prime-ng-table/prime-ng-table.component';
 import { toast } from 'ngx-sonner';
 import { UserFormComponent } from '../../components/user-form/user-form.component';
 
@@ -23,6 +24,7 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
     UserTableComponent,
     UserFormComponent,
     EditFormComponent,
+    PrimeNgTableComponent,
   ],
   templateUrl: './user-list.component.html',
   styles: `
