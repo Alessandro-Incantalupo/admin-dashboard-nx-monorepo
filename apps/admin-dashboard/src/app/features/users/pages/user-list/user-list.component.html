@@ -145,6 +145,9 @@
         <app-prime-ng-table
           [users]="userStore.users()"
           [roles]="userStore.roles()"
+          [readOnly]="!authStore.canEdit()"
+          (editAction)="onEdit($event)"
+          (deleteAction)="onDelete($event)"
         ></app-prime-ng-table>
 
         @if (editingUser()) {

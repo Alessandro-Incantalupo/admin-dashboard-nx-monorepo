@@ -70,6 +70,18 @@
                 rounded
                 severity="secondary"
               ></button>
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-trash"
+                (click)="onRowDelete(user, ri)"
+                text
+                rounded
+                severity="danger"
+                pTooltip="Delete user"
+                tooltipPosition="top"
+              ></button>
             }
 
             @if (editing) {

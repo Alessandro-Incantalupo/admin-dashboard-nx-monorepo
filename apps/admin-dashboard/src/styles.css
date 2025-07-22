@@ -170,6 +170,7 @@ layer(base);
     --primary-foreground: #ffffff;
     --muted: #cfd9e5;
     --muted-foreground: #64748b;
+    --cell-editor-input: #ffffff;
     --destructive: #cc0033;
     --destructive-foreground: #fafafa;
     --border: #e2e8f0;
@@ -183,6 +184,7 @@ layer(base);
     --muted: #262626;
     --muted-foreground: #a3a3a3;
     --border: #262626;
+    --cell-editor-input: #0a0a0a;
   }
 
   :root[data-theme="violet"] {
@@ -300,7 +302,7 @@ p-cellEditor input[pInputText] {
   border: 1px solid var(--foreground); /* Dynamic border color */
   border-radius: 4px; /* Rounds the corners */
   padding: 8px; /* Adds padding inside the input */
-  background-color: var(--muted-foreground); /* Dynamic background color */
+  background-color: var(--cell-editor-input); /* Dynamic background color */
   box-shadow: inset 0 1px 3px var(--shadow-custom); /* Custom shadow for depth */
   width: 100%; /* Ensures the input takes full width */
   color: var(--foreground); /* Dynamic text color */
@@ -314,16 +316,42 @@ p-cellEditor input[pInputText]:focus {
   box-shadow: 0 0 5px var(--input-focus-shadow); /* Dynamic glow effect */
 }
 
-/* Editable dropdown fields */
-p-cellEditor input[p-select] {
-  border: 1px solid var(--foreground); /* Dynamic border color */
-  border-radius: 4px; /* Rounds the corners */
-  padding: 8px; /* Adds padding inside the dropdown */
-  background-color: var(--muted-foreground); /* Dynamic background color */
-  width: 100%; /* Ensures the dropdown takes full width */
-  color: var(--muted-foreground); /* Dynamic text color */
-  font-family: var(--font-nunito); /* Applies dynamic font */
-} /* Editable dropdown fields */
+/* Target the p-select dropdown button */
+p-cellEditor p-select .p-select {
+  border: 1px solid var(--foreground) !important;
+  border-radius: 4px !important;
+  background-color: var(--background) !important;
+  width: 100% !important;
+  font-family: var(--font-nunito) !important;
+}
+
+/* Target the selected value display */
+p-cellEditor p-select .p-select-label {
+  color: var(--foreground) !important;
+  padding: 8px !important;
+}
+
+/* Target the dropdown arrow */
+p-cellEditor p-select .p-select-dropdown {
+  color: var(--foreground) !important;
+}
+
+/* Target the dropdown panel when open */
+.p-select-overlay .p-select-list {
+  background-color: var(--background) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px !important;
+}
+
+/* Target individual dropdown options */
+.p-select-overlay .p-select-list .p-select-option {
+  color: var(--foreground) !important;
+  padding: 8px 12px !important;
+}
+
+.p-select-overlay .p-select-list .p-select-option:hover {
+  background-color: var(--muted) !important;
+}
 
 /* Output fields */
 p-cellEditor span {

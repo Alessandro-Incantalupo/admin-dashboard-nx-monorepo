@@ -1,6 +1,6 @@
 import { User } from '@admin-dashboard-nx-monorepo/models';
 import { CommonModule } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessageService, SelectItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -27,8 +27,11 @@ import { ToastModule } from 'primeng/toast';
 })
 export class PrimeNgTableComponent {
   private messageService = inject(MessageService);
-  users = input<User[]>();
+  readonly users = input.required<User[]>();
   roles = input<SelectItem<any>[]>();
+  readonly readOnly = input<boolean>(false);
+  readonly editAction = output<User>();
+  readonly deleteAction = output<User>();
   clonedUsers: { [s: string]: User } = {};
 
   onRowEditInit(user: User) {
@@ -55,5 +58,30 @@ export class PrimeNgTableComponent {
   onRowEditCancel(user: User, index: number) {
     this.users[index] = this.clonedUsers[user.id];
     delete this.clonedUsers[user.id];
+  }
+
+  onRowDelete(user: User, index: number) {
+    this.confirmationService.confirm({
+      message: `Are you sure you want to delete ${user.name}?`,
+      header: 'Confirm Delete',
+      icon: 'pi pi-exclamation-triangle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text',
+      accept: () => {
+        this.userDeleted.emit({ user, index });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'User deleted successfully',
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Cancelled',
+          detail: 'Delete operation cancelled',
+        });
+      },
+    });
   }
 }
