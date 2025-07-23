@@ -364,11 +364,6 @@ p-cellEditor span {
   font-family: var(--font-poppins); /* Applies dynamic font */
 }
 
-/* Center align the last table header */
-p-table th:last-child {
-  text-align: center;
-}
-
 /* Add spacing for table rows */
 p-table .p-datatable-tbody > tr > td {
   padding: 16px 20px; /* Adds padding inside table cells */
@@ -383,10 +378,20 @@ p-table .p-datatable-tbody > tr {
 }
 
 /* Adjust header and footer spacing for consistency */
-p-table .p-datatable-thead > tr > th,
-p-table .p-datatable-tfoot > tr > td {
-  padding: 16px 20px; /* Matches row spacing */
-  background-color: var(--color-card); /* Dynamic header/footer background */
-  color: var(--color-card-foreground); /* Dynamic text color */
-  font-family: var(--font-nunito); /* Applies dynamic font */
+p-table .p-datatable-thead > tr > th {
+  background-color: var(
+    --primary
+  ); /* Matches the user table header background */
+  color: var(
+    --primary-foreground
+  ); /* Matches the user table header text color */
+  font-size: 0.75rem; /* Matches the text size */
+  font-weight: 600; /* Matches the font weight */
+  text-align: left; /* Aligns text to the left */
+  padding: 12px; /* Adds padding for consistency */
+  border-bottom: 1px solid var(--border); /* Adds a border similar to the user table */
+}
+/* Center align the last table header */
+p-table .p-datatable-thead > tr > th:last-child {
+  text-align: center;
 }

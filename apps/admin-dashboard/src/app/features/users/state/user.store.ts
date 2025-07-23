@@ -41,10 +41,12 @@ import {
 
 type State = {
   users: User[];
+  clonedUsers: { [id: string]: User }; // Temporary storage for original user states
 };
 
 const initialState: State = {
   users: [],
+  clonedUsers: {},
 };
 
 export const UsersStore = signalStore(
@@ -52,13 +54,6 @@ export const UsersStore = signalStore(
   withDevtools('Users Store'),
   withComputed(({ users }) => ({
     hasUsers: computed(() => users().length > 0),
-    roles: computed(() => {
-      const uniqueRoles = Array.from(new Set(users().map(user => user.role)));
-      return uniqueRoles.map(role => ({
-        label: role.charAt(0).toUpperCase() + role.slice(1),
-        value: role,
-      }));
-    }),
   })),
   withMethods((state, userService = inject(UsersService)) => {
     const loadUsers = rxMethod<void>(
@@ -127,6 +122,7 @@ export const UsersStore = signalStore(
                 updateState(state, 'Users: Update', {
                   users: state.users().map(u => (u.id === user.id ? user : u)),
                 });
+
                 setUsersUpdateLoaded();
                 toast.success('User updated!', {
                   description: `User "${user.name}" has been updated.`,
@@ -217,7 +213,47 @@ export const UsersStore = signalStore(
     }, getNextResetMs());
     const reset = () => updateState(state, 'Users: Reset', initialState);
 
-    return { loadUsers, reset, addUser, updateUser, deleteUser, resetDemoData };
+    const startEditing = (user: User) => {
+      updateState(state, 'User: Start Editing', {
+        clonedUsers: {
+          ...state.clonedUsers(),
+          [user.id]: structuredClone(user),
+        },
+      });
+    };
+
+    const cancelEditing = (user: User) => {
+      const cloned = { ...state.clonedUsers() };
+      delete cloned[user.id];
+      updateState(state, 'User: Cancel Editing', { clonedUsers: cloned });
+    };
+    const restoreUser = (user: User) => {
+      const original = state.clonedUsers()[user.id];
+      if (!original) return;
+
+      const updatedUsers = state
+        .users()
+        .map(u => (u.id === user.id ? structuredClone(original) : u));
+
+      updateState(state, 'Users: Restore Original', {
+        users: updatedUsers,
+        clonedUsers: Object.fromEntries(
+          Object.entries(state.clonedUsers()).filter(([id]) => id !== user.id)
+        ),
+      });
+    };
+
+    return {
+      loadUsers,
+      reset,
+      addUser,
+      updateUser,
+      deleteUser,
+      resetDemoData,
+      startEditing,
+      cancelEditing,
+      restoreUser,
+    };
   }),
   withHooks(({ loadUsers }) => ({
     onInit: () => {

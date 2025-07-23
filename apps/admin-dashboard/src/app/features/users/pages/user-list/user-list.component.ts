@@ -9,8 +9,6 @@ import {
   viewChild,
 } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { EditFormComponent } from '@features/users/components/edit-form/edit-form.component';
-import { UserTableComponent } from '@features/users/components/user-table/user-table.component';
 import { UsersStore } from '@features/users/state/user.store';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { PrimeNgTableComponent } from '@shared/prime-ng-table/prime-ng-table.component';
@@ -19,13 +17,7 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
 
 @Component({
   selector: 'app-user-list',
-  imports: [
-    TranslocoDirective,
-    UserTableComponent,
-    UserFormComponent,
-    EditFormComponent,
-    PrimeNgTableComponent,
-  ],
+  imports: [TranslocoDirective, UserFormComponent, PrimeNgTableComponent],
   templateUrl: './user-list.component.html',
   styles: `
     :host {
@@ -40,7 +32,12 @@ export default class UserListComponent {
   readonly formSection = viewChild<ElementRef<HTMLDivElement>>('formSection');
 
   readonly showForm = signal(false);
-  readonly editingUser = signal<User | null>(null);
+  clonedUsers: { [s: string]: User } = {};
+  readonly roles = [
+    { label: 'Guest', value: 'guest' },
+    { label: 'User', value: 'user' },
+    { label: 'Admin', value: 'admin' },
+  ];
 
   readonly demoCredentials = [
     {
@@ -103,6 +100,19 @@ export default class UserListComponent {
     return (editRules[role] ?? editRules.guest)();
   }
 
+  onEditOld(user: User) {
+    if (!this.authStore.canEdit()) {
+      toast.error('Unauthorized', {
+        description: 'You need to be logged in to edit users.',
+      });
+      return;
+    }
+  }
+
+  saveEdit(user: User) {
+    this.userStore.updateUser(user);
+  }
+
   onEdit(user: User) {
     if (!this.authStore.canEdit()) {
       toast.error('Unauthorized', {
@@ -110,16 +120,19 @@ export default class UserListComponent {
       });
       return;
     }
-
-    this.editingUser.set(user);
+    this.userStore.startEditing(user);
   }
 
-  saveEdit(user: User) {
+  onRowEditSave(user: User) {
+    this.userStore.cancelEditing(user);
     this.userStore.updateUser(user);
-    this.editingUser.set(null);
   }
 
-  onDelete(user: User) {
+  onRowEditCancel({ user }: { user: User; index: number }) {
+    this.userStore.restoreUser(user);
+  }
+
+  onDelete(event: { user: User; index: number }) {
     if (!this.authStore.canDelete()) {
       toast.error('Unauthorized', {
         description: 'Only admins can delete users.',
@@ -129,16 +142,16 @@ export default class UserListComponent {
 
     // Confirmation dialog
     const confirmed = confirm(
-      `Are you sure you want to delete user "${user.name}"?`
+      `Are you sure you want to delete user "${event.user.name}"?`
     );
     if (!confirmed) {
       toast.info('Delete cancelled', {
-        description: `User "${user.name}" was not deleted.`,
+        description: `User "${event.user.name}" was not deleted.`,
       });
       return;
     }
 
-    this.userStore.deleteUser(user.id);
+    this.userStore.deleteUser(event.user.id);
   }
 
   toggleForm() {

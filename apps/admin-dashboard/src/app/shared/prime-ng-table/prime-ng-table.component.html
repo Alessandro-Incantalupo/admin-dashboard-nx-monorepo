@@ -52,7 +52,7 @@
               ></p-select>
             </ng-template>
             <ng-template #output>
-              {{ user.role }}
+              {{ user.role | titlecase }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -65,7 +65,7 @@
                 type="button"
                 pInitEditableRow
                 icon="pi pi-pencil"
-                (click)="onRowEditInit(user)"
+                (click)="editAction.emit(user)"
                 text
                 rounded
                 severity="secondary"
@@ -75,7 +75,7 @@
                 pRipple
                 type="button"
                 icon="pi pi-trash"
-                (click)="onRowDelete(user, ri)"
+                (click)="deleteAction.emit({ user: user, index: ri })"
                 text
                 rounded
                 severity="danger"
@@ -91,7 +91,7 @@
                 type="button"
                 pSaveEditableRow
                 icon="pi pi-check"
-                (click)="onRowEditSave(user)"
+                (click)="saveAction.emit(user)"
                 text
                 rounded
                 severity="secondary"
@@ -105,7 +105,7 @@
                 type="button"
                 pCancelEditableRow
                 icon="pi pi-times"
-                (click)="onRowEditCancel(user, ri)"
+                (click)="saveActionCancel.emit({ user: user, index: ri })"
                 text
                 rounded
                 severity="secondary"
