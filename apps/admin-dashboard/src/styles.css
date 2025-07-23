@@ -395,3 +395,7 @@ p-table .p-datatable-thead > tr > th {
 p-table .p-datatable-thead > tr > th:last-child {
   text-align: center;
 }
+
+.color-primary {
+  color: var(--color-primary);
+}
