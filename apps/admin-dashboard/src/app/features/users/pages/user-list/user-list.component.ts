@@ -100,15 +100,6 @@ export default class UserListComponent {
     return (editRules[role] ?? editRules.guest)();
   }
 
-  onEditOld(user: User) {
-    if (!this.authStore.canEdit()) {
-      toast.error('Unauthorized', {
-        description: 'You need to be logged in to edit users.',
-      });
-      return;
-    }
-  }
-
   saveEdit(user: User) {
     this.userStore.updateUser(user);
   }

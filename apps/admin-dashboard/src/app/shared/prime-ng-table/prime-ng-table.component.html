@@ -58,7 +58,7 @@
         </td>
         <td>
           <div class="align-items-center flex items-end justify-center gap-2">
-            @if (!editing) {
+            @if (!editing && !readOnly()) {
               <button
                 pButton
                 pRipple
@@ -84,7 +84,7 @@
               ></button>
             }
 
-            @if (editing) {
+            @if (editing && !readOnly()) {
               <button
                 pButton
                 pRipple
@@ -112,6 +112,13 @@
               ></button>
             }
           </div>
+
+          @if (readOnly()) {
+            <span
+              class="text-muted-foreground align-items-center flex justify-center text-xs"
+              >View Only</span
+            >
+          }
         </td>
       </tr>
     </ng-template>
