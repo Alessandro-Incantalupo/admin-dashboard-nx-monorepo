@@ -8,6 +8,7 @@ layer(base);
 
 /** Plugins **/
 @import "./assets/styles/apexchart.css";
+@import "primeicons/primeicons.css";
 
 @plugin "daisyui";
 @plugin "@tailwindcss/forms";
@@ -161,6 +162,7 @@ layer(base);
 @layer base {
   :root {
     --background: #ffffff;
+    --background-color: #000000;
     --foreground: #0c1420;
     --card: #f1f5f9;
     --card-foreground: #000000;
@@ -168,6 +170,7 @@ layer(base);
     --primary-foreground: #ffffff;
     --muted: #cfd9e5;
     --muted-foreground: #64748b;
+    --cell-editor-input: #ffffff;
     --destructive: #cc0033;
     --destructive-foreground: #fafafa;
     --border: #e2e8f0;
@@ -181,6 +184,7 @@ layer(base);
     --muted: #262626;
     --muted-foreground: #a3a3a3;
     --border: #262626;
+    --cell-editor-input: #0a0a0a;
   }
 
   :root[data-theme="violet"] {
@@ -291,4 +295,107 @@ select {
 [type="checkbox"],
 [type="radio"] {
   @apply border-border bg-background checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus:ring-primary h-4 w-4 rounded-sm focus:ring-2;
+}
+
+/* Editable input fields */
+p-cellEditor input[pInputText] {
+  border: 1px solid var(--foreground); /* Dynamic border color */
+  border-radius: 4px; /* Rounds the corners */
+  padding: 8px; /* Adds padding inside the input */
+  background-color: var(--cell-editor-input); /* Dynamic background color */
+  box-shadow: inset 0 1px 3px var(--shadow-custom); /* Custom shadow for depth */
+  width: 100%; /* Ensures the input takes full width */
+  color: var(--foreground); /* Dynamic text color */
+  font-family: var(--font-poppins); /* Applies dynamic font */
+}
+
+/* Highlight editable fields when focused */
+p-cellEditor input[pInputText]:focus {
+  border-color: var(--input-focus-border); /* Dynamic focus border color */
+  outline: none; /* Removes default outline */
+  box-shadow: 0 0 5px var(--input-focus-shadow); /* Dynamic glow effect */
+}
+
+/* Target the p-select dropdown button */
+p-cellEditor p-select .p-select {
+  border: 1px solid var(--foreground) !important;
+  border-radius: 4px !important;
+  background-color: var(--background) !important;
+  width: 100% !important;
+  font-family: var(--font-nunito) !important;
+}
+
+/* Target the selected value display */
+p-cellEditor p-select .p-select-label {
+  color: var(--foreground) !important;
+  padding: 8px !important;
+}
+
+/* Target the dropdown arrow */
+p-cellEditor p-select .p-select-dropdown {
+  color: var(--foreground) !important;
+}
+
+/* Target the dropdown panel when open */
+.p-select-overlay .p-select-list {
+  background-color: var(--background) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px !important;
+}
+
+/* Target individual dropdown options */
+.p-select-overlay .p-select-list .p-select-option {
+  color: var(--foreground) !important;
+  padding: 8px 12px !important;
+}
+
+.p-select-overlay .p-select-list .p-select-option:hover {
+  background-color: var(--muted) !important;
+}
+
+/* Output fields */
+p-cellEditor span {
+  display: block;
+  padding: 8px;
+  background-color: var(--card-foreground); /* Dynamic background color */
+  border: 1px solid transparent; /* Transparent border for consistency */
+  border-radius: 4px;
+  color: var(--card-foreground); /* Dynamic text color */
+  font-family: var(--font-poppins); /* Applies dynamic font */
+}
+
+/* Add spacing for table rows */
+p-table .p-datatable-tbody > tr > td {
+  padding: 16px 20px; /* Adds padding inside table cells */
+  vertical-align: middle; /* Ensures content is vertically centered */
+  background-color: var(--color-background); /* Dynamic row background */
+  color: var(--color-foreground); /* Dynamic text color */
+}
+
+/* Optional: Add spacing between rows */
+p-table .p-datatable-tbody > tr {
+  margin-bottom: 8px; /* Adds space between rows */
+}
+
+/* Adjust header and footer spacing for consistency */
+p-table .p-datatable-thead > tr > th {
+  background-color: var(
+    --primary
+  ); /* Matches the user table header background */
+  color: var(
+    --primary-foreground
+  ); /* Matches the user table header text color */
+  font-size: 0.75rem; /* Matches the text size */
+  font-weight: 600; /* Matches the font weight */
+  text-align: left; /* Aligns text to the left */
+  padding: 12px; /* Adds padding for consistency */
+  border-bottom: 1px solid var(--border); /* Adds a border similar to the user table */
+}
+/* Center align the last table header */
+p-table .p-datatable-thead > tr > th:last-child {
+  text-align: center;
+}
+
+.color-primary {
+  color: var(--color-primary);
 }
