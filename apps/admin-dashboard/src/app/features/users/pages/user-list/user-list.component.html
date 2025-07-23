@@ -177,7 +177,10 @@
               <h2 class="mb-2 text-lg font-semibold">
                 {{ t('users.addUserForm') }}
               </h2>
-              <app-user-form class="block" />
+              <app-user-form
+                class="block"
+                (isSubmitted)="showForm.set(false)"
+              ></app-user-form>
             </div>
           }
         }

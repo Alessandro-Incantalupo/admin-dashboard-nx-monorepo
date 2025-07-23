@@ -154,20 +154,4 @@ export default class UserListComponent {
     }
     this.showForm.set(!this.showForm());
   }
-
-  addUser() {
-    if (!this.authStore.canCreate()) {
-      toast.error('Unauthorized', {
-        description: 'Only admins can add users.',
-      });
-      return;
-    }
-    this.userStore.addUser({
-      id: crypto.randomUUID(),
-      name: 'New User',
-      email: 'new@example.com',
-      role: 'user',
-      status: 'active',
-    });
-  }
 }

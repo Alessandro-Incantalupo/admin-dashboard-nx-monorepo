@@ -5,6 +5,7 @@ import {
   DestroyRef,
   inject,
   OnInit,
+  output,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -32,6 +33,7 @@ export class UserFormComponent implements OnInit {
   private fb = inject(NonNullableFormBuilder);
   private userStore = inject(UsersStore);
   private readonly destroyRef = inject(DestroyRef);
+  isSubmitted = output<boolean>();
   readonly submitted = signal(false);
 
   readonly form = this.fb.group({
@@ -70,6 +72,9 @@ export class UserFormComponent implements OnInit {
     };
 
     this.userStore.addUser(newUser);
+
+    this.isSubmitted.emit(true);
+
     this.form.reset({ role: 'user', status: 'active' });
     this.submitted.set(false);
   }
