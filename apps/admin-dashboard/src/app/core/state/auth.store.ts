@@ -120,6 +120,10 @@ export const AuthStore = signalStore(
 
     return { login, logout, setError, setRole };
   }),
+  // This hook runs when the AuthStore is initialized.
+  // It checks if a JWT token exists in localStorage.
+  // If a token is found, it decodes the user from the token and updates the store state.
+  // This ensures that after a page refresh, the authentication state and user data are restored.
   withHooks((_, authService = inject(AuthService)) => ({
     onInit: () => {
       const token = localStorage.getItem('token');
