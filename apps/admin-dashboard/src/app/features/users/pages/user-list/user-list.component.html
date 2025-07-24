@@ -4,41 +4,39 @@
       {{ t('users.title') }}
     </h1>
     <button
-      class="rounded bg-yellow-500 px-5 py-2 text-sm font-semibold text-white shadow transition hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-300 focus:outline-none"
+      class="text-foreground rounded bg-yellow-500 px-5 py-2 font-semibold shadow transition hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-300 focus:outline-none"
       (click)="userStore.resetDemoData()"
       type="button"
     >
       ♻️ {{ t('users.reset-demo') }}
     </button>
   </div>
-  <div class="mb-6 rounded border-l-4 border-blue-400 bg-blue-50 p-4">
+  <div class="border-primary background mb-6 rounded border-l-4 p-4">
     <div class="flex">
       <div class="ml-3">
-        <p class="mb-2 text-sm font-semibold text-blue-700">
+        <p class="color-primary mb-2 font-semibold">
           {{ t('users.abilitiesTitle') ?? 'Your current abilities:' }}
         </p>
-        <p class="text-sm text-blue-700">
+        <p class="color-primary">
           {{ getRoleDescription() }}
         </p>
         @if (!authStore.isAuthenticated()) {
           <div class="mt-4">
-            <p class="mb-3 text-xs text-blue-600">
+            <p class="color-primary mb-3">
               You are viewing as a guest. <strong>Login</strong> to access user
               and admin features.
             </p>
             <div class="space-y-2">
-              <p class="text-xs font-semibold text-blue-800">
-                Quick Demo Login:
-              </p>
+              <p class="color-primary font-semibold">Quick Demo Login:</p>
               <div class="flex gap-2">
                 <button
-                  class="rounded bg-green-600 px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-green-700"
+                  class="text-foreground transform rounded bg-green-600 px-4 py-2 font-semibold transition-transform hover:scale-105 hover:bg-green-700 hover:shadow-lg"
                   (click)="quickLogin('user')"
                 >
                   👤 Login as User
                 </button>
                 <button
-                  class="rounded bg-red-600 px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-red-700"
+                  class="text-foreground transform rounded bg-red-600 px-4 py-2 font-semibold transition-transform hover:scale-105 hover:bg-red-700 hover:shadow-lg"
                   (click)="quickLogin('admin')"
                 >
                   👑 Login as Admin
@@ -46,14 +44,14 @@
               </div>
               <div class="mt-3 space-y-1">
                 @for (cred of demoCredentials; track cred.role) {
-                  <div class="rounded bg-blue-100 p-2 text-xs">
-                    <div class="flex items-center justify-between">
+                  <div class="background-primary rounded p-2">
+                    <div
+                      class="text-foreground flex items-center justify-between"
+                    >
                       <span class="font-mono">{{ cred.email }}</span>
-                      <span class="font-mono text-gray-600">{{
-                        cred.password
-                      }}</span>
+                      <span class="font-mono">{{ cred.password }}</span>
                     </div>
-                    <p class="mt-1 text-xs text-blue-700">
+                    <p class="text-foreground mt-1">
                       {{ cred.description }}
                     </p>
                   </div>
@@ -72,9 +70,10 @@
       <!-- Guest View - Always available -->
       <button
         class="rounded px-4 py-2"
-        [class.bg-blue-500]="authStore.isGuest()"
-        [class.text-white]="authStore.isGuest()"
-        [class.bg-gray-200]="!authStore.isGuest()"
+        [class.color-primary]="authStore.isGuest()"
+        [class.background-primary]="authStore.isGuest()"
+        [class.background-muted]="!authStore.isGuest()"
+        [class.text-foreground]="authStore.isGuest()"
         (click)="setRole('guest')"
       >
         👁️ Guest View
@@ -87,9 +86,10 @@
       ) {
         <button
           class="rounded px-4 py-2"
-          [class.bg-green-500]="authStore.isUser()"
-          [class.text-white]="authStore.isUser()"
-          [class.bg-gray-200]="!authStore.isUser()"
+          [class.color-primary]="authStore.isUser()"
+          [class.background-primary]="authStore.isUser()"
+          [class.background-muted]="!authStore.isUser()"
+          [class.text-foreground]="authStore.isUser()"
           (click)="setRole('user')"
         >
           👤 User View
@@ -100,9 +100,10 @@
       @if (authStore.userData()?.role === 'admin') {
         <button
           class="rounded px-4 py-2"
-          [class.bg-red-500]="authStore.isAdmin()"
-          [class.text-white]="authStore.isAdmin()"
-          [class.bg-gray-200]="!authStore.isAdmin()"
+          [class.color-primary]="authStore.isAdmin()"
+          [class.background-primary]="authStore.isAdmin()"
+          [class.background-muted]="!authStore.isAdmin()"
+          [class.text-foreground]="authStore.isAdmin()"
           (click)="setRole('admin')"
         >
           👑 Admin View
@@ -112,7 +113,10 @@
   } @else {
     <!-- Guest view only when not authenticated -->
     <div class="mb-6 flex gap-4">
-      <button class="rounded bg-blue-500 px-4 py-2 text-white" disabled>
+      <button
+        class="background-primary color-primary-foreground rounded px-4 py-2"
+        disabled
+      >
         👁️ Guest View (Current)
       </button>
       <button
@@ -149,11 +153,11 @@
 
         <!-- Role-based description -->
         <div class="mt-4 rounded bg-gray-50 p-3">
-          <p class="text-sm text-gray-600">
+          <p class="text-gray-600">
             {{ getRoleDescription() }}
           </p>
           @if (authStore.error()) {
-            <p class="mt-2 text-sm text-red-500">
+            <p class="mt-2 text-red-500">
               {{ authStore.error() }}
             </p>
           }
@@ -163,7 +167,7 @@
         @if (authStore.canCreate()) {
           <div class="mt-6 flex justify-end">
             <button
-              class="bg-primary hover:bg-primary/90 focus:ring-primary/50 transform rounded px-6 py-3 text-sm font-medium text-white shadow-md transition-transform hover:scale-105 focus:ring-2 focus:outline-none"
+              class="bg-primary hover:bg-primary/90 focus:ring-primary/50 text-foreground transform rounded px-6 py-3 font-medium shadow-md transition-transform hover:scale-105 focus:ring-2 focus:outline-none"
               (click)="toggleForm()"
             >
               ➕ {{ showForm() ? t('users.hideForm') : t('users.addUser') }}

@@ -174,6 +174,7 @@ layer(base);
     --destructive: #cc0033;
     --destructive-foreground: #fafafa;
     --border: #e2e8f0;
+    --credentials: #5f5c5c;
   }
 
   .dark {
@@ -396,6 +397,36 @@ p-table .p-datatable-thead > tr > th:last-child {
   text-align: center;
 }
 
+.background {
+  background-color: var(--color-background);
+}
 .color-primary {
   color: var(--color-primary);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.background-primary {
+  background-color: var(--color-primary);
+}
+
+.background-muted {
+  background-color: var(--muted-foreground);
+}
+
+.color-primary-foreground {
+  color: var(--color-primary-foreground);
+}
+.text-foreground {
+  color: var(--color-foreground);
+}
+
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+
+.credentials {
+  color: var(--credentials);
 }
