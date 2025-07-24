@@ -1,6 +1,6 @@
 @if (authService.isAuthenticated()) {
   <!-- Profile Menu (When Logged In) -->
-  <div class="relative ml-3" (clickOutside)="isOpen = false">
+  <div class="relative ml-3" (clickOutside)="isOpen.set(false)">
     <!-- Profile Button -->
     <button
       (click)="toggleMenu()"
@@ -16,10 +16,10 @@
     </button>
 
     <!-- Dropdown -->
-    @if (isOpen) {
+    @if (isOpen()) {
       <div
         [class]="
-          isOpen
+          isOpen()
             ? 'visible translate-y-0 scale-100 opacity-100'
             : 'invisible -translate-y-5 scale-95 opacity-0'
         "

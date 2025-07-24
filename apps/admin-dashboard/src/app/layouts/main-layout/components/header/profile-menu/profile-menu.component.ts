@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { PATHS } from '@core/constants/routes';
 import { AuthService } from '@core/services/auth.service';
@@ -17,7 +22,8 @@ export class ProfileMenuComponent {
   authService = inject(AuthService);
   router = inject(Router);
 
-  public isOpen = false;
+  public isOpen = signal(false);
+
   public profileMenu = [
     {
       title: 'Your Profile',
@@ -37,16 +43,11 @@ export class ProfileMenuComponent {
   ];
 
   public toggleMenu(): void {
-    this.isOpen = !this.isOpen;
-  }
-
-  getDropdownClasses() {
-    return this.isOpen
-      ? 'scale-100 opacity-100 translate-y-0 visible'
-      : 'scale-95 opacity-0 -translate-y-5 invisible';
+    this.isOpen.set(!this.isOpen());
   }
 
   logout() {
+    this.isOpen.set(false);
     this.authService.logout();
   }
 
