@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthStore } from '@core/state/auth.store';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { AuthService } from '../../../core/services/auth.service';
 import { ButtonComponent } from '../../../shared/button/button.component';
@@ -19,6 +20,7 @@ export default class SignUpComponent {
   nnfb = inject(NonNullableFormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
+  authStore = inject(AuthStore);
 
   isLoading = signal(false);
 
@@ -57,7 +59,7 @@ export default class SignUpComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this.authStore.logout();
     this.router.navigate(['/auth/sign-up']); // Redirect to login after logout
   }
 }

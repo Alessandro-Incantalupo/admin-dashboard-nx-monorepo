@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthStore } from '@core/state/auth.store';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { PATHS } from '../../../core/constants/routes';
 import { AuthService } from '../../../core/services/auth.service';
@@ -20,6 +21,7 @@ export default class SignInComponent {
   nnfb = inject(NonNullableFormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
+  protected authStore = inject(AuthStore);
 
   isLoading = signal(false);
   submitted = false;
@@ -33,16 +35,11 @@ export default class SignInComponent {
   });
 
   readonly handleRedirect = effect(() => {
-    const status = this.authService.loginStatus();
-    const user = this.authService.userData();
+    const user = this.authStore.userData();
 
-    if (status === 'success' && user) {
+    if (user) {
       // Redirect to dashboard instead of profile
       this.router.navigate(['/']);
-    }
-
-    if (status === 'error') {
-      this.loginError.set(this.authService.error());
     }
   });
 
@@ -51,7 +48,7 @@ export default class SignInComponent {
     if (this.form.invalid) return;
 
     const { email, password } = this.form.value;
-    this.authService.login({ email, password });
+    this.authStore.login({ email, password });
   }
 
   // Helper function to check form field validity

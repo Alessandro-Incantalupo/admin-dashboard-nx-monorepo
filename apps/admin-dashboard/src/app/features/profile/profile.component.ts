@@ -1,5 +1,7 @@
+import { User } from '@admin-dashboard-nx-monorepo/models';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
 import { AuthService } from '../../core/services/auth.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
@@ -18,12 +20,14 @@ import { ThemeSelectorComponent } from './theme-selector/theme-selector.componen
     ThemeSelectorComponent,
     ProfileInfoComponent,
   ],
+  providers: [AuthStore],
 })
 export default class ProfileComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   authService = inject(AuthService);
   themeStore = inject(ThemeStore);
+  authStore = inject(AuthStore);
 
   breadcrumbItems = signal<{ label: string; route?: string }[]>([]);
 
@@ -31,12 +35,13 @@ export default class ProfileComponent {
   userData: { [key: string]: any } | undefined = undefined;
   username = signal('Guest');
   userRole = signal('Guest');
+  userEmail = signal('Guest');
 
   constructor() {
     // Get user data from state
     this.userData = this.state?.['userData'];
     this.userRole.set(this.userData?.['role']);
-
+    this.userEmail.set(this.userData?.['email']);
     // Get username from route parameters
     this.route.params.subscribe(params => {
       const currentUsername = params['username'] || this.username();
@@ -49,8 +54,15 @@ export default class ProfileComponent {
     });
   }
 
+  private setUserData(userData: User) {
+    this.userData = userData;
+    this.userRole.set(userData.role || 'Guest');
+    this.userEmail.set(userData.email || 'Guest');
+    this.username.set(userData.name || 'Guest');
+  }
+
   logout() {
-    this.authService.logout();
+    this.authStore.logout();
     this.router.navigate(['/']);
   }
 }

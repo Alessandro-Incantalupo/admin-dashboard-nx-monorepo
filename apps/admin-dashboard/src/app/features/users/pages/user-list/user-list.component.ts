@@ -9,6 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import { AuthStore } from '@core/state/auth.store';
 import { UsersStore } from '@features/users/state/user.store';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { PrimeNgTableComponent } from '@shared/prime-ng-table/prime-ng-table.component';
@@ -28,7 +29,8 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
 })
 export default class UserListComponent {
   protected userStore = inject(UsersStore);
-  protected authStore = inject(AuthService);
+  protected authStore = inject(AuthStore);
+  protected authService = inject(AuthService);
   readonly formSection = viewChild<ElementRef<HTMLDivElement>>('formSection');
 
   readonly showForm = signal(false);
@@ -77,14 +79,6 @@ export default class UserListComponent {
         password: credentials.password,
       });
     }
-  }
-
-  setRole(role: 'guest' | 'user' | 'admin') {
-    this.authStore.setRole(role);
-  }
-
-  getRoleDescription() {
-    return this.authStore.getRoleDescription();
   }
 
   canEditUser(user: User): boolean {

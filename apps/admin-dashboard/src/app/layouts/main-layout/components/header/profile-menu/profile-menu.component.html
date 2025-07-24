@@ -1,4 +1,4 @@
-@if (authService.isAuthenticated()) {
+@if (authStore.isAuthenticated()) {
   <!-- Profile Menu (When Logged In) -->
   <div class="relative ml-3" (clickOutside)="isOpen.set(false)">
     <!-- Profile Button -->
@@ -10,8 +10,8 @@
       <span class="sr-only">Open user menu</span>
       <img
         class="h-9 w-9 rounded-md"
-        src="https://avatars.githubusercontent.com/u/12519008?v=4"
-        alt=""
+        src="https://avatars.githubusercontent.com/u/145116865?v=4"
+        alt="git hub profile picture"
       />
     </button>
 
@@ -30,8 +30,8 @@
           <div class="w-10 shrink-0">
             <img
               class="rounded-md"
-              src="https://avatars.githubusercontent.com/u/12519008?v=4"
-              alt=""
+              src="https://avatars.githubusercontent.com/u/145116865?v=4"
+              alt="git hub profile picture"
             />
           </div>
           <div

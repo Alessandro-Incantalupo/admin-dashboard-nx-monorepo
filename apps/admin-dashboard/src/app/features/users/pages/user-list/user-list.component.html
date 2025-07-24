@@ -18,13 +18,13 @@
           {{ t('users.abilitiesTitle') ?? 'Your current abilities:' }}
         </p>
         <p class="color-primary">
-          {{ getRoleDescription() }}
+          {{ authStore.roleDescription() }}
         </p>
         @if (!authStore.isAuthenticated()) {
           <div class="mt-4">
             <p class="color-primary mb-3">
-              You are viewing as a guest. <strong>Login</strong> to access user
-              and admin features.
+              You are viewing as a Guest. <strong>Login</strong> to access User
+              and Admin features.
             </p>
             <div class="space-y-2">
               <p class="color-primary font-semibold">Quick Demo Login:</p>
@@ -74,41 +74,35 @@
         [class.background-primary]="authStore.isGuest()"
         [class.background-muted]="!authStore.isGuest()"
         [class.text-foreground]="authStore.isGuest()"
-        (click)="setRole('guest')"
+        (click)="authStore.setRole('guest')"
       >
         👁️ Guest View
       </button>
 
       <!-- User View - Available for users and admins -->
-      @if (
-        authStore.userData()?.role === 'user' ||
-        authStore.userData()?.role === 'admin'
-      ) {
-        <button
-          class="rounded px-4 py-2"
-          [class.color-primary]="authStore.isUser()"
-          [class.background-primary]="authStore.isUser()"
-          [class.background-muted]="!authStore.isUser()"
-          [class.text-foreground]="authStore.isUser()"
-          (click)="setRole('user')"
-        >
-          👤 User View
-        </button>
-      }
+
+      <button
+        class="rounded px-4 py-2"
+        [class.color-primary]="authStore.isUser()"
+        [class.background-primary]="authStore.isUser()"
+        [class.background-muted]="!authStore.isUser()"
+        [class.text-foreground]="authStore.isUser()"
+        (click)="authStore.setRole('user')"
+      >
+        👤 User View
+      </button>
 
       <!-- Admin View - Only available for admins -->
-      @if (authStore.userData()?.role === 'admin') {
-        <button
-          class="rounded px-4 py-2"
-          [class.color-primary]="authStore.isAdmin()"
-          [class.background-primary]="authStore.isAdmin()"
-          [class.background-muted]="!authStore.isAdmin()"
-          [class.text-foreground]="authStore.isAdmin()"
-          (click)="setRole('admin')"
-        >
-          👑 Admin View
-        </button>
-      }
+      <button
+        class="rounded px-4 py-2"
+        [class.color-primary]="authStore.isAdmin()"
+        [class.background-primary]="authStore.isAdmin()"
+        [class.background-muted]="!authStore.isAdmin()"
+        [class.text-foreground]="authStore.isAdmin()"
+        (click)="authStore.setRole('admin')"
+      >
+        👑 Admin View
+      </button>
     </div>
   } @else {
     <!-- Guest view only when not authenticated -->
@@ -117,7 +111,7 @@
         class="background-primary color-primary-foreground rounded px-4 py-2"
         disabled
       >
-        👁️ Guest View (Current)
+        s 👁️ Guest View (Current)
       </button>
       <button
         class="cursor-not-allowed rounded bg-gray-300 px-4 py-2 text-gray-500"
@@ -154,7 +148,7 @@
         <!-- Role-based description -->
         <div class="mt-4 rounded bg-gray-50 p-3">
           <p class="text-gray-600">
-            {{ getRoleDescription() }}
+            {{ authStore.roleDescription() }}
           </p>
           @if (authStore.error()) {
             <p class="mt-2 text-red-500">

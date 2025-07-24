@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { PATHS } from '@core/constants/routes';
 import { AuthService } from '@core/services/auth.service';
+import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
 import { ClickOutsideDirective } from '@shared/directives/click-outside.directive';
 import { SvgIconComponent } from 'angular-svg-icon';
@@ -20,6 +21,7 @@ import { SvgIconComponent } from 'angular-svg-icon';
 export class ProfileMenuComponent {
   themeStore = inject(ThemeStore);
   authService = inject(AuthService);
+  authStore = inject(AuthStore);
   router = inject(Router);
 
   public isOpen = signal(false);
@@ -48,7 +50,7 @@ export class ProfileMenuComponent {
 
   logout() {
     this.isOpen.set(false);
-    this.authService.logout();
+    this.authStore.logout();
   }
 
   signIn() {
@@ -56,10 +58,10 @@ export class ProfileMenuComponent {
   }
 
   toProfile(link: string) {
-    const userData = this.authService.userData(); // Get the user object
+    const userData = this.authStore.userData(); // Get the user object
     const userRole = userData?.role || 'Guest'; // Extract the user role
     this.router.navigate([PATHS.PROFILE, userRole], {
-      state: { userData: this.authService.userData() },
+      state: { userData: this.authStore.userData() },
     });
   }
 }
