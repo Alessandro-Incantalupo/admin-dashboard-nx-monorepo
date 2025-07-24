@@ -14,9 +14,4 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 export class AppComponent {
   title = 'admin-dashboard';
   readonly spinner = inject(SpinnerService);
-
-  constructor() {
-    this.spinner.dispatch(true);
-    setTimeout(() => this.spinner.dispatch(false), 30000);
-  }
 }
