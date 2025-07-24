@@ -6,6 +6,7 @@ import { tapResponse } from '@ngrx/operators';
 import {
   signalStore,
   withComputed,
+  withHooks,
   withMethods,
   withState,
 } from '@ngrx/signals';
@@ -119,5 +120,17 @@ export const AuthStore = signalStore(
     };
 
     return { login, logout, setError, setRole };
-  })
+  }),
+  withHooks((_, authService = inject(AuthService)) => ({
+    onInit: () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        updateState(_, 'Hydrate user from token', {
+          isAuthenticated: true,
+          userData: authService.decodeUserFromToken(),
+          error: null,
+        });
+      }
+    },
+  }))
 );
