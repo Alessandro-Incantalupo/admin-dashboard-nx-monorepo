@@ -412,6 +412,10 @@ p-table .p-datatable-thead > tr > th:last-child {
   background-color: var(--color-primary);
 }
 
+.border-foreground {
+  border-color: var(--color-foreground);
+}
+
 .background-muted {
   background-color: var(--muted-foreground);
 }
