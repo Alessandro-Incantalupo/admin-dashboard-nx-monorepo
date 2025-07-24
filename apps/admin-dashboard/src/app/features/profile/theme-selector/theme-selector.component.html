@@ -20,31 +20,3 @@
     }
   </div>
 </div>
-
-<!-- Theme Mode -->
-<div class="mx-4 my-2">
-  <span class="text-foreground text-xs font-semibold">Mode</span>
-  <div class="mt-2 grid grid-cols-2 gap-2">
-    @for (item of themeStore.getMode(); track $index) {
-      <div
-        (click)="themeStore.toggleMode()"
-        [class]="{
-          'border-muted-foreground bg-card': item == themeStore.mode(),
-          'border-primary': item == themeStore.mode(),
-        }"
-        class="focus-visible:ring-ring border-border bg-background text-muted-foreground hover:bg-card hover:text-foreground inline-flex h-8 cursor-pointer items-center justify-start rounded-md border px-3 text-xs font-medium whitespace-nowrap shadow-xs transition-colors focus-visible:ring-1 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
-      >
-        <svg-icon
-          [src]="
-            item == 'light'
-              ? 'assets/icons/heroicons/outline/sun.svg'
-              : 'assets/icons/heroicons/outline/moon.svg'
-          "
-          [svgClass]="'h-5 mr-2 w-5 text-muted-foreground/50'"
-        >
-        </svg-icon>
-        <p class="capitalize">{{ item }}</p>
-      </div>
-    }
-  </div>
-</div>

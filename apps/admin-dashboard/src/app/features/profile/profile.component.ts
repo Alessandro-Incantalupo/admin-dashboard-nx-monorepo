@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ThemeStore } from '@core/state/theme.store';
 import { AuthService } from '../../core/services/auth.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 import { ButtonComponent } from '../../shared/button/button.component';
@@ -22,6 +23,7 @@ export default class ProfileComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   authService = inject(AuthService);
+  themeStore = inject(ThemeStore);
 
   breadcrumbItems = signal<{ label: string; route?: string }[]>([]);
 

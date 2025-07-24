@@ -1,9 +1,9 @@
 <nav aria-label="breadcrumb">
   <p class="sr-only">Ti trovi in:</p>
-  <ol class="flex space-x-2 text-sm text-white" role="list">
+  <ol class="text-foreground flex space-x-2 text-sm" role="list">
     <!-- Home Link -->
     <li>
-      <a class="text-white hover:text-gray-300" routerLink="/">
+      <a class="text-foreground hover:text-muted-foreground" routerLink="/">
         <span aria-hidden="true" class="fas fa-home"></span>
         Home
       </a>
@@ -11,10 +11,10 @@
 
     <!-- Dynamic Breadcrumbs -->
     @for (item of items(); track $index) {
-      <li class="before:text-white flex items-center">
+      <li class="before:text-foreground flex items-center">
         <span class="mx-2 text-gray-500">/</span>
         <a
-          class="text-white hover:text-gray-300"
+          class="text-foreground hover:text-muted-foreground"
           [routerLink]="item.route"
           [state]="item.routeState ?? undefined"
           [attr.aria-current]="$last ? 'page' : undefined"
