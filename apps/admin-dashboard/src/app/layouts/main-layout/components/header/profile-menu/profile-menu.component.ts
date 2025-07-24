@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { PATHS } from '@core/constants/routes';
-import { AuthService } from '@core/services/auth.service';
 import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
 import { ClickOutsideDirective } from '@shared/directives/click-outside.directive';
@@ -20,7 +19,6 @@ import { SvgIconComponent } from 'angular-svg-icon';
 })
 export class ProfileMenuComponent {
   themeStore = inject(ThemeStore);
-  authService = inject(AuthService);
   authStore = inject(AuthStore);
   router = inject(Router);
 
