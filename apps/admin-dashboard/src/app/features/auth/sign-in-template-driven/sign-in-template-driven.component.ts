@@ -14,7 +14,5 @@ interface SignInForm {
   styles: ``,
 })
 export default class SignInTemplateDrivenComponent {
-  onSubmit(form: { value: SignInForm }) {
-    console.log('Form Submitted:', form.value);
-  }
+  onSubmit(form: { value: SignInForm }) {}
 }

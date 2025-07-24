@@ -25,7 +25,6 @@ export class NavbarMobileMenuComponent {
 
   public toggleMenu(item: SubMenuItem): void {
     if (item.disabled) {
-      console.log('Feature under development');
       toast.info('Feature under development', {
         position: 'top-center',
       });
@@ -36,8 +35,6 @@ export class NavbarMobileMenuComponent {
       return;
     }
     if (item.route) {
-      console.log('Navigating to route:', item.route);
-
       this.router.navigate([item.route]);
     }
   }

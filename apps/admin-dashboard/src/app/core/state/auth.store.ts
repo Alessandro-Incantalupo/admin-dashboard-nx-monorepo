@@ -106,7 +106,6 @@ export const AuthStore = signalStore(
 
     const setRole = (role: 'guest' | 'user' | 'admin') => {
       const currentUser = state.userData();
-      console.log('Setting role:', role, 'for user:', currentUser);
       if (!currentUser) {
         toast.error('Cannot set role. No user is logged in.');
         return;

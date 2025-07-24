@@ -34,7 +34,6 @@ export default class SignUpComponent {
   );
 
   register() {
-    console.log('Registering user:', this.form.value);
     if (this.form.invalid) return; // Stop if invalid form
 
     if (this.form.value.password !== this.form.value.confirmPassword) {
