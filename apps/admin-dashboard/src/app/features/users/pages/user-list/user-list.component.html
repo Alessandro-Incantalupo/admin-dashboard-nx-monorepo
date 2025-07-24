@@ -42,21 +42,6 @@
                   👑 Login as Admin
                 </button>
               </div>
-              <div class="mt-3 space-y-1">
-                @for (cred of demoCredentials; track cred.role) {
-                  <div class="background-primary rounded p-2">
-                    <div
-                      class="text-foreground flex items-center justify-between"
-                    >
-                      <span class="font-mono">{{ cred.email }}</span>
-                      <span class="font-mono">{{ cred.password }}</span>
-                    </div>
-                    <p class="text-foreground mt-1">
-                      {{ cred.description }}
-                    </p>
-                  </div>
-                }
-              </div>
             </div>
           </div>
         }
