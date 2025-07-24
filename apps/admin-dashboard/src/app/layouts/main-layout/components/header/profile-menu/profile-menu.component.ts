@@ -32,16 +32,17 @@ export class ProfileMenuComponent {
       icon: './assets/icons/heroicons/outline/user-circle.svg',
       link: PATHS.PROFILE,
     },
-    {
-      title: 'Settings',
-      icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
-      link: PATHS.SETTINGS,
-    },
-    {
-      title: 'Log out',
-      icon: './assets/icons/heroicons/outline/logout.svg',
-      link: PATHS.AUTH,
-    },
+    // {
+    //   title: 'Settings',
+    //   icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
+    //   link: PATHS.SETTINGS,
+    //   disabled: true,
+    // },
+    // {
+    //   title: 'Log out',
+    //   icon: './assets/icons/heroicons/outline/logout.svg',
+    //   link: PATHS.AUTH,
+    // },
   ];
 
   public toggleMenu(): void {

@@ -10,11 +10,8 @@ export class AuthService {
 
   private readonly authUrl = this.createUrlRemote(`/auth`, () => `/auth`);
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
   decodeUserFromToken(): any | null {
-    const token = this.getToken();
+    const token = localStorage.getItem('token');
     if (!token) return null;
 
     try {

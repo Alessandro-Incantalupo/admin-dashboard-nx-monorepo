@@ -4,7 +4,7 @@ import { AuthService } from '@core/services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
-  const token = auth.getToken();
+  const token = localStorage.getItem('token');
 
   if (!token) return next(req);
 

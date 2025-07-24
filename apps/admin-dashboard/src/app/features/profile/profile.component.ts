@@ -1,9 +1,7 @@
-import { User } from '@admin-dashboard-nx-monorepo/models';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
-import { AuthService } from '../../core/services/auth.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
@@ -25,7 +23,6 @@ import { ThemeSelectorComponent } from './theme-selector/theme-selector.componen
 export default class ProfileComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
-  authService = inject(AuthService);
   themeStore = inject(ThemeStore);
   authStore = inject(AuthStore);
 
@@ -52,13 +49,6 @@ export default class ProfileComponent {
         { label: 'Profile', route: `/profile/${currentUsername}` },
       ]);
     });
-  }
-
-  private setUserData(userData: User) {
-    this.userData = userData;
-    this.userRole.set(userData.role || 'Guest');
-    this.userEmail.set(userData.email || 'Guest');
-    this.username.set(userData.name || 'Guest');
   }
 
   logout() {
