@@ -58,8 +58,8 @@ export class ProfileMenuComponent {
 
   toProfile(link: string) {
     const userData = this.authStore.userData(); // Get the user object
-    const userRole = userData?.role || 'Guest'; // Extract the user role
-    this.router.navigate([PATHS.PROFILE, userRole], {
+    if (!userData) return;
+    this.router.navigate([PATHS.PROFILE, userData.id], {
       state: { userData: this.authStore.userData() },
     });
   }

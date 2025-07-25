@@ -30,20 +30,13 @@ export default class ProfileComponent {
 
   state = this.router.getCurrentNavigation()?.extras.state;
   userData: { [key: string]: any } | undefined = undefined;
-  username = signal('Guest');
-  userRole = signal('Guest');
-  userEmail = signal('Guest');
 
   constructor() {
     // Get user data from state
     this.userData = this.state?.['userData'];
-    this.userRole.set(this.userData?.['role']);
-    this.userEmail.set(this.userData?.['email']);
     // Get username from route parameters
     this.route.params.subscribe(params => {
-      const currentUsername = params['username'] || this.username();
-      this.username.set(currentUsername);
-
+      const currentUsername = this.userData?.['name'] || 'Name Not Found';
       // ✅ Update breadcrumbs dynamically
       this.breadcrumbItems.set([
         { label: 'Profile', route: `/profile/${currentUsername}` },

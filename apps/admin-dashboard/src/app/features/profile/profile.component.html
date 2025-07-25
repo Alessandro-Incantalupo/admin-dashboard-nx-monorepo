@@ -37,9 +37,9 @@
   <div class="text-center">
     <!-- Profile Info -->
     <app-profile-info
-      [userName]="username()"
-      [email]="userEmail()"
-      [userRole]="userRole()"
+      [userName]="this.userData?.['name']"
+      [email]="this.userData?.['email']"
+      [userRole]="this.userData?.['role']"
       avatarUrl="https://avatars.githubusercontent.com/u/145116865?v=4"
     />
 

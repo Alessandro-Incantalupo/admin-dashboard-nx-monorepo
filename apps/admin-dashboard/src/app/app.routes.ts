@@ -15,7 +15,7 @@ export const routes: Routes = [
     loadChildren: () => import('./features/auth/auth.routes'),
   },
   {
-    path: PATHS.PROFILE + '/:username',
+    path: PATHS.PROFILE + '/:id',
     loadComponent: () => import('./features/profile/profile.component'),
     canActivate: [AuthGuard],
   },
