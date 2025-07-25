@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* Your current stylesheet with targeted improvements */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap")
 layer(base);
@@ -324,30 +324,6 @@ layer(base);
     color: color-mix(in srgb, var(--color-primary) 80%, transparent);
   }
 
-  /* Form Element Defaults - Keep Your Automatic Approach */
-  input[type="text"],
-  input[type="email"],
-  input[type="url"],
-  input[type="password"],
-  input[type="number"],
-  input[type="date"],
-  input[type="datetime-local"],
-  input[type="month"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="time"],
-  input[type="week"],
-  select[multiple],
-  textarea,
-  select {
-    @apply border-border bg-background text-foreground placeholder-muted-foreground focus:border-primary focus:ring-primary/20 w-full rounded-md border text-sm transition-colors focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
-  }
-
-  input[type="checkbox"],
-  input[type="radio"] {
-    @apply border-border bg-background checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus:ring-primary/20 h-4 w-4 rounded transition-colors focus:ring-2;
-  }
-
   /* Button Defaults */
   button {
     background-color: transparent;
@@ -390,8 +366,6 @@ layer(base);
     background-color: var(--color-muted-foreground);
   }
 }
-
-/* ===== COMPONENTS LAYER ===== */
 
 /* ===== UTILITIES LAYER ===== */
 @layer utilities {
@@ -483,6 +457,19 @@ layer(base);
     animation: none !important;
     transition: none !important;
   }
+
+  /* 🆕 NEW: Component Utilities */
+  .btn-base {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .card-base {
+    @apply bg-card text-card-foreground border-border rounded-lg border shadow-sm;
+  }
+
+  .input-base {
+    @apply border-border bg-background text-foreground placeholder-muted-foreground focus:border-primary focus:ring-primary/20 w-full rounded-md border text-sm transition-colors focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  }
 }
 
 /* ===== THEME DEFINITIONS ===== */
@@ -505,6 +492,12 @@ layer(base);
     --success: #16a34a;
     --warning: #ea580c;
     --info: #2563eb;
+
+    /* 🆕 IMPROVEMENT: Add missing variables your PrimeNG styles need */
+    --cell-editor-input: #ffffff;
+    --credentials: #5f5c5c;
+    --input-focus-border: var(--primary);
+    --input-focus-shadow: rgba(var(--primary), 0.3);
   }
 
   .dark {
@@ -525,9 +518,13 @@ layer(base);
     --success: #16a34a;
     --warning: #ea580c;
     --info: #2563eb;
+
+    /* Dark theme specific variables */
+    --cell-editor-input: #0a0a0a;
+    --credentials: #a3a3a3;
   }
 
-  /* Theme Variants - Keep Your Existing System */
+  /* Theme Variants - Your Existing System */
   :root[data-theme="violet"] {
     --primary: #6d28d9;
   }
@@ -578,32 +575,55 @@ layer(base);
     --border: #292524;
   }
 }
-[multiple],
+
+/* ===== FORM ELEMENTS (Outside layers for PrimeNG compatibility) ===== */
+/* Your automatic form styling - KEEP THIS! */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="week"],
+select[multiple],
+textarea,
 select {
-  @apply border-border bg-background text-foreground placeholder-muted-foreground focus:border-primary focus:ring-primary w-full rounded-md border text-xs focus:z-10 focus:outline-hidden;
+  @apply border-border bg-background text-foreground placeholder-muted-foreground focus:border-primary focus:ring-primary/20 w-full rounded-md border text-sm transition-colors focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 }
 
-/* Editable input fields */
-p-cellEditor input[pInputText] {
-  border: 1px solid var(--foreground); /* Dynamic border color */
-  border-radius: 4px; /* Rounds the corners */
-  padding: 8px; /* Adds padding inside the input */
-  background-color: var(--cell-editor-input); /* Dynamic background color */
-  box-shadow: inset 0 1px 3px var(--shadow-custom); /* Custom shadow for depth */
-  width: 100%; /* Ensures the input takes full width */
-  color: var(--foreground); /* Dynamic text color */
-  font-family: var(--font-poppins); /* Applies dynamic font */
+input[type="checkbox"],
+input[type="radio"] {
+  @apply border-border bg-background checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus:ring-primary/20 h-4 w-4 rounded transition-colors focus:ring-2;
 }
 
-/* Highlight editable fields when focused */
-p-cellEditor input[pInputText]:focus {
-  border-color: var(--input-focus-border); /* Dynamic focus border color */
-  outline: none; /* Removes default outline */
-  box-shadow: 0 0 5px var(--input-focus-shadow); /* Dynamic glow effect */
+/* ===== PRIMENG OVERRIDES ===== */
+/* 🆕 IMPROVEMENT: Better organized and more comprehensive */
+
+/* Cell Editor Styles */
+p-celleditor input[pinputtext] {
+  border: 1px solid var(--foreground) !important;
+  border-radius: 4px !important;
+  padding: 8px !important;
+  background-color: var(--cell-editor-input) !important;
+  box-shadow: inset 0 1px 3px var(--shadow-custom) !important;
+  width: 100% !important;
+  color: var(--foreground) !important;
+  font-family: var(--font-poppins) !important;
 }
 
-/* Target the p-select dropdown button */
-p-cellEditor p-select .p-select {
+p-celleditor input[pinputtext]:focus {
+  border-color: var(--input-focus-border) !important;
+  outline: none !important;
+  box-shadow: 0 0 5px var(--input-focus-shadow) !important;
+}
+
+/* Dropdown Styles */
+p-celleditor p-select .p-select {
   border: 1px solid var(--foreground) !important;
   border-radius: 4px !important;
   background-color: var(--background) !important;
@@ -611,25 +631,21 @@ p-cellEditor p-select .p-select {
   font-family: var(--font-nunito) !important;
 }
 
-/* Target the selected value display */
-p-cellEditor p-select .p-select-label {
+p-celleditor p-select .p-select-label {
   color: var(--foreground) !important;
   padding: 8px !important;
 }
 
-/* Target the dropdown arrow */
-p-cellEditor p-select .p-select-dropdown {
+p-celleditor p-select .p-select-dropdown {
   color: var(--foreground) !important;
 }
 
-/* Target the dropdown panel when open */
 .p-select-overlay .p-select-list {
   background-color: var(--background) !important;
   border: 1px solid var(--border) !important;
   border-radius: 4px !important;
 }
 
-/* Target individual dropdown options */
 .p-select-overlay .p-select-list .p-select-option {
   color: var(--foreground) !important;
   padding: 8px 12px !important;
@@ -640,51 +656,54 @@ p-cellEditor p-select .p-select-dropdown {
 }
 
 /* Output fields */
-p-cellEditor span {
+p-celleditor span {
   display: block;
   padding: 8px;
-  background-color: var(--card-foreground); /* Dynamic background color */
-  border: 1px solid transparent; /* Transparent border for consistency */
+  background-color: var(--card-foreground);
+  border: 1px solid transparent;
   border-radius: 4px;
-  color: var(--card-foreground); /* Dynamic text color */
-  font-family: var(--font-poppins); /* Applies dynamic font */
+  color: var(--card-foreground);
+  font-family: var(--font-poppins);
 }
 
-/* Add spacing for table rows */
+/* Table Styles */
 p-table .p-datatable-tbody > tr > td {
-  padding: 16px 20px; /* Adds padding inside table cells */
-  vertical-align: middle; /* Ensures content is vertically centered */
-  background-color: var(--color-background); /* Dynamic row background */
-  color: var(--color-foreground); /* Dynamic text color */
+  padding: 16px 20px !important;
+  vertical-align: middle !important;
+  background-color: var(--color-background) !important;
+  color: var(--color-foreground) !important;
+  transition: background-color var(--transition-fast) !important;
 }
 
-/* Optional: Add spacing between rows */
+p-table .p-datatable-tbody > tr:hover > td {
+  background-color: var(--muted) !important;
+}
+
 p-table .p-datatable-tbody > tr {
-  margin-bottom: 8px; /* Adds space between rows */
+  margin-bottom: 8px;
 }
 
-/* Adjust header and footer spacing for consistency */
 p-table .p-datatable-thead > tr > th {
-  background-color: var(
-    --primary
-  ); /* Matches the user table header background */
-  color: var(
-    --primary-foreground
-  ); /* Matches the user table header text color */
-  font-size: 0.75rem; /* Matches the text size */
-  font-weight: 600; /* Matches the font weight */
-  text-align: left; /* Aligns text to the left */
-  padding: 12px; /* Adds padding for consistency */
-  border-bottom: 1px solid var(--border); /* Adds a border similar to the user table */
-}
-/* Center align the last table header */
-p-table .p-datatable-thead > tr > th:last-child {
-  text-align: center;
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+  padding: 12px !important;
+  border-bottom: 1px solid var(--border) !important;
+  font-family: var(--font-poppins) !important;
 }
 
+p-table .p-datatable-thead > tr > th:last-child {
+  text-align: center !important;
+}
+
+/* ===== LEGACY UTILITY CLASSES ===== */
+/* Keep these for backward compatibility, but consider migrating to Tailwind equivalents */
 .background {
   background-color: var(--color-background);
 }
+
 .color-primary {
   color: var(--color-primary);
 }
@@ -702,18 +721,19 @@ p-table .p-datatable-thead > tr > th:last-child {
 }
 
 .background-muted {
-  background-color: var(--muted-foreground);
+  background-color: var(--color-muted-foreground);
 }
 
 .color-primary-foreground {
   color: var(--color-primary-foreground);
 }
+
 .text-foreground {
   color: var(--color-foreground);
 }
 
 .text-muted-foreground {
-  color: var(--muted-foreground);
+  color: var(--color-muted-foreground);
 }
 
 .credentials {
