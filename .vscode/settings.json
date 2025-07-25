@@ -1,6 +1,12 @@
 {
   "nxConsole.generateAiAgentRules": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
+   "tailwindCSS.includeLanguages": {
+    "css": "css"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    "@apply\\s+([^;]*);?"
+  ]
   
   // Windows-specific performance optimizations
   // "files.watcherExclude": {

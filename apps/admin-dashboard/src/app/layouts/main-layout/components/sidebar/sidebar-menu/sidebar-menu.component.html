@@ -43,7 +43,10 @@
               >
                 <a
                   routerLinkActive="text-primary"
-                  class="ml-10 truncate text-xs font-semibold tracking-wide focus:outline-hidden"
+                  class="group-hover:text-foreground ml-10 truncate text-xs font-semibold tracking-wide focus:outline-hidden"
+                  [class]="
+                    item.active ? 'text-primary' : 'text-muted-foreground/50'
+                  "
                 >
                   {{ item.label }}
                   @if (item.disabled) {
