@@ -59,11 +59,11 @@ export const ThemeStore = signalStore(
     };
 
     const toggleMode = () => {
-      patchState(state, { mode: state.mode() === 'dark' ? 'light' : 'dark' });
+      setTheme({ mode: state.mode() === 'dark' ? 'light' : 'dark' });
     };
 
     const setColor = (color: string) => {
-      patchState(state, { color });
+      setTheme({ color });
     };
 
     const getThemeColors = () => themeColors;
