@@ -166,9 +166,9 @@
   </form>
 </div>
 
-@if (authStore.isAuthenticated()) {
+@if (securityStore.signedIn()) {
   <nav class="text-white">
-    <button (click)="logout()">Logout</button>
+    <button (click)="securityStore.signOut()">Logout</button>
   </nav>
 }
 <button class="text-white" (click)="router.navigate(['/'])">BACK BUTTON</button>

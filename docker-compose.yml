@@ -8,6 +8,12 @@ services:
       - '3000:3000'
     environment:
       - PORT=3000
-    # Optionally, add volumes for development live reload
-    # volumes:
-    #   - ./apps/api:/app
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.2.0
+    command: start-dev
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    ports:
+      - '8081:8080'

@@ -1,4 +1,4 @@
-import { User } from '@admin-dashboard-nx-monorepo/models';
+import { UserAuthStore as User } from '@admin-dashboard-nx-monorepo/models';
 import { updateState } from '@angular-architects/ngrx-toolkit';
 import { computed, inject } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';

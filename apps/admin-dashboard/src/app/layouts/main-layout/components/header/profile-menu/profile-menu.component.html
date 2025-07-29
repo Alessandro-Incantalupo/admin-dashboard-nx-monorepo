@@ -1,4 +1,4 @@
-@if (authStore.isAuthenticated()) {
+@if (securityStore.signedIn()) {
   <!-- Profile Menu (When Logged In) -->
   <div class="relative ml-3" (clickOutside)="isOpen.set(false)">
     <!-- Profile Button -->
@@ -93,7 +93,7 @@
         <!-- Logout Button -->
         <div class="mx-4 my-2">
           <button
-            (click)="logout()"
+            (click)="securityStore.signOut()"
             class="w-full rounded-md px-3 py-2 text-xs font-semibold text-red-500 hover:bg-red-50"
           >
             Logout
@@ -106,7 +106,7 @@
   <!-- If NOT Logged In, Show Login Button -->
   <div class="relative ml-3">
     <a
-      (click)="signIn()"
+      (click)="securityStore.signIn()"
       class="bg-primary hover:bg-primary-dark rounded-md px-4 py-2 text-sm font-semibold text-white transition"
     >
       Sign In

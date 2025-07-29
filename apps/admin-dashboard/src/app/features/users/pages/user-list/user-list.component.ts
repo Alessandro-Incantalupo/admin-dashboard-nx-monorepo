@@ -1,4 +1,4 @@
-import { User } from '@admin-dashboard-nx-monorepo/models';
+import { User, UserAuthStore } from '@admin-dashboard-nx-monorepo/models';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -83,7 +83,7 @@ export default class UserListComponent {
     }
   }
 
-  canEditUser(user: User): boolean {
+  canEditUser(user: UserAuthStore): boolean {
     const currentUser = this.authStore.userData();
     const role = currentUser?.role ?? 'guest';
 

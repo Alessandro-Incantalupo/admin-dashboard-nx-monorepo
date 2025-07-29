@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@core/state/auth.store';
+import { SecurityStore } from '@core/state/security-store';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { ButtonComponent } from '../../../shared/button/button.component';
 
@@ -19,6 +20,7 @@ export default class SignUpComponent {
   nnfb = inject(NonNullableFormBuilder);
   router = inject(Router);
   authStore = inject(AuthStore);
+  securityStore = inject(SecurityStore);
 
   isLoading = signal(false);
 
@@ -53,10 +55,5 @@ export default class SignUpComponent {
   hasError(controlName: string, errorType: string): boolean | undefined {
     const control = this.form.get(controlName);
     return control?.hasError(errorType) && control.touched;
-  }
-
-  logout() {
-    this.authStore.logout();
-    this.router.navigate(['/auth/sign-up']); // Redirect to login after logout
   }
 }

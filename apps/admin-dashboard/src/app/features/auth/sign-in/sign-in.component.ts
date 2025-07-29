@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@core/state/auth.store';
+import { SecurityStore } from '@core/state/security-store';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { PATHS } from '../../../core/constants/routes';
 import { AuthService } from '../../../core/services/auth.service';
@@ -22,6 +23,7 @@ export default class SignInComponent {
   router = inject(Router);
   authService = inject(AuthService);
   protected authStore = inject(AuthStore);
+  securityStore = inject(SecurityStore);
 
   isLoading = signal(false);
   submitted = false;
@@ -35,7 +37,7 @@ export default class SignInComponent {
   });
 
   readonly handleRedirect = effect(() => {
-    const user = this.authStore.userData();
+    const user = this.securityStore.user();
 
     if (user) {
       // Redirect to dashboard instead of profile

@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@core/state/auth.store';
+import { SecurityStore } from '@core/state/security-store';
 import { ThemeStore } from '@core/state/theme.store';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 import { ButtonComponent } from '../../shared/button/button.component';
@@ -24,7 +25,7 @@ export default class ProfileComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   themeStore = inject(ThemeStore);
-  authStore = inject(AuthStore);
+  securityStore = inject(SecurityStore);
 
   breadcrumbItems = signal<{ label: string; route?: string }[]>([]);
 
@@ -42,10 +43,5 @@ export default class ProfileComponent {
         { label: 'Profile', route: `/profile/${currentUsername}` },
       ]);
     });
-  }
-
-  logout() {
-    this.authStore.logout();
-    this.router.navigate(['/']);
   }
 }

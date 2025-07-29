@@ -1,4 +1,4 @@
-import { User } from '@admin-dashboard-nx-monorepo/models';
+import { User, UserRole } from '@admin-dashboard-nx-monorepo/models';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,7 +39,7 @@ export class UserFormComponent implements OnInit {
   readonly form = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    role: ['user', Validators.required],
+    role: [UserRole.user, Validators.required],
     status: ['active'],
   });
 
@@ -67,7 +67,7 @@ export class UserFormComponent implements OnInit {
       id: crypto.randomUUID(),
       name: value.name ?? '',
       email: value.email ?? '',
-      role: value.role as 'admin' | 'user' | 'guest',
+      role: [value.role],
       status: value.status as 'active' | 'inactive',
     };
 
@@ -75,7 +75,7 @@ export class UserFormComponent implements OnInit {
 
     this.isSubmitted.emit(true);
 
-    this.form.reset({ role: 'user', status: 'active' });
+    this.form.reset({ role: UserRole.user, status: 'active' });
     this.submitted.set(false);
   }
 }

@@ -11,6 +11,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { BaseResponseInterceptor } from '@core/interceptors/base-response.interceptor';
 import { LoadingInterceptor } from '@core/interceptors/loading.interceptor';
+import { securityInterceptor } from '@core/interceptors/security.interceptor';
 import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
 import { provideAngularSvgIcon } from 'angular-svg-icon';
@@ -33,6 +34,7 @@ export const appConfig: ApplicationConfig = {
         LoadingInterceptor,
         authInterceptor,
         BaseResponseInterceptor,
+        securityInterceptor,
       ])
     ),
 
