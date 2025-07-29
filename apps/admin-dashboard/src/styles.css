@@ -755,7 +755,6 @@ p-table .p-paginator {
 
 /* Override for selected paginator page */
 p-table .p-paginator-page.p-paginator-page-selected {
-  background-color: var(--primary); /* Change background color */
   color: var(--color-foreground); /* Change text color */
   border: 2px solid var(--primary-dark); /* Add a border if needed */
 }
@@ -772,7 +771,7 @@ p-table .p-paginator-last {
   text-align: center;
   font-size: 0.875rem;
   border-radius: var(--radius-full); /* Use full border radius */
-  color: var(--color-muted-foreground); /* Use muted foreground color */
+  color: var(--color-primary-foreground); /* Use muted foreground color */
   background-color: var(--secondary);
   border: none;
   transition: var(--transition-colors); /* Use transition variable */
