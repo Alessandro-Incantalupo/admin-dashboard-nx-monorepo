@@ -91,7 +91,7 @@ export const UsersStore = signalStore(
             tapResponse({
               next: user => {
                 updateState(state, 'Users: Add', {
-                  users: [...state.users(), user],
+                  users: [user, ...state.users()],
                 });
                 setUsersAddLoaded();
                 toast.success('User created!', {

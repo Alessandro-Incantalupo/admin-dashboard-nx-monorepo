@@ -5,6 +5,11 @@
     dataKey="id"
     editMode="row"
     [tableStyle]="{ 'min-width': '50rem' }"
+    [rows]="5"
+    [paginator]="true"
+    [rowsPerPageOptions]="[5, 10]"
+    [showCurrentPageReport]="false"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   >
     <ng-template #header>
       <tr>
