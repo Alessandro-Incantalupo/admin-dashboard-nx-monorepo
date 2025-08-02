@@ -3,7 +3,7 @@
     <div class="mx-1 mb-2 flex items-center justify-between">
       <small
         [class]="{ hidden: !menuService.showSideBar }"
-        class="text-muted-foreground/50 text-xs font-semibold"
+        class="text-color-muted-foreground/50 text-xs font-semibold"
       >
         {{ menu.group }}
       </small>
@@ -15,14 +15,14 @@
           <!-- Menu List -->
           <div
             (click)="toggleMenu(item)"
-            class="text-muted-foreground group relative"
+            class="text-color-muted-foreground group relative"
           >
             <!-- Icon -->
             <div
               [class]="
                 item.active && !menuService.showSideBar
                   ? 'text-primary'
-                  : 'text-muted-foreground/50'
+                  : 'text-color-muted-foreground/50'
               "
               class="pointer-events-none absolute m-2"
             >
@@ -39,13 +39,15 @@
             <!-- Workaround:: Enable routerLink -->
             <ng-template #parentMenu let-item="item">
               <div
-                class="text-muted-foreground hover:bg-card hover:text-foreground flex h-9 cursor-pointer items-center justify-start rounded-sm"
+                class="text-color-muted-foreground hover:bg-card hover:text-color-foreground flex h-9 cursor-pointer items-center justify-start rounded-sm"
               >
                 <a
                   routerLinkActive="text-primary"
-                  class="group-hover:text-foreground ml-10 truncate text-xs font-semibold tracking-wide focus:outline-hidden"
+                  class="group-hover:text-color-foreground ml-10 truncate text-xs font-semibold tracking-wide focus:outline-hidden"
                   [class]="
-                    item.active ? 'text-primary' : 'text-muted-foreground/50'
+                    item.active
+                      ? 'text-primary'
+                      : 'text-color-muted-foreground/50'
                   "
                 >
                   {{ item.label }}
@@ -70,7 +72,7 @@
                 class="hover:bg-card flex h-9 cursor-pointer items-center justify-start rounded-sm"
               >
                 <a
-                  class="text-muted-foreground group-hover:text-foreground ml-10 truncate text-xs font-semibold tracking-wide focus:outline-hidden"
+                  class="text-color-muted-foreground group-hover:text-color-foreground ml-10 truncate text-xs font-semibold tracking-wide focus:outline-hidden"
                 >
                   {{ item.label }}
                   @if (item.disabled) {
@@ -96,7 +98,7 @@
                   hidden: !menuService.showSideBar,
                   'rotate-90': item.expanded,
                 }"
-                class="text-muted-foreground/50 pointer-events-none absolute top-1 right-0 flex items-center p-1 transition-all duration-500"
+                class="text-color-muted-foreground/50 pointer-events-none absolute top-1 right-0 flex items-center p-1 transition-all duration-500"
               >
                 <svg-icon
                   src="assets/icons/heroicons/solid/chevron-right.svg"

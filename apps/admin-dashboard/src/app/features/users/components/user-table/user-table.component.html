@@ -2,20 +2,20 @@
   class="border-muted/20 bg-background flex min-w-full flex-col overflow-x-auto rounded-lg rounded-xl border p-2 shadow-md"
 >
   <table
-    class="text-muted-foreground min-w-full table-auto border-collapse border-0 text-left align-middle leading-5"
+    class="text-color-muted-foreground min-w-full table-auto border-collapse border-0 text-left align-middle leading-5"
   >
     <thead class="bg-primary text-primary-foreground text-xs">
       <tr>
-        <th class="text-foreground border-b p-3 text-left font-semibold">
+        <th class="text-color-foreground border-b p-3 text-left font-semibold">
           Name
         </th>
-        <th class="text-foreground border-b p-3 text-left font-semibold">
+        <th class="text-color-foreground border-b p-3 text-left font-semibold">
           Email
         </th>
-        <th class="text-foreground border-b p-3 text-left font-semibold">
+        <th class="text-color-foreground border-b p-3 text-left font-semibold">
           Role
         </th>
-        <th class="text-foreground border-b p-3 text-left font-semibold">
+        <th class="text-color-foreground border-b p-3 text-left font-semibold">
           Actions
         </th>
       </tr>
@@ -42,13 +42,13 @@
                 Delete
               </button>
             } @else {
-              <span class="text-muted-foreground text-xs">View Only</span>
+              <span class="text-color-muted-foreground text-xs">View Only</span>
             }
           </td>
         </tr>
       } @empty {
         <tr>
-          <td colspan="4" class="text-muted-foreground p-6 text-center">
+          <td colspan="4" class="text-color-muted-foreground p-6 text-center">
             No users found
           </td>
         </tr>
