@@ -52,9 +52,9 @@ export class ProfileMenuComponent {
     this.authStore.logout();
   }
 
-  signIn() {
-    this.router.navigate([PATHS.AUTH, PATHS.SIGN_IN]);
-  }
+  // signIn() {
+  //   this.router.navigate([PATHS.AUTH, PATHS.SIGN_IN]);
+  // }
 
   toProfile(link: string) {
     const userData = this.authStore.userData(); // Get the user object
@@ -62,5 +62,21 @@ export class ProfileMenuComponent {
     this.router.navigate([PATHS.PROFILE, userData.id], {
       state: { userData: this.authStore.userData() },
     });
+  }
+
+  quickLogin(userType: 'admin' | 'user') {
+    const demoCredentials = [
+      { role: 'admin', email: 'admin@example.com', password: 'admin123' },
+      { role: 'user', email: 'user@example.com', password: 'user123' },
+    ];
+
+    const credentials = demoCredentials.find(cred => cred.role === userType);
+
+    if (credentials) {
+      this.authStore.login({
+        email: credentials.email,
+        password: credentials.password,
+      });
+    }
   }
 }
