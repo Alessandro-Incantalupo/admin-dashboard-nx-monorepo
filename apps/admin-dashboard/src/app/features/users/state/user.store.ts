@@ -41,12 +41,14 @@ import {
 
 type State = {
   users: User[];
-  clonedUsers: { [id: string]: User }; // Temporary storage for original user states
+  clonedUsers: { [id: string]: User };
+  totalUsers: number;
 };
 
 const initialState: State = {
   users: [],
   clonedUsers: {},
+  totalUsers: 0,
 };
 
 export const UsersStore = signalStore(
@@ -91,7 +93,7 @@ export const UsersStore = signalStore(
             tapResponse({
               next: user => {
                 updateState(state, 'Users: Add', {
-                  users: [...state.users(), user],
+                  users: [user, ...state.users()],
                 });
                 setUsersAddLoaded();
                 toast.success('User created!', {

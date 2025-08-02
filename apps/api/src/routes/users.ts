@@ -31,7 +31,7 @@ usersRoute.post('/', async c => {
   try {
     const body = await c.req.json();
     const newUser = { id: crypto.randomUUID(), ...body };
-    users.push(newUser);
+    users.unshift(newUser);
     return c.json(newUser, 201);
   } catch (err) {
     return c.json({ error: 'Failed to add user' }, 500);

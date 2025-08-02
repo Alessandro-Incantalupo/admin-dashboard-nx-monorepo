@@ -1,16 +1,27 @@
 <div class="flex h-screen w-screen">
-  <div class="flex flex-1 items-center justify-center bg-card bg-cover">
+  <div class="bg-card flex flex-1 items-center justify-center bg-cover">
     <div
-      class="bg-background shadow-xs flex max-w-lg flex-col items-center justify-center gap-2 rounded-lg p-8 text-center">
-      <h1 class="text-foreground text-4xl font-bold">Oops!</h1>
-      <p class="text-muted-foreground text-base">
-        We can't find that page. You can go back to the previous page or go to the homepage.
+      class="bg-background flex max-w-lg flex-col items-center justify-center gap-2 rounded-lg p-8 text-center shadow-xs"
+    >
+      <h1 class="text-color-foreground text-4xl font-bold">Oops!</h1>
+      <p class="text-color-muted-foreground text-base">
+        We can't find that page. You can go back to the previous page or go to
+        the homepage.
       </p>
-      <button app-button (buttonClick)="goToHomePage()" impact="bold" tone="primary" shape="rounded" size="medium">
+      <button
+        app-button
+        (buttonClick)="goToHomePage()"
+        impact="bold"
+        tone="primary"
+        shape="rounded"
+        size="medium"
+      >
         Homepage
       </button>
-      <svg-icon src="assets/illustrations/404.svg" svgClass="w-[300px] h-[300px] text-muted-foreground  "></svg-icon>
+      <svg-icon
+        src="assets/illustrations/404.svg"
+        svgClass="w-[300px] h-[300px] text-color-muted-foreground  "
+      ></svg-icon>
     </div>
   </div>
 </div>
-

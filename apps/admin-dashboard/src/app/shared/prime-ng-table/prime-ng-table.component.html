@@ -5,6 +5,12 @@
     dataKey="id"
     editMode="row"
     [tableStyle]="{ 'min-width': '50rem' }"
+    [rows]="5"
+    [paginator]="true"
+    [rowsPerPageOptions]="[5, 10]"
+    [showCurrentPageReport]="false"
+    [totalRecords]="totalUsers()"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   >
     <ng-template #header>
       <tr>
@@ -115,7 +121,7 @@
 
           @if (readOnly()) {
             <span
-              class="text-muted-foreground align-items-center flex justify-center text-xs"
+              class="text-color-muted-foreground align-items-center flex justify-center text-xs"
               >View Only</span
             >
           }

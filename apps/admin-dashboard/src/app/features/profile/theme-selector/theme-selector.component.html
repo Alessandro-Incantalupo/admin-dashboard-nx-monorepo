@@ -1,6 +1,6 @@
 <!-- Theme Selector -->
 <div class="mx-4 my-2">
-  <span class="text-foreground text-xs font-semibold">Color</span>
+  <span class="text-color-foreground text-xs font-semibold">Color</span>
   <div class="mt-2 grid grid-cols-2 gap-2">
     @for (item of themeStore.getThemeColors(); track $index) {
       <div
@@ -9,7 +9,7 @@
           'border-muted-foreground bg-card': item.name == themeStore.color(),
           'border-primary': item.name == themeStore.color(),
         }"
-        class="focus-visible:ring-ring border-border bg-background text-muted-foreground hover:bg-card hover:text-foreground inline-flex h-8 cursor-pointer items-center justify-start rounded-md border px-3 text-xs font-medium whitespace-nowrap shadow-xs transition-colors focus-visible:ring-1 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+        class="focus-visible:ring-ring border-border bg-background text-color-muted-foreground hover:bg-card hover:text-color-foreground inline-flex h-8 cursor-pointer items-center justify-start rounded-md border px-3 text-xs font-medium whitespace-nowrap shadow-xs transition-colors focus-visible:ring-1 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
       >
         <span
           [style.background-color]="item.name"

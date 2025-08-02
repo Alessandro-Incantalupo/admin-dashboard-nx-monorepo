@@ -1,0 +1,51 @@
+<!-- Role Selector for Demo - Only show if authenticated -->
+@if (isAuthenticated()) {
+  <div class="mb-6 flex gap-4">
+    @for (role of roles; track $index) {
+      <button
+        class="bg-primary hover:bg-primary/90 focus:ring-primary/50 text-color-foreground transform rounded px-4 py-2 font-medium shadow-md transition-transform hover:scale-105 focus:ring-4"
+        [class.bg-primary]="
+          role === 'guest' ? isGuest() : role === 'user' ? isUser() : isAdmin()
+        "
+        [class.bg-muted]="
+          role === 'guest'
+            ? !isGuest()
+            : role === 'user'
+              ? !isUser()
+              : !isAdmin()
+        "
+        [class.text-color-foreground]="
+          role === 'guest' ? isGuest() : role === 'user' ? isUser() : isAdmin()
+        "
+        (click)="whatIsMyRole.emit(role)"
+      >
+        {{
+          role === 'guest'
+            ? '👁️ Guest View'
+            : role === 'user'
+              ? '👤 User View'
+              : '👑 Admin View'
+        }}
+      </button>
+    }
+  </div>
+} @else {
+  <!-- Guest view only when not authenticated -->
+  <div class="mb-6 flex gap-4">
+    @for (role of roles; track $index) {
+      <button
+        class="text-color-foreground bg-secondary rounded px-4 py-2"
+        [class.bg-primary]="isGuest()"
+        [disabled]="role !== 'guest' && !isAuthenticated()"
+      >
+        {{
+          role === 'guest'
+            ? '👁️ Guest View (Current)'
+            : role === 'user'
+              ? '👤 User View (Login Required)'
+              : '👑 Admin View (Login Required)'
+        }}
+      </button>
+    }
+  </div>
+}
