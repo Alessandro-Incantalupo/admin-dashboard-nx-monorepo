@@ -9,6 +9,7 @@
     [paginator]="true"
     [rowsPerPageOptions]="[5, 10]"
     [showCurrentPageReport]="false"
+    [totalRecords]="totalUsers()"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   >
     <ng-template #header>

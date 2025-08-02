@@ -124,6 +124,7 @@
           [users]="userStore.users()"
           [roles]="roles"
           [readOnly]="!authStore.canEdit()"
+          [totalUsers]="userStore.totalUsers()"
           (editAction)="onEdit($event)"
           (deleteAction)="onDelete($event)"
           (saveAction)="onRowEditSave($event)"

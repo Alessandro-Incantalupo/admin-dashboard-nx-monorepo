@@ -35,6 +35,7 @@ export class PrimeNgTableComponent {
   readonly users = input.required<User[]>();
   readonly roles = input<SelectItem<any>[]>();
   readonly readOnly = input<boolean>(false);
+  readonly totalUsers = input<number>(0);
   readonly editAction = output<User>();
   readonly deleteAction = output<{ user: User; index: number }>();
   readonly saveAction = output<User>();
