@@ -23,13 +23,13 @@
                 class="text-color-foreground transform rounded bg-green-600 px-4 py-2 font-semibold transition-transform hover:scale-105 hover:bg-green-700 hover:shadow-lg"
                 (click)="whatIsMyRole.emit('user')"
               >
-                👤 Login as User
+                {{ t('users.login-button.user') }}
               </button>
               <button
                 class="text-color-foreground transform rounded bg-red-600 px-4 py-2 font-semibold transition-transform hover:scale-105 hover:bg-red-700 hover:shadow-lg"
                 (click)="whatIsMyRole.emit('admin')"
               >
-                👑 Login as Admin
+                {{ t('users.login-button.admin') }}
               </button>
             </div>
           </div>

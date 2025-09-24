@@ -5,10 +5,11 @@ import {
   input,
   output,
 } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-role-selector',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoDirective],
   templateUrl: './role-selector.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

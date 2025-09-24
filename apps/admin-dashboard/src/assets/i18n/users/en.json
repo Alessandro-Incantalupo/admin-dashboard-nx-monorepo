@@ -1,0 +1,24 @@
+{
+    "title": "User List",
+    "loading": "Loading users...",
+    "error": "Failed to load users",
+    "empty": "No users found.",
+    "addUser": "Add User",
+    "hideForm": "Hide Form",
+    "addUserForm": "Add User Form",
+    "reset-demo": "Reset Demo Data",
+    "abilitiesTitle": "User Abilities",
+
+  "login-button": {
+    "user": "👤 Login as User",
+    "admin": "👑 Login as Admin",
+    "user-mobile": "User Login",
+    "admin-mobile": "Admin Login"
+  },
+  "role-selector": {
+      "guest": "👁️ Guest {{mobile}}",
+      "user": "👤 User {{mobile}}",
+      "admin": "👑 Admin {{mobile}}"
+    }
+  }
+  
