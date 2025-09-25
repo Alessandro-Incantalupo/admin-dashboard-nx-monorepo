@@ -1,5 +1,5 @@
 <!-- Role Selector for Demo - Only show if authenticated -->
-<ng-container *transloco="let t">
+<ng-container *transloco="let t; prefix: 'users.role-selector'">
   @if (isAuthenticated()) {
     <div class="mb-6 flex gap-4">
       @for (role of roles; track $index) {
@@ -33,13 +33,20 @@
           "
           (click)="whatIsMyRole.emit(role)"
         >
-          {{
-            role === 'guest'
-              ? t('users.role-selector.guest')
-              : role === 'user'
-                ? t('users.role-selector.user')
-                : t('users.role-selector.admin')
-          }}
+          <span class="sm:hidden">
+            {{ t(role) }}
+          </span>
+          <span class="hidden sm:inline">
+            <span class="hidden sm:inline">
+              {{
+                role === 'guest'
+                  ? '👁️ ' + t('guest')
+                  : role === 'user'
+                    ? '👤 ' + t('user')
+                    : '👑 ' + t('admin')
+              }}
+            </span>
+          </span>
         </button>
       }
     </div>
@@ -54,10 +61,10 @@
         >
           {{
             role === 'guest'
-              ? t('users.role-selector.guest')
+              ? t('guest')
               : role === 'user'
-                ? t('users.role-selector.user')
-                : t('users.role-selector.admin')
+                ? t('user')
+                : t('admin')
           }}
         </button>
       }

@@ -16,9 +16,9 @@
     "admin-mobile": "Admin Login"
   },
   "role-selector": {
-      "guest": "👁️ Guest {{mobile}}",
-      "user": "👤 User {{mobile}}",
-      "admin": "👑 Admin {{mobile}}"
+      "guest": "Guest",
+      "user": "User",
+      "admin": "Admin"
     }
   }
   
