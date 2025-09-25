@@ -26,6 +26,11 @@
                 ? isUser()
                 : isAdmin()
           "
+          [disabled]="
+            (role === 'guest' && isGuest()) ||
+            (role === 'user' && isUser()) ||
+            (role === 'admin' && isAdmin())
+          "
           (click)="whatIsMyRole.emit(role)"
         >
           {{
