@@ -9,6 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { AuthStore } from '@core/state/auth.store';
+import { RoleDescriptionComponent } from '@features/users/components/role-description/role-description.component';
 import { RoleSelectorComponent } from '@features/users/components/role-selector/role-selector.component';
 import { UserAbilitiesComponent } from '@features/users/components/user-abilities/user-abilities.component';
 import { UsersStore } from '@features/users/state/user.store';
@@ -25,6 +26,7 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
     PrimeNgTableComponent,
     RoleSelectorComponent,
     UserAbilitiesComponent,
+    RoleDescriptionComponent,
   ],
   templateUrl: './user-list.component.html',
   styles: `
