@@ -4,7 +4,7 @@
     <div class="mb-6 flex gap-4">
       @for (role of roles; track $index) {
         <button
-          class="bg-primary hover:bg-primary/90 focus:ring-primary/50 text-color-foreground transform rounded px-4 py-2 font-medium shadow-md transition-transform hover:scale-105 focus:ring-4"
+          class="bg-primary hover:bg-primary/90 focus:ring-primary/50 text-color-foreground h-12 w-full transform rounded px-4 py-2 font-medium shadow-md transition-transform hover:scale-105 focus:ring-4 sm:w-32"
           [class.bg-primary]="
             role === 'guest'
               ? isGuest()
@@ -43,7 +43,7 @@
     <div class="mb-6 flex gap-4">
       @for (role of roles; track $index) {
         <button
-          class="text-color-foreground bg-secondary rounded px-4 py-2"
+          class="text-color-foreground bg-secondary h-12 w-full flex-wrap justify-center rounded px-4 py-2 sm:w-32"
           [class.bg-primary]="isGuest()"
           [disabled]="role !== 'guest' && !isAuthenticated()"
         >
