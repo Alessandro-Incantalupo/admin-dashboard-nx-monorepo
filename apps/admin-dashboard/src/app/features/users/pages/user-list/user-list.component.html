@@ -35,13 +35,13 @@
       <div class="flex flex-col">
         <!-- Role-based description -->
 
-        <app-role-description [hasError]="!!authStore.error()">
+        <!-- <app-role-description [hasError]="!!authStore.error()">
           @if (!authStore.error()) {
             <span class="text-primary">{{ authStore.roleDescription() }}</span>
           } @else {
             <span class="text-primary">Error loading role description</span>
           }
-        </app-role-description>
+        </app-role-description> -->
 
         <app-prime-ng-table
           [users]="userStore.users()"
