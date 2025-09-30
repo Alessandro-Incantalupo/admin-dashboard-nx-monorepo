@@ -2,7 +2,9 @@
   "name": "@admin-dashboard-nx-monorepo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "analyze:admin-dashboard": "nx build admin-dashboard --stats-json --named-chunks && npx -y @angular-experts/hawkeye dist/apps/admin-dashboard/stats.json"
+  },
   "private": true,
   "dependencies": {
     "@angular-architects/ngrx-toolkit": "^19.1.0",
@@ -69,6 +71,7 @@
     "angular-eslint": "20.1.1",
     "daisyui": "^5.0.46",
     "esbuild": "^0.25.8",
+    "esbuild-visualizer": "^0.7.0",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-playwright": "^2.2.0",
