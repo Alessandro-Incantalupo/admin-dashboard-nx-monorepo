@@ -11,6 +11,7 @@
     [showCurrentPageReport]="false"
     [totalRecords]="totalUsers()"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPage)="onPage($event)"
   >
     <ng-template #header>
       <tr>

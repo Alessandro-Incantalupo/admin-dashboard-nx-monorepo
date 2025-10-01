@@ -20,6 +20,7 @@ import { PrimeNgTableComponent } from '@shared/prime-ng-table/prime-ng-table.com
 import { TabComponent } from '@shared/tab/tab.component';
 import { toast } from 'ngx-sonner';
 
+import { TablePageEvent } from 'primeng/table';
 import { UserFormComponent } from '../../components/user-form/user-form.component';
 @Component({
   selector: 'app-user-list',
@@ -171,5 +172,10 @@ export default class UserListComponent {
       return;
     }
     this.showForm.set(!this.showForm());
+  }
+
+  onPageChange(event: TablePageEvent & { page: number; pageCount: number }) {
+    const pageEvent = { ...event, page: event.page + 1 }; // Convert 0-based page to 1-based
+    this.userStore.loadUsers(pageEvent); // Pass the correct object
   }
 }

@@ -11,7 +11,7 @@ import { MessageService, SelectItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TableModule } from 'primeng/table';
+import { TableModule, TablePageEvent } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 @Component({
@@ -40,4 +40,18 @@ export class PrimeNgTableComponent {
   readonly deleteAction = output<{ user: User; index: number }>();
   readonly saveAction = output<User>();
   readonly saveActionCancel = output<{ user: User; index: number }>();
+  readonly pageChangeAction = output<
+    TablePageEvent & { page: number; pageCount: number }
+  >();
+
+  onPage(event: TablePageEvent) {
+    const page = event.first / event.rows; // Calculate the current page (0-based)
+    const pageCount = Math.ceil(this.totalUsers() / event.rows); // Calculate total pages
+
+    this.pageChangeAction.emit({
+      ...event, // Spread the original event properties
+      page, // Add the calculated page
+      pageCount, // Add the calculated pageCount
+    }); // Cast to TablePageEvent to satisfy the type
+  }
 }

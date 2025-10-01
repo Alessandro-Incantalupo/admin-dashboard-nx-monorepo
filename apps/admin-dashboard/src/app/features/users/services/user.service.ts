@@ -2,6 +2,7 @@ import { User } from '@admin-dashboard-nx-monorepo/models';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { injectBaseUrl } from '@core/CIF/inject-base-url';
+import { WHITELISTED_API } from '@core/interceptors/base-response.interceptor';
 import { BYPASS_LOADING_SPINNER } from '@core/interceptors/loading.interceptor';
 
 @Injectable({
@@ -17,10 +18,13 @@ export class UsersService {
     true
   );
 
-  getUsers() {
-    return this.http.get<User[]>(this.usersUrl);
+  getUsers(page: number = 1, size: number = 5) {
+    const context = new HttpContext().set(WHITELISTED_API, true);
+    return this.http.get<{
+      data: User[];
+      meta: { totalUsers: number; totalPages: number };
+    }>(`${this.usersUrl}?page=${page}&size=${size}`, { context });
   }
-
   addUser(user: User) {
     return this.http.post<User>(this.usersUrl, user);
   }

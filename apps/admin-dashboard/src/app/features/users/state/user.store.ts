@@ -20,6 +20,7 @@ import { getNextResetMs } from '@app-info';
 import { getHttpErrorMessage } from '@core/utils/http-error-message.util';
 import { UsersService } from '@features/users/services/user.service';
 import { toast } from 'ngx-sonner';
+import { TablePageEvent } from 'primeng/table';
 import { debounceTime, pipe, switchMap, tap } from 'rxjs';
 import {
   setUsersAddError,
@@ -58,15 +59,28 @@ export const UsersStore = signalStore(
     hasUsers: computed(() => users().length > 0),
   })),
   withMethods((state, userService = inject(UsersService)) => {
-    const loadUsers = rxMethod<void>(
+    const loadUsers = rxMethod<
+      (TablePageEvent & { page: number; pageCount: number }) | void
+    >(
       pipe(
         tap(() => setUsersLoading()),
         debounceTime(500),
-        switchMap(() =>
-          userService.getUsers().pipe(
+        switchMap(event => {
+          // Extract page and size from the event or use defaults
+          // Handle the case where event is void
+          const page = event && 'page' in event ? event.page : 1; // Default to page 1
+          const size = event && 'rows' in event ? event.rows : 5; // Default to 5 rows
+
+          return userService.getUsers(page, size).pipe(
             tapResponse({
-              next: users => {
-                updateState(state, 'Users: Load Success', { users });
+              next: response => {
+                console.log('API Response:', response); // Debugging log
+
+                const { data: users, meta } = response;
+                updateState(state, 'Users: Load Success', {
+                  users,
+                  totalUsers: meta.totalUsers,
+                });
                 setUsersLoaded();
               },
               error: err => {
@@ -74,13 +88,12 @@ export const UsersStore = signalStore(
                   err,
                   'Failed to load users'
                 );
-
                 toast.error(message);
                 setUsersError(message);
               },
             })
-          )
-        )
+          );
+        })
       )
     );
 
