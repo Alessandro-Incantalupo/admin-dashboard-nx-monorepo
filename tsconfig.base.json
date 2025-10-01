@@ -6,7 +6,8 @@
     "lib": ["es2020", "dom"],
     "moduleResolution": "node",
     // "esModuleInterop": true,
-    // "resolveJsonModule": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "sourceMap": true,
     "declaration": false,
@@ -28,7 +29,9 @@
       "@features/*": ["apps/admin-dashboard/src/app/features/*"],
       "@layouts/*": ["apps/admin-dashboard/src/app/layouts/*"],
       "@models": ["libs/models/src/index.ts"],
-      "@shared/*": ["apps/admin-dashboard/src/app/shared/*"]
+      "@shared/*": ["apps/admin-dashboard/src/app/shared/*"],
+      "@assets/*": ["apps/admin-dashboard/src/assets/*"],
+      "@test/*": ["apps/admin-dashboard/src/test/*"]
     }
   },
   "exclude": ["tmp"]
