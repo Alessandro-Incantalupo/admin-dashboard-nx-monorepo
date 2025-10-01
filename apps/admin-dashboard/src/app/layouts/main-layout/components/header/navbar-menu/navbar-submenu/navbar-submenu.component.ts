@@ -1,5 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { toast } from 'ngx-sonner';
@@ -11,6 +16,7 @@ import { SubMenuItem } from '../../../../../../core/models/menu.model';
   imports: [NgTemplateOutlet, RouterLinkActive, SvgIconComponent, ChipModule],
   templateUrl: './navbar-submenu.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarSubmenuComponent {
   submenu = input<SubMenuItem[]>();

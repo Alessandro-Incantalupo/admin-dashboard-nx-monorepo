@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { toast } from 'ngx-sonner';
@@ -18,6 +18,7 @@ import { SidebarSubmenuComponent } from './sidebar-submenu/sidebar-submenu.compo
   ],
   templateUrl: './sidebar-menu.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarMenuComponent {
   menuService = inject(MenuService);

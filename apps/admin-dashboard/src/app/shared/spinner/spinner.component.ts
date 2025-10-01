@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SpinnerService } from '@core/services/spinner.service';
 
 @Component({
@@ -21,6 +21,7 @@ import { SpinnerService } from '@core/services/spinner.service';
       }
     }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpinnerComponent {
   readonly spinner = inject(SpinnerService);

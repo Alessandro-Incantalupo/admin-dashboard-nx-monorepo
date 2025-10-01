@@ -1,4 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
@@ -19,6 +24,7 @@ import { ThemeSelectorComponent } from './theme-selector/theme-selector.componen
     ProfileInfoComponent,
   ],
   providers: [AuthStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ProfileComponent {
   router = inject(Router);

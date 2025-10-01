@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/button/button.component';
 
@@ -12,6 +12,7 @@ interface SignInForm {
   imports: [FormsModule, ButtonComponent],
   templateUrl: './sign-in-template-driven.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SignInTemplateDrivenComponent {
   onSubmit(form: { value: SignInForm }) {}

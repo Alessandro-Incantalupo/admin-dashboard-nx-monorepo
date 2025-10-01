@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SubMenuItem } from '@core/models/menu.model';
 import { MenuService } from '@layouts/main-layout/services/menu.service';
@@ -18,6 +18,7 @@ import { NavbarMobileSubmenuComponent } from '../navbar-mobile-submenu/navbar-mo
     ChipModule,
   ],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarMobileMenuComponent {
   public menuService = inject(MenuService);

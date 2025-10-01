@@ -34,8 +34,7 @@
     "tailwind-scrollbar": "^4.0.1",
     "tailwindcss": "^4.1.11",
     "tailwindcss-primeui": "^0.6.1",
-    "uuid": "^11.1.0",
-    "zone.js": "~0.15.1"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "20.1.1",
