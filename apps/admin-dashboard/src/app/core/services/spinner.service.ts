@@ -14,7 +14,7 @@ export class SpinnerService {
       // Delay hiding spinner to avoid flicker
       this.timeout = setTimeout(() => {
         this.isLoading.set(false);
-      }, 300); // ← 300ms is UX sweet spot
+      }, 200); // ← 300ms is UX sweet spot
     }
   }
 }

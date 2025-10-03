@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MessageService, SelectItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { Paginator } from 'primeng/paginator';
 import { SelectModule } from 'primeng/select';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
@@ -26,6 +27,7 @@ import { ToastModule } from 'primeng/toast';
     ButtonModule,
     InputTextModule,
     FormsModule,
+    Paginator,
   ],
   providers: [MessageService],
   styles: ``,
@@ -36,6 +38,8 @@ export class PrimeNgTableComponent {
   readonly roles = input<SelectItem<any>[]>();
   readonly readOnly = input<boolean>(false);
   readonly totalUsers = input<number>(0);
+  readonly currentPage = input<number>(1);
+  readonly pageSize = input<number>(5);
   readonly editAction = output<User>();
   readonly deleteAction = output<{ user: User; index: number }>();
   readonly saveAction = output<User>();
@@ -44,14 +48,21 @@ export class PrimeNgTableComponent {
     TablePageEvent & { page: number; pageCount: number }
   >();
 
-  onPage(event: TablePageEvent) {
-    const page = event.first / event.rows; // Calculate the current page (0-based)
-    const pageCount = Math.ceil(this.totalUsers() / event.rows); // Calculate total pages
+  onPage(event: {
+    page?: number;
+    first?: number;
+    rows?: number;
+    pageCount?: number;
+  }) {
+    const page = event.page + 1; // Convert to 1-based page
+    const pageCount = Math.ceil(this.totalUsers() / event.rows);
 
+    // Emit the page change event
     this.pageChangeAction.emit({
-      ...event, // Spread the original event properties
-      page, // Add the calculated page
-      pageCount, // Add the calculated pageCount
-    }); // Cast to TablePageEvent to satisfy the type
+      first: event.first,
+      rows: event.rows,
+      page,
+      pageCount,
+    });
   }
 }

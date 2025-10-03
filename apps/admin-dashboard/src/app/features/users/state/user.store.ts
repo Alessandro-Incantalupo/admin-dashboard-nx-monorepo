@@ -43,13 +43,17 @@ import {
 type State = {
   users: User[];
   clonedUsers: { [id: string]: User };
-  totalUsers: number;
+  totalUsers?: number;
+  currentPage?: number;
+  pageSize?: number;
 };
 
 const initialState: State = {
   users: [],
   clonedUsers: {},
   totalUsers: 0,
+  currentPage: 1,
+  pageSize: 5,
 };
 
 export const UsersStore = signalStore(
@@ -64,23 +68,24 @@ export const UsersStore = signalStore(
     >(
       pipe(
         tap(() => setUsersLoading()),
-        debounceTime(500),
+        debounceTime(300),
         switchMap(event => {
           // Extract page and size from the event or use defaults
-          // Handle the case where event is void
           const page = event && 'page' in event ? event.page : 1; // Default to page 1
           const size = event && 'rows' in event ? event.rows : 5; // Default to 5 rows
 
           return userService.getUsers(page, size).pipe(
             tapResponse({
               next: response => {
-                console.log('API Response:', response); // Debugging log
-
                 const { data: users, meta } = response;
+
                 updateState(state, 'Users: Load Success', {
-                  users,
+                  users: users,
+                  currentPage: page,
+                  pageSize: size,
                   totalUsers: meta.totalUsers,
                 });
+
                 setUsersLoaded();
               },
               error: err => {
@@ -100,7 +105,7 @@ export const UsersStore = signalStore(
     const addUser = rxMethod<User>(
       pipe(
         tap(() => setUsersAddLoading()),
-        debounceTime(500),
+        debounceTime(300),
         switchMap(newUser =>
           userService.addUser(newUser).pipe(
             tapResponse({
@@ -270,6 +275,7 @@ export const UsersStore = signalStore(
       restoreUser,
     };
   }),
+
   withHooks(({ loadUsers }) => ({
     onInit: () => {
       loadUsers();

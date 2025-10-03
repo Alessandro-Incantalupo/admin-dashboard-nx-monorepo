@@ -175,7 +175,6 @@ export default class UserListComponent {
   }
 
   onPageChange(event: TablePageEvent & { page: number; pageCount: number }) {
-    const pageEvent = { ...event, page: event.page + 1 }; // Convert 0-based page to 1-based
-    this.userStore.loadUsers(pageEvent); // Pass the correct object
+    this.userStore.loadUsers(event);
   }
 }

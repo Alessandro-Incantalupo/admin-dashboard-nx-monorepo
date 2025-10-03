@@ -69,6 +69,8 @@
           [roles]="roles"
           [readOnly]="!authStore.canEdit()"
           [totalUsers]="userStore.totalUsers()"
+          [pageSize]="userStore.pageSize()"
+          [currentPage]="userStore.currentPage()"
           (editAction)="onEdit($event)"
           (deleteAction)="onDelete($event)"
           (saveAction)="onRowEditSave($event)"
