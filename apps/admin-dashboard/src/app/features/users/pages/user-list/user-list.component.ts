@@ -20,7 +20,7 @@ import { PrimeNgTableComponent } from '@shared/prime-ng-table/prime-ng-table.com
 import { TabComponent } from '@shared/tab/tab.component';
 import { toast } from 'ngx-sonner';
 
-import { TablePageEvent } from 'primeng/table';
+import { PaginatorState } from 'primeng/paginator';
 import { UserFormComponent } from '../../components/user-form/user-form.component';
 @Component({
   selector: 'app-user-list',
@@ -174,7 +174,7 @@ export default class UserListComponent {
     this.showForm.set(!this.showForm());
   }
 
-  onPageChange(event: TablePageEvent & { page: number; pageCount: number }) {
+  onPageChange(event: PaginatorState) {
     this.userStore.loadUsers(event);
   }
 }

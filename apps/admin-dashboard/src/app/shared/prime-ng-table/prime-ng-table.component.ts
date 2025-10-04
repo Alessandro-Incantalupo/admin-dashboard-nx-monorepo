@@ -10,9 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { MessageService, SelectItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { Paginator } from 'primeng/paginator';
+import { Paginator, PaginatorState } from 'primeng/paginator';
 import { SelectModule } from 'primeng/select';
-import { TableModule, TablePageEvent } from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 @Component({
@@ -44,24 +44,13 @@ export class PrimeNgTableComponent {
   readonly deleteAction = output<{ user: User; index: number }>();
   readonly saveAction = output<User>();
   readonly saveActionCancel = output<{ user: User; index: number }>();
-  readonly pageChangeAction = output<
-    TablePageEvent & { page: number; pageCount: number }
-  >();
+  readonly pageChangeAction = output<PaginatorState>();
 
-  onPage(event: {
-    page?: number;
-    first?: number;
-    rows?: number;
-    pageCount?: number;
-  }) {
-    const page = event.page + 1; // Convert to 1-based page
-    const pageCount = Math.ceil(this.totalUsers() / event.rows);
-
-    // Emit the page change event
+  onPage({ page, first, rows, pageCount }: PaginatorState) {
     this.pageChangeAction.emit({
-      first: event.first,
-      rows: event.rows,
-      page,
+      first,
+      rows,
+      page: page + 1,
       pageCount,
     });
   }

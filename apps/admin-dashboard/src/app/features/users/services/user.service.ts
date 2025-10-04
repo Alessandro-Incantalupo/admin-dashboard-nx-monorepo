@@ -1,4 +1,4 @@
-import { User } from '@admin-dashboard-nx-monorepo/models';
+import { PaginatedResponse, User } from '@admin-dashboard-nx-monorepo/models';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { injectBaseUrl } from '@core/CIF/inject-base-url';
@@ -17,14 +17,17 @@ export class UsersService {
     BYPASS_LOADING_SPINNER,
     true
   );
+  private readonly WHITELISTED_API_HTTP_CONTEXT = new HttpContext().set(
+    WHITELISTED_API,
+    true
+  );
 
   getUsers(page: number = 1, size: number = 5) {
-    const context = new HttpContext().set(WHITELISTED_API, true);
-    return this.http.get<{
-      data: User[];
-      meta: { totalUsers: number; totalPages: number };
-    }>(`${this.usersUrl}?page=${page}&size=${size}`, { context });
+    return this.http.get<PaginatedResponse<User>>(
+      `${this.usersUrl}?page=${page}&size=${size}`
+    );
   }
+
   addUser(user: User) {
     return this.http.post<User>(this.usersUrl, user);
   }

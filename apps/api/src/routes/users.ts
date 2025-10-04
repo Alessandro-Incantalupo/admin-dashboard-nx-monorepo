@@ -30,7 +30,7 @@ usersRoute.get('/', c => {
     return c.json({
       data: paginatedUsers,
       meta: {
-        totalUsers,
+        totalItems: totalUsers,
         totalPages,
         currentPage: page,
         pageSize: size,

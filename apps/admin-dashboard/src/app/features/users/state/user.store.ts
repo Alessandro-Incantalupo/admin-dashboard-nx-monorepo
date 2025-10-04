@@ -20,8 +20,9 @@ import { getNextResetMs } from '@app-info';
 import { getHttpErrorMessage } from '@core/utils/http-error-message.util';
 import { UsersService } from '@features/users/services/user.service';
 import { toast } from 'ngx-sonner';
-import { TablePageEvent } from 'primeng/table';
+import { PaginatorState } from 'primeng/paginator';
 import { debounceTime, pipe, switchMap, tap } from 'rxjs';
+import { withPagination } from './features/withPagination';
 import {
   setUsersAddError,
   setUsersAddLoaded,
@@ -43,47 +44,37 @@ import {
 type State = {
   users: User[];
   clonedUsers: { [id: string]: User };
-  totalUsers?: number;
-  currentPage?: number;
-  pageSize?: number;
 };
 
 const initialState: State = {
   users: [],
   clonedUsers: {},
-  totalUsers: 0,
-  currentPage: 1,
-  pageSize: 5,
 };
 
 export const UsersStore = signalStore(
   withState(initialState),
+  withPagination({ initialPage: 1, initialPageSize: 5 }),
   withDevtools('Users Store'),
   withComputed(({ users }) => ({
     hasUsers: computed(() => users().length > 0),
   })),
   withMethods((state, userService = inject(UsersService)) => {
-    const loadUsers = rxMethod<
-      (TablePageEvent & { page: number; pageCount: number }) | void
-    >(
+    const loadUsers = rxMethod<PaginatorState | void>(
       pipe(
-        tap(() => setUsersLoading()),
+        tap(() => {
+          updateState(state, 'Users: Loading');
+          setUsersLoading();
+        }),
         debounceTime(300),
-        switchMap(event => {
-          // Extract page and size from the event or use defaults
-          const page = event && 'page' in event ? event.page : 1; // Default to page 1
-          const size = event && 'rows' in event ? event.rows : 5; // Default to 5 rows
-
-          return userService.getUsers(page, size).pipe(
+        switchMap(({ page = 1, rows = 5 }: Partial<PaginatorState> = {}) => {
+          return userService.getUsers(page, rows).pipe(
             tapResponse({
               next: response => {
-                const { data: users, meta } = response;
-
                 updateState(state, 'Users: Load Success', {
-                  users: users,
+                  users: response.data,
                   currentPage: page,
-                  pageSize: size,
-                  totalUsers: meta.totalUsers,
+                  pageSize: rows,
+                  totalItems: response.meta.totalItems,
                 });
 
                 setUsersLoaded();
@@ -94,6 +85,7 @@ export const UsersStore = signalStore(
                   'Failed to load users'
                 );
                 toast.error(message);
+                updateState(state, 'Users: Load Error');
                 setUsersError(message);
               },
             })
