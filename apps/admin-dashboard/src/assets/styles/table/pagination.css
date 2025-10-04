@@ -1,29 +1,28 @@
 /* ===== Scoped Paginator Styling ===== */
 
 /* Paginator Container */
-p-table .p-paginator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm); /* Use spacing variable */
-  padding: var(--spacing-sm) var(--spacing-md); /* Use spacing variables */
-  background-color: var(--color-card); /* Use card background color */
-  border-top: 1px solid var(--color-border); /* Add a border for separation */
+p-paginator {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--spacing-sm) !important;
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+  background-color: var(--color-card) !important;
 }
 
 /* Override for selected paginator page */
-p-table .p-paginator-page.p-paginator-page-selected {
+p-paginator .p-paginator-page.p-paginator-page-selected {
   border: 2px solid var(--primary-dark); /* Add a border if needed */
   background-color: var(--card-foreground); /* Use primary color */
   color: var(--primary); /* Use primary foreground color */
 }
 
 /* Pagination Buttons */
-p-table .p-paginator-page,
-p-table .p-paginator-next,
-p-table .p-paginator-prev,
-p-table .p-paginator-first,
-p-table .p-paginator-last {
+p-paginator .p-paginator-page,
+p-paginator .p-paginator-next,
+p-paginator .p-paginator-prev,
+p-paginator .p-paginator-first,
+p-paginator .p-paginator-last {
   width: 2rem;
   height: 2rem;
   line-height: 2rem;
@@ -35,35 +34,33 @@ p-table .p-paginator-last {
   border: none;
   transition: var(--transition-colors); /* Use transition variable */
 }
-p-table .p-paginator-page {
+
+p-paginator .p-paginator-page {
   margin: 0 var(--spacing-xs); /* Adds spacing between buttons */
 }
 
 /* Hover Effect for Buttons with Increased Specificity */
-p-table
-  .p-paginator-page:not(.p-disabled):not(.p-paginator-page-selected):hover,
-p-table .p-paginator-next:not(.p-disabled):hover,
-p-table .p-paginator-prev:not(.p-disabled):hover,
-p-table .p-paginator-first:not(.p-disabled):hover,
-p-table .p-paginator-last:not(.p-disabled):hover {
-  background-color: var(--primary); /* Use muted background color */
-  color: var(--color-foreground); /* Use foreground color */
-  border-radius: var(--radius-full); /* Ensure rounded corners on hover */
+p-paginator .p-paginator-page:not(.p-disabled):not(.p-paginator-page-selected):hover,
+p-paginator .p-paginator-next:not(.p-disabled):hover,
+p-paginator .p-paginator-prev:not(.p-disabled):hover,
+p-paginator .p-paginator-first:not(.p-disabled):hover,
+p-paginator .p-paginator-last:not(.p-disabled):hover {
+  background-color: var(--primary);
+  color: var(--color-foreground);
+  border-radius: var(--radius-full);
 }
 
 /* Active Page Button */
-p-table .p-paginator-page.p-highlight {
+p-paginator .p-paginator-page.p-highlight {
   background-color: var(--background); /* Use primary color */
   color: var(--color-primary-foreground); /* Use primary foreground color */
   font-weight: 600;
   box-shadow: var(--shadow-xs); /* Use shadow variable */
-  border-radius: var(
-    --radius-full
-  ); /* Ensure rounded corners for active page */
+  border-radius: var(--radius-full); /* Ensure rounded corners for active page */
 }
 
 /* Disabled Buttons */
-p-table .p-paginator .p-disabled {
+p-paginator .p-disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
@@ -71,7 +68,7 @@ p-table .p-paginator .p-disabled {
 /* ===== Dropdown Styling ===== */
 
 /* Base Wrapper for Dropdown */
-body .p-paginator .p-select {
+p-paginator .p-select {
   background-color: var(--background); /* Use background color */
   border: 1px solid var(--color-border); /* Use border color */
   border-radius: var(--radius-md); /* Use medium border radius */
@@ -87,12 +84,12 @@ body .p-paginator .p-select {
 }
 
 /* Hover Effect for Dropdown */
-body .p-paginator .p-select:hover {
+p-paginator .p-select:hover {
   border-color: var(--color-muted-foreground); /* Use muted foreground color */
 }
 
 /* Selected Label (e.g., the "5") */
-body .p-paginator .p-select-label {
+p-paginator .p-select-label {
   padding-left: var(--spacing-xs); /* Use spacing variable */
   font-size: 0.875rem;
   color: var(--color-foreground); /* Use foreground color */
@@ -102,7 +99,7 @@ body .p-paginator .p-select-label {
 }
 
 /* Dropdown Icon */
-body .p-paginator .p-select-dropdown {
+p-paginator .p-select-dropdown {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +110,7 @@ body .p-paginator .p-select-dropdown {
 /* ===== Option Panel Styling ===== */
 
 /* Option Panel */
-body .p-select-panel {
+p-paginator .p-select-panel {
   background-color: var(--color-card); /* Use card background color */
   border: 1px solid var(--color-border); /* Use border color */
   border-radius: var(--radius-md); /* Use medium border radius */
@@ -122,7 +119,7 @@ body .p-select-panel {
 }
 
 /* Option Items */
-body .p-select-item {
+p-paginator .p-select-item {
   padding: var(--spacing-sm) var(--spacing-md); /* Use spacing variables */
   font-size: 0.875rem;
   color: var(--color-foreground); /* Use foreground color */
@@ -130,13 +127,13 @@ body .p-select-item {
 }
 
 /* Hover Effect for Option Items */
-body .p-select-item:hover {
+p-paginator .p-select-item:hover {
   background-color: var(--color-muted); /* Use muted background color */
   color: var(--color-primary-foreground); /* Use primary foreground color */
 }
 
 /* Highlighted Option Item */
-body .p-select-item.p-highlight {
+p-paginator .p-select-item.p-highlight {
   background-color: var(--color-primary); /* Use primary color */
   color: var(--color-primary-foreground); /* Use primary foreground color */
   font-weight: 500;

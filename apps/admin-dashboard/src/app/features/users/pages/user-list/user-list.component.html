@@ -43,15 +43,39 @@
           }
         </app-role-description> -->
 
+        <!-- <app-tab
+          [tabs]="tabs()"
+          [activeTab]="activeTab()"
+          (tabChange)="activeTab.set($event)"
+        >
+          @if (activeTab() === 'Tab 1') {
+            <div class="p-4">
+              <p>Content for Tab 1 goes here...</p>
+            </div>
+          }
+          @if (activeTab() === 'Tab 2') {
+            <div class="p-4">
+              <p>Content for Tab 2 goes here...</p>
+            </div>
+          }
+          @if (activeTab() === 'Tab 3') {
+            <div class="p-4">
+              <p>Content for Tab 3 goes here...</p>
+            </div>
+          }
+        </app-tab> -->
         <app-prime-ng-table
           [users]="userStore.users()"
           [roles]="roles"
           [readOnly]="!authStore.canEdit()"
-          [totalUsers]="userStore.totalUsers()"
+          [totalUsers]="userStore.totalItems()"
+          [pageSize]="userStore.pageSize()"
+          [currentPage]="userStore.currentPage()"
           (editAction)="onEdit($event)"
           (deleteAction)="onDelete($event)"
           (saveAction)="onRowEditSave($event)"
           (saveActionCancel)="onRowEditCancel($event)"
+          (pageChangeAction)="onPageChange($event)"
         ></app-prime-ng-table>
 
         <!-- Admin-only form - Only show if authenticated and admin -->

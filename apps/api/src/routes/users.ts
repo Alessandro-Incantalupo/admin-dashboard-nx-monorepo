@@ -10,8 +10,31 @@ const initialUsers: User[] = JSON.parse(JSON.stringify(usersData));
 
 usersRoute.get('/', c => {
   try {
+    const page = parseInt(c.req.query('page') || '1', 10); // Default to page 1
+    const size = parseInt(c.req.query('size') || '5', 10); // Default to 5 items per page
+
+    if (page < 1 || size < 1) {
+      return c.json({ error: 'Invalid pagination parameters' }, 400);
+    }
+
+    const totalUsers = users.length;
+    const totalPages = Math.ceil(totalUsers / size);
+
+    if (page > totalPages) {
+      return c.json({ error: 'Page out of range' }, 404);
+    }
+
+    const offset = (page - 1) * size;
+    const paginatedUsers = users.slice(offset, offset + size);
+
     return c.json({
-      data: users,
+      data: paginatedUsers,
+      meta: {
+        totalItems: totalUsers,
+        totalPages,
+        currentPage: page,
+        pageSize: size,
+      },
       message: null,
       code: null,
     });

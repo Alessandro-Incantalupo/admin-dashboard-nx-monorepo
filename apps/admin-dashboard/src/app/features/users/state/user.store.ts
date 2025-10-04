@@ -20,7 +20,9 @@ import { getNextResetMs } from '@app-info';
 import { getHttpErrorMessage } from '@core/utils/http-error-message.util';
 import { UsersService } from '@features/users/services/user.service';
 import { toast } from 'ngx-sonner';
+import { PaginatorState } from 'primeng/paginator';
 import { debounceTime, pipe, switchMap, tap } from 'rxjs';
+import { withPagination } from './features/withPagination';
 import {
   setUsersAddError,
   setUsersAddLoaded,
@@ -42,31 +44,39 @@ import {
 type State = {
   users: User[];
   clonedUsers: { [id: string]: User };
-  totalUsers: number;
 };
 
 const initialState: State = {
   users: [],
   clonedUsers: {},
-  totalUsers: 0,
 };
 
 export const UsersStore = signalStore(
   withState(initialState),
+  withPagination({ initialPage: 1, initialPageSize: 5 }),
   withDevtools('Users Store'),
   withComputed(({ users }) => ({
     hasUsers: computed(() => users().length > 0),
   })),
   withMethods((state, userService = inject(UsersService)) => {
-    const loadUsers = rxMethod<void>(
+    const loadUsers = rxMethod<PaginatorState | void>(
       pipe(
-        tap(() => setUsersLoading()),
-        debounceTime(500),
-        switchMap(() =>
-          userService.getUsers().pipe(
+        tap(() => {
+          updateState(state, 'Users: Loading');
+          setUsersLoading();
+        }),
+        debounceTime(300),
+        switchMap(({ page = 1, rows = 5 }: Partial<PaginatorState> = {}) => {
+          return userService.getUsers(page, rows).pipe(
             tapResponse({
-              next: users => {
-                updateState(state, 'Users: Load Success', { users });
+              next: response => {
+                updateState(state, 'Users: Load Success', {
+                  users: response.data,
+                  currentPage: page,
+                  pageSize: rows,
+                  totalItems: response.meta.totalItems,
+                });
+
                 setUsersLoaded();
               },
               error: err => {
@@ -74,20 +84,20 @@ export const UsersStore = signalStore(
                   err,
                   'Failed to load users'
                 );
-
                 toast.error(message);
+                updateState(state, 'Users: Load Error');
                 setUsersError(message);
               },
             })
-          )
-        )
+          );
+        })
       )
     );
 
     const addUser = rxMethod<User>(
       pipe(
         tap(() => setUsersAddLoading()),
-        debounceTime(500),
+        debounceTime(300),
         switchMap(newUser =>
           userService.addUser(newUser).pipe(
             tapResponse({
@@ -257,6 +267,7 @@ export const UsersStore = signalStore(
       restoreUser,
     };
   }),
+
   withHooks(({ loadUsers }) => ({
     onInit: () => {
       loadUsers();

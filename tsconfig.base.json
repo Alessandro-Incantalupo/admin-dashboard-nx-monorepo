@@ -31,7 +31,8 @@
       "@models": ["libs/models/src/index.ts"],
       "@shared/*": ["apps/admin-dashboard/src/app/shared/*"],
       "@assets/*": ["apps/admin-dashboard/src/assets/*"],
-      "@test/*": ["apps/admin-dashboard/src/test/*"]
+      "@test/*": ["apps/admin-dashboard/src/test/*"],
+      "@mocks/*": ["apps/admin-dashboard/src/mocks/*"]
     }
   },
   "exclude": ["tmp"]

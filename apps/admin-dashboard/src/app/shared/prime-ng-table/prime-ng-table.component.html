@@ -6,8 +6,7 @@
     editMode="row"
     [tableStyle]="{ 'min-width': '50rem' }"
     [rows]="5"
-    [paginator]="true"
-    [rowsPerPageOptions]="[5, 10]"
+    [paginator]="false"
     [showCurrentPageReport]="false"
     [totalRecords]="totalUsers()"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -129,4 +128,12 @@
       </tr>
     </ng-template>
   </p-table>
+
+  <p-paginator
+    class="mt-4"
+    [rows]="pageSize()"
+    [totalRecords]="totalUsers()"
+    [rowsPerPageOptions]="[5, 10]"
+    (onPageChange)="onPage($event)"
+  ></p-paginator>
 </div>
