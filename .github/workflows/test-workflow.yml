@@ -1,18 +1,7 @@
 name: Build and Deploy to DigitalOcean
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'apps/api/**'
-      - 'libs/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'apps/api/**'
-      - 'libs/**'
+  workflow_dispatch
 
 jobs:
   deploy:
