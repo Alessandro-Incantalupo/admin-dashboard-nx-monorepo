@@ -7,6 +7,12 @@ on:
     paths:
       - 'apps/api/**'
       - 'libs/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'apps/api/**'
+      - 'libs/**'
 
 jobs:
   deploy:
