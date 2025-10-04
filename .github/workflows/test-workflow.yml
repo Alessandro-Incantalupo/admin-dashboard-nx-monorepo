@@ -1,4 +1,4 @@
-name: Build and Deploy to DigitalOcean
+name: Browser Runnable Workflow
 
 on:
   workflow_dispatch
@@ -44,7 +44,7 @@ jobs:
       - name: Clean Up DigitalOcean Registry
         run: |
           REPO="admin-api"
-          DIGESTS=$(doctl registry repository list-manifests $REPO --format Digest --no-header)
+          DIGESTS=$(doctl registry repository list-manifests $REPO --format Digest --no-header | awk '{print $1}')
           if [ -z "$DIGESTS" ]; then
             echo "No digests found to delete."
             exit 0
