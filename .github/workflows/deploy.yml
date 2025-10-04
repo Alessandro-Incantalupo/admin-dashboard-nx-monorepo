@@ -56,9 +56,17 @@ jobs:
         run: |
           REPO="admin-api"
           DIGESTS=$(doctl registry repository list-manifests $REPO --format Digest --no-header)
+          if [ -z "$DIGESTS" ]; then
+            echo "No digests found to delete."
+            exit 0
+          fi
           for DIGEST in $DIGESTS; do
+            if [[ $DIGEST != sha256:* ]]; then
+              echo "Invalid digest format: $DIGEST"
+              continue
+            fi
             echo "Deleting digest: $DIGEST"
-            doctl registry repository delete-manifest $REPO $DIGEST --force
+            doctl registry repository delete-manifest $REPO $DIGEST --force || echo "Failed to delete digest: $DIGEST"
           done
 
       - name: Build Docker Image
