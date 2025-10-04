@@ -13,7 +13,7 @@
         "outputPath": "dist/apps/admin-dashboard",
         "index": "apps/admin-dashboard/src/index.html",
         "browser": "apps/admin-dashboard/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [],
         "tsConfig": "apps/admin-dashboard/tsconfig.app.json",
         "assets": [
           {
@@ -102,7 +102,9 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/admin-dashboard/jest.config.ts"
+        "jestConfig": "apps/admin-dashboard/jest.config.ts",
+        "watchAll": true,
+        "collectCoverage": true
       }
     },
     "serve-static": {

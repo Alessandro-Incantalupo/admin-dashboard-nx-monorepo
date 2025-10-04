@@ -1,4 +1,10 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -14,6 +20,7 @@ import { ButtonComponent } from '../../../shared/button/button.component';
   imports: [SvgIconComponent, RouterLink, ButtonComponent, ReactiveFormsModule],
   templateUrl: './sign-up.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SignUpComponent {
   nnfb = inject(NonNullableFormBuilder);

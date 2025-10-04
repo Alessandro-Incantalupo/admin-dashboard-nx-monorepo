@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ThemeStore } from '@core/state/theme.store';
 
 @Component({
@@ -6,6 +6,7 @@ import { ThemeStore } from '@core/state/theme.store';
   imports: [],
   templateUrl: './theme-selector.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSelectorComponent {
   themeStore = inject(ThemeStore);

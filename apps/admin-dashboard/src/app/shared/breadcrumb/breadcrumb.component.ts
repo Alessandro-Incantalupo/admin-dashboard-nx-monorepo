@@ -1,4 +1,9 @@
-import { Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -6,6 +11,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './breadcrumb.component.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbComponent {
   router = inject(Router);

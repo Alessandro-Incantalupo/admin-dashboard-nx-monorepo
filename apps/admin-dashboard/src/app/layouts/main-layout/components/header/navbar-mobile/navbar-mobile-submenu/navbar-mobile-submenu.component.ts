@@ -1,5 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { SubMenuItem } from '@core/models/menu.model';
 import { MenuService } from '@layouts/main-layout/services/menu.service';
@@ -11,6 +16,7 @@ import { ChipModule } from 'primeng/chip';
   selector: 'app-navbar-mobile-submenu',
   templateUrl: './navbar-mobile-submenu.component.html',
   imports: [NgTemplateOutlet, AngularSvgIconModule, ChipModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarMobileSubmenuComponent {
   router = inject(Router);

@@ -43,8 +43,6 @@ export class EditFormComponent {
     status: ['active'],
   });
 
-  readonly isAdmin = this.auth.isAdmin;
-
   constructor() {
     effect(() => {
       if (this.user()) {

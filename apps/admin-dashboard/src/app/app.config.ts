@@ -2,7 +2,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
   isDevMode,
-  provideZoneChangeDetection,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
@@ -39,10 +39,13 @@ export const appConfig: ApplicationConfig = {
     // Provides Angular's change detection system (required by default)
     // The `eventCoalescing: true` option optimizes performance by batching multiple events
     // of the same type within a single change detection cycle, reducing redundant checks.
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    // provideZoneChangeDetection({ eventCoalescing: true }),
 
     // Enables animations with better performance (lazy initialization)
     provideAnimationsAsync(),
+
+    // Alternative change detection strategy that runs outside Angular's zone.
+    provideZonelessChangeDetection(),
 
     // Registers PrimeNG UI config so components work globally
     providePrimeNG(),

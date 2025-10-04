@@ -5,6 +5,9 @@
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "moduleResolution": "node",
+    // "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "sourceMap": true,
     "declaration": false,
@@ -27,6 +30,8 @@
       "@layouts/*": ["apps/admin-dashboard/src/app/layouts/*"],
       "@models": ["libs/models/src/index.ts"],
       "@shared/*": ["apps/admin-dashboard/src/app/shared/*"],
+      "@assets/*": ["apps/admin-dashboard/src/assets/*"],
+      "@test/*": ["apps/admin-dashboard/src/test/*"],
       "@mocks/*": ["apps/admin-dashboard/src/mocks/*"]
     }
   },
