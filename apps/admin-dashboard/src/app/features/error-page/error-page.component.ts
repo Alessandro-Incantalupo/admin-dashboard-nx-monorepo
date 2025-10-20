@@ -12,6 +12,12 @@ import { ButtonComponent } from '../../shared/button/button.component';
 })
 export class ErrorPageComponent {
   router = inject(Router);
+  // location = inject(Location);
+  // navigation = inject(NgxNavigateBackService);
+
+  // goBack() {
+  //   this.location.back();
+  // }
 
   goToHomePage() {
     this.router.navigate(['/']);
