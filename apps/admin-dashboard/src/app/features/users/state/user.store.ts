@@ -175,6 +175,8 @@ export const UsersStore = signalStore(
                   position: 'top-right',
                 });
                 setUsersDeleteLoaded();
+                const { currentPage, pageSize } = state;
+                loadUsers({ page: currentPage(), rows: pageSize() });
               },
               error: err => {
                 const message = getHttpErrorMessage(
