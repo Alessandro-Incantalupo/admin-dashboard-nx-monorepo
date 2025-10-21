@@ -125,6 +125,14 @@ pnpm nx build api
 - **Status Management** - Active/inactive user status
 - **Profile Management** - User profile with avatar and details
 
+### **GitHub Profile Integration**
+
+- **GitHub User Search** - Look up any GitHub user by username
+- **Profile Display** - View comprehensive GitHub profile information
+- **Repository Stats** - See public repositories, followers, and following counts
+- **Social Links** - Access to user's website, company, and location
+- **Real-time Data** - Direct integration with GitHub's REST API
+
 ### **Modern UI Components**
 
 - **Responsive Dashboard** - Clean, modern admin interface

@@ -23,6 +23,11 @@ export default [
         path: PATHS.USERS,
         loadChildren: () => import('../../features/users/users.routes'),
       },
+      {
+        path: PATHS.GITHUB_PROFILE,
+        loadComponent: () =>
+          import('../../features/github-profile/github-profile.component'),
+      },
     ],
   },
 ] satisfies Routes;

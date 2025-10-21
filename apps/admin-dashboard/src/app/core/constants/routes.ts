@@ -2,6 +2,7 @@ export const PATHS = {
   DASHBOARD: 'dashboard',
   AUTH: 'auth',
   PROFILE: 'profile',
+  GITHUB_PROFILE: 'github-profile',
   SIGN_UP: 'sign-up',
   SIGN_IN: 'sign-in',
   SIGN_IN_TEMPLATE_DRIVEN: 'sign-in-template-driven',

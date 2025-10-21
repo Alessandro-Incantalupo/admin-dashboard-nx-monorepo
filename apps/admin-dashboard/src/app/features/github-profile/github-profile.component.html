@@ -1,0 +1,144 @@
+<div class="min-h-screen p-6">
+  <app-breadcrumb class="mb-6" [items]="breadcrumbItems()" />
+
+  <div class="mx-auto max-w-2xl">
+    <div class="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+      <h1 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
+        GitHub Profile Lookup
+      </h1>
+
+      <div class="mb-6">
+        <label
+          for="username"
+          class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+        >
+          GitHub Username
+        </label>
+        <div class="flex gap-2">
+          <input
+            type="text"
+            id="username"
+            [(ngModel)]="username"
+            (keyup.enter)="fetchProfile()"
+            placeholder="Enter GitHub username..."
+            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+          />
+          <button
+            app-button
+            (click)="fetchProfile()"
+            [disabled]="loading()"
+            impact="bold"
+            tone="primary"
+            shape="rounded"
+            size="medium"
+          >
+            {{ loading() ? 'Loading...' : 'Search' }}
+          </button>
+        </div>
+      </div>
+
+      @if (error()) {
+        <div
+          class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-800 dark:bg-gray-800 dark:text-red-400"
+        >
+          {{ error() }}
+        </div>
+      }
+
+      @if (profile()) {
+        <div class="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-900">
+          <div class="mb-6 flex items-center gap-6">
+            <img
+              [src]="profile()!.avatar_url"
+              [alt]="profile()!.name || profile()!.login"
+              class="h-24 w-24 rounded-full border-4 border-white shadow-lg dark:border-gray-700"
+            />
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                {{ profile()!.name || profile()!.login }}
+              </h2>
+              <p class="text-gray-600 dark:text-gray-400">
+                &#64;{{ profile()!.login }}
+              </p>
+              @if (profile()!.bio) {
+                <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+                  {{ profile()!.bio }}
+                </p>
+              }
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+            <div class="rounded-lg bg-white p-4 text-center shadow-sm dark:bg-gray-800">
+              <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                {{ profile()!.public_repos }}
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Repositories</p>
+            </div>
+            <div class="rounded-lg bg-white p-4 text-center shadow-sm dark:bg-gray-800">
+              <p class="text-2xl font-bold text-green-600 dark:text-green-400">
+                {{ profile()!.followers }}
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Followers</p>
+            </div>
+            <div class="rounded-lg bg-white p-4 text-center shadow-sm dark:bg-gray-800">
+              <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                {{ profile()!.following }}
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Following</p>
+            </div>
+          </div>
+
+          <div class="mt-6 space-y-3">
+            @if (profile()!.company) {
+              <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                <span class="font-semibold">Company:</span>
+                <span>{{ profile()!.company }}</span>
+              </div>
+            }
+            @if (profile()!.location) {
+              <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                <span class="font-semibold">Location:</span>
+                <span>{{ profile()!.location }}</span>
+              </div>
+            }
+            @if (profile()!.email) {
+              <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                <span class="font-semibold">Email:</span>
+                <span>{{ profile()!.email }}</span>
+              </div>
+            }
+            @if (profile()!.blog) {
+              <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                <span class="font-semibold">Website:</span>
+                <a
+                  [href]="profile()!.blog"
+                  target="_blank"
+                  class="text-blue-600 hover:underline dark:text-blue-400"
+                >
+                  {{ profile()!.blog }}
+                </a>
+              </div>
+            }
+            @if (profile()!.twitter_username) {
+              <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                <span class="font-semibold">Twitter:</span>
+                <span>&#64;{{ profile()!.twitter_username }}</span>
+              </div>
+            }
+          </div>
+
+          <div class="mt-6">
+            <a
+              [href]="profile()!.html_url"
+              target="_blank"
+              class="inline-block w-full rounded-lg bg-gray-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+            >
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
