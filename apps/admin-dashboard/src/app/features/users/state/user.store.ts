@@ -102,15 +102,15 @@ export const UsersStore = signalStore(
           userService.addUser(newUser).pipe(
             tapResponse({
               next: user => {
-                updateState(state, 'Users: Add', {
-                  users: [user, ...state.users()],
-                });
                 setUsersAddLoaded();
                 toast.success('User created!', {
                   description: 'The user has been added to the system.',
                   duration: 4000,
                   position: 'top-right',
                 });
+                // Refetch to maintain proper pagination
+                const { currentPage, pageSize } = state;
+                loadUsers({ page: currentPage(), rows: pageSize() });
               },
               error: err => {
                 const message = getHttpErrorMessage(err, 'Failed to add user');
