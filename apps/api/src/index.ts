@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import { rateLimiter } from 'hono-rate-limiter';
 import { cors } from 'hono/cors';
 import auth from './routes/auth';
+import github from './routes/github';
 import usersRoute from './routes/users';
 
 const allowedOrigin = Bun.env['FRONTEND_ORIGIN'] ?? 'http://localhost:4300';
@@ -67,5 +68,6 @@ app.get('/', c => c.text('🟢 API is alive'));
 // Mount the users sub-app
 app.route('/users', users);
 app.route('/auth', auth);
+app.route('/github', github);
 
 export default app;

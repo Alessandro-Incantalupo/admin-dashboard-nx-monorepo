@@ -92,6 +92,11 @@ export const pages: CustomMenuItem[] = [
         label: 'Users',
         route: PATHS.USERS,
       },
+      {
+        icon: 'assets/icons/heroicons/outline/user.svg',
+        label: 'GitHub Profile',
+        route: PATHS.GITHUB_PROFILE,
+      },
     ],
   },
   {
