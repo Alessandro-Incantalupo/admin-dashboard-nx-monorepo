@@ -238,7 +238,9 @@ export class ProfileInfoComponent {
 
 ## 📚 **Documentation**
 
-- **[Angular Injection Context Guide](./docs/ANGULAR_INJECTION_CONTEXT.md)** - Comprehensive guide on Angular's dependency injection context, including common errors and solutions
+### Angular Injection Context
+- **[Quick Reference](./docs/QUICK_REFERENCE_INJECTION_CONTEXT.md)** - Fast lookup for valid/invalid injection contexts
+- **[Complete Guide](./docs/ANGULAR_INJECTION_CONTEXT.md)** - Comprehensive documentation with examples and debugging tips
 
 ---
 
