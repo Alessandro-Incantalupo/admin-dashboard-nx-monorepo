@@ -32,7 +32,8 @@
       "@shared/*": ["apps/admin-dashboard/src/app/shared/*"],
       "@assets/*": ["apps/admin-dashboard/src/assets/*"],
       "@test/*": ["apps/admin-dashboard/src/test/*"],
-      "@mocks/*": ["apps/admin-dashboard/src/mocks/*"]
+      "@mocks/*": ["apps/admin-dashboard/src/mocks/*"],
+      "@root/*": ["./*"]
     }
   },
   "exclude": ["tmp"]

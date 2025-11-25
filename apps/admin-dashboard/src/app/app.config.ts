@@ -1,6 +1,7 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
+  ErrorHandler,
   isDevMode,
   provideZonelessChangeDetection,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { BaseResponseInterceptor } from '@core/interceptors/base-response.interceptor';
 import { LoadingInterceptor } from '@core/interceptors/loading.interceptor';
+import { GlobalErrorHandler } from '@core/services/global-error-handler.service';
 import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
 import { provideAngularSvgIcon } from 'angular-svg-icon';
@@ -67,5 +69,6 @@ export const appConfig: ApplicationConfig = {
     }),
     ThemeStore,
     AuthStore,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
 };
