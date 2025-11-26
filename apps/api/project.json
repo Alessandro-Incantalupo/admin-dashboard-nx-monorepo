@@ -43,6 +43,20 @@
         "command": "nx run api:docker-build && nx run api:docker-push",
         "cwd": "."
       }
+    },
+    "docker-run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker run --rm -d -p 3100:3100 --env-file .env --name api-container registry.digitalocean.com/admin-api-registry-v1/admin-api:latest",
+        "cwd": "."
+      }
+    },
+    "docker-stop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker stop api-container && docker rm api-container",
+        "cwd": "."
+      }
     }
   },
   "tags": ["type:api", "scope:server"]
