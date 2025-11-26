@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 import { PATHS } from '@core/constants/routes';
 import { AuthStore } from '@core/state/auth.store';
 import { ThemeStore } from '@core/state/theme.store';
-import { ClickOutsideDirective } from '@shared/directives/click-outside.directive';
+import { ClickOutsideRxjsDirective } from '@shared/directives/click-outside-rxjs.directive';
 import { SvgIconComponent } from 'angular-svg-icon';
 @Component({
   selector: 'app-profile-menu',
-  imports: [SvgIconComponent, ClickOutsideDirective],
+  imports: [SvgIconComponent, ClickOutsideRxjsDirective],
   templateUrl: './profile-menu.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
