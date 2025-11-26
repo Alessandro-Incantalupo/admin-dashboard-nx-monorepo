@@ -104,7 +104,8 @@
       "options": {
         "jestConfig": "apps/admin-dashboard/jest.config.ts",
         "watchAll": true,
-        "collectCoverage": true
+        "collectCoverage": true,
+        "tsConfig": "apps/admin-dashboard/tsconfig.spec.json"
       }
     },
     "serve-static": {

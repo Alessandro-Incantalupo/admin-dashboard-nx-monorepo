@@ -34,7 +34,7 @@ export default class ProfileComponent {
 
   breadcrumbItems = signal<{ label: string; route?: string }[]>([]);
 
-  state = this.router.getCurrentNavigation()?.extras.state;
+  state = this.router.currentNavigation()?.extras.state;
   userData: { [key: string]: any } | undefined = undefined;
 
   constructor() {

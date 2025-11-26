@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   input,
   output,
 } from '@angular/core';
-import { HugeiconsIconComponent } from '@hugeicons/angular';
 @Component({
   selector: 'app-tab',
-  imports: [CommonModule, HugeiconsIconComponent],
+  imports: [],
   templateUrl: './tab.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

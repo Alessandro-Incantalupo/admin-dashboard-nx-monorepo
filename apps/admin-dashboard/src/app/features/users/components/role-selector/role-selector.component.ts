@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +9,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-role-selector',
-  imports: [CommonModule, TranslocoDirective],
+  imports: [TranslocoDirective],
   templateUrl: './role-selector.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

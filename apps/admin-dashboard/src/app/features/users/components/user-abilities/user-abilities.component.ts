@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +9,7 @@ import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-user-abilities',
-  imports: [CommonModule, TranslocoDirective],
+  imports: [TranslocoDirective],
   templateUrl: './user-abilities.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

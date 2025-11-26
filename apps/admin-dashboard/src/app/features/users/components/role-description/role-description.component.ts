@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-role-description',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './role-description.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
