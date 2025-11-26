@@ -54,7 +54,6 @@ export const appConfig: ApplicationConfig = {
     provideAngularSvgIcon(),
     // Custom DI token containing package metadata (e.g. version, name)
     // { provide: APP_INFO, useValue: packageJson },
-    provideHttpClient(),
     provideTransloco({
       config: {
         availableLangs: ['en', 'it'],
