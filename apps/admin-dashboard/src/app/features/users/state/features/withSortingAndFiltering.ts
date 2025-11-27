@@ -178,7 +178,10 @@ export const sortingFilteringUpdaters = {
   /**
    * Set or update the sort configuration.
    */
-  setSort: (field: string, order: 'asc' | 'desc'): Partial<SortingFilteringState> => ({
+  setSort: (
+    field: string,
+    order: 'asc' | 'desc'
+  ): Partial<SortingFilteringState> => ({
     sort: { field, order },
   }),
 
@@ -239,7 +242,9 @@ export const sortingFilteringUpdaters = {
   /**
    * Replace all filters at once.
    */
-  setFilters: (filters: Record<string, string>): Partial<SortingFilteringState> => ({
+  setFilters: (
+    filters: Record<string, string>
+  ): Partial<SortingFilteringState> => ({
     filters,
   }),
 

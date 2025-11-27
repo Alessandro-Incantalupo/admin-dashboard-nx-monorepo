@@ -1,8 +1,5 @@
 import { User } from '@admin-dashboard-nx-monorepo/models';
-import {
-  KeyValuePipe,
-  TitleCasePipe,
-} from '@angular/common';
+import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,6 +9,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthStore } from '@core/state/auth.store';
 import { RoleSelectorComponent } from '@features/users/components/role-selector/role-selector.component';
 import { UserAbilitiesComponent } from '@features/users/components/user-abilities/user-abilities.component';
@@ -44,6 +42,7 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
 export default class UserListComponent {
   protected userStore = inject(UsersStore);
   protected authStore = inject(AuthStore);
+  private readonly router = inject(Router);
   readonly formSection = viewChild<ElementRef<HTMLDivElement>>('formSection');
 
   readonly showForm = signal(false);
@@ -172,5 +171,13 @@ export default class UserListComponent {
 
   onSort(event: { field: string; order: 'asc' | 'desc' }) {
     this.userStore.sortBy(event.field);
+  }
+
+  navigateToFunction1() {
+    this.router.navigate(['/users/function1']);
+  }
+
+  navigateToUserDetail(userId: number) {
+    this.router.navigate(['/users/detail', userId]);
   }
 }

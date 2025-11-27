@@ -72,41 +72,43 @@ export const UsersStore = signalStore(
           // Get current sort and filter state
           const sort = state.sort();
           const filters = state.filters();
-          
+
           // Build filter params for API
           const filterField = Object.keys(filters)[0];
           const filterValue = filterField ? filters[filterField] : undefined;
 
-          return userService.getUsersWithFilters(
-            page, 
-            rows,
-            sort?.field,
-            sort?.order,
-            filterField,
-            filterValue
-          ).pipe(
-            tapResponse({
-              next: response => {
-                updateState(state, 'Users: Load Success', {
-                  users: response.data,
-                  currentPage: page,
-                  pageSize: rows,
-                  totalItems: response.meta.totalItems,
-                });
+          return userService
+            .getUsersWithFilters(
+              page,
+              rows,
+              sort?.field,
+              sort?.order,
+              filterField,
+              filterValue
+            )
+            .pipe(
+              tapResponse({
+                next: response => {
+                  updateState(state, 'Users: Load Success', {
+                    users: response.data,
+                    currentPage: page,
+                    pageSize: rows,
+                    totalItems: response.meta.totalItems,
+                  });
 
-                setUsersLoaded();
-              },
-              error: err => {
-                const message = getHttpErrorMessage(
-                  err,
-                  'Failed to load users'
-                );
-                toast.error(message);
-                updateState(state, 'Users: Load Error');
-                setUsersError(message);
-              },
-            })
-          );
+                  setUsersLoaded();
+                },
+                error: err => {
+                  const message = getHttpErrorMessage(
+                    err,
+                    'Failed to load users'
+                  );
+                  toast.error(message);
+                  updateState(state, 'Users: Load Error');
+                  setUsersError(message);
+                },
+              })
+            );
         })
       )
     );

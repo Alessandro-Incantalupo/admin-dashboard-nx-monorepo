@@ -30,20 +30,22 @@ apps/api/src/
 ## 🔧 **Layer Responsibilities**
 
 ### **1. Service Layer** (`services/user.service.ts`)
+
 **Purpose:** Business logic and data management
 
 ```typescript
 class UserService {
-  getAll()              // Get all users
-  getById(id)           // Get user by ID
-  create(userData)      // Create new user
-  update(id, userData)  // Update existing user
-  delete(id)            // Delete user
-  reset()               // Reset to initial data
+  getAll(); // Get all users
+  getById(id); // Get user by ID
+  create(userData); // Create new user
+  update(id, userData); // Update existing user
+  delete(id); // Delete user
+  reset(); // Reset to initial data
 }
 ```
 
 **Why?**
+
 - ✅ Single source of truth for data operations
 - ✅ Easy to swap in-memory data with a real database later
 - ✅ Testable in isolation
@@ -52,13 +54,15 @@ class UserService {
 ---
 
 ### **2. Utility Layer** (`utils/process-table-request.util.ts`)
+
 **Purpose:** Generic helpers for common tasks
 
 ```typescript
-processTableRequest<T>(data, request)
+processTableRequest<T>(data, request);
 ```
 
 **Features:**
+
 - ✅ Type-safe filtering, sorting, pagination
 - ✅ Works with ANY entity type (not just User)
 - ✅ Reusable across all table endpoints
@@ -67,20 +71,22 @@ processTableRequest<T>(data, request)
 ---
 
 ### **3. Route Handlers** (`routes/users/*.ts`)
+
 **Purpose:** HTTP request/response handling
 
 Each file exports **ONE handler function**:
 
-| File | Handler | Method | Route | Purpose |
-|------|---------|--------|-------|---------|
-| `get-users.ts` | `getUsersHandler` | GET | `/users` | List users with query params |
-| `search-users.ts` | `searchUsersHandler` | POST | `/users/search` | Search with request body |
-| `create-user.ts` | `createUserHandler` | POST | `/users` | Create new user |
-| `update-user.ts` | `updateUserHandler` | PUT | `/users/:id` | Update existing user |
-| `delete-user.ts` | `deleteUserHandler` | DELETE | `/users/:id` | Delete user |
-| `reset-users.ts` | `resetUsersHandler` | POST | `/users/reset` | Reset demo data |
+| File              | Handler              | Method | Route           | Purpose                      |
+| ----------------- | -------------------- | ------ | --------------- | ---------------------------- |
+| `get-users.ts`    | `getUsersHandler`    | GET    | `/users`        | List users with query params |
+| `search-users.ts` | `searchUsersHandler` | POST   | `/users/search` | Search with request body     |
+| `create-user.ts`  | `createUserHandler`  | POST   | `/users`        | Create new user              |
+| `update-user.ts`  | `updateUserHandler`  | PUT    | `/users/:id`    | Update existing user         |
+| `delete-user.ts`  | `deleteUserHandler`  | DELETE | `/users/:id`    | Delete user                  |
+| `reset-users.ts`  | `resetUsersHandler`  | POST   | `/users/reset`  | Reset demo data              |
 
 **Why separate files?**
+
 - ✅ **Single Responsibility** - Each file does ONE thing
 - ✅ **Easy to find** - Clear naming convention
 - ✅ **Easy to test** - Import and test individual handlers
@@ -90,6 +96,7 @@ Each file exports **ONE handler function**:
 ---
 
 ### **4. Router** (`routes/users/index.ts`)
+
 **Purpose:** Combine all handlers into a Hono router
 
 ```typescript
@@ -106,6 +113,7 @@ export default usersRoute;
 ```
 
 **Why?**
+
 - ✅ Clean overview of all routes in one place
 - ✅ Easy to see HTTP methods and paths
 - ✅ Handlers are imported, not defined inline
@@ -139,6 +147,7 @@ Response to Client
 Want to add `GET /users/:id` to get a single user?
 
 ### **Step 1:** Create handler file
+
 ```typescript
 // routes/users/get-user-by-id.ts
 import type { Context } from 'hono';
@@ -148,11 +157,11 @@ export function getUserByIdHandler(c: Context) {
   try {
     const id = c.req.param('id');
     const user = userService.getById(id);
-    
+
     if (!user) {
       return c.json({ error: 'User not found' }, 404);
     }
-    
+
     return c.json(user);
   } catch {
     return c.json({ error: 'Failed to get user' }, 500);
@@ -161,6 +170,7 @@ export function getUserByIdHandler(c: Context) {
 ```
 
 ### **Step 2:** Add to router
+
 ```typescript
 // routes/users/index.ts
 import { getUserByIdHandler } from './get-user-by-id';
@@ -175,6 +185,7 @@ Done! ✅
 ## 🧪 Testing Strategy
 
 ### **Unit Tests**
+
 ```typescript
 // Test service independently
 import { userService } from './user.service';
@@ -186,6 +197,7 @@ test('should create user', () => {
 ```
 
 ### **Integration Tests**
+
 ```typescript
 // Test handler with mocked service
 import { getUsersHandler } from './get-users';
@@ -201,14 +213,14 @@ test('should return paginated users', async () => {
 
 ## 🎓 Benefits of This Architecture
 
-| Before (Monolithic) | After (Modular) |
-|---------------------|-----------------|
-| ❌ 200+ line single file | ✅ Files ~20-40 lines each |
-| ❌ Hard to find specific logic | ✅ Clear file names |
-| ❌ Testing requires mocking entire file | ✅ Test individual pieces |
-| ❌ Merge conflicts on same file | ✅ Work on separate files |
-| ❌ Mixed concerns | ✅ Separation of concerns |
-| ❌ Hard to onboard new devs | ✅ Self-documenting structure |
+| Before (Monolithic)                     | After (Modular)               |
+| --------------------------------------- | ----------------------------- |
+| ❌ 200+ line single file                | ✅ Files ~20-40 lines each    |
+| ❌ Hard to find specific logic          | ✅ Clear file names           |
+| ❌ Testing requires mocking entire file | ✅ Test individual pieces     |
+| ❌ Merge conflicts on same file         | ✅ Work on separate files     |
+| ❌ Mixed concerns                       | ✅ Separation of concerns     |
+| ❌ Hard to onboard new devs             | ✅ Self-documenting structure |
 
 ---
 
@@ -228,12 +240,14 @@ This structure makes it easy to add:
 ## 📝 Summary
 
 **File Responsibilities:**
+
 - `index.ts` - Route registration
 - `*-handler.ts` - HTTP layer (request/response)
 - `user.service.ts` - Business logic
 - `process-table-request.util.ts` - Reusable helpers
 
 **Key Principles:**
+
 - ✅ Single Responsibility
 - ✅ Separation of Concerns
 - ✅ DRY (Don't Repeat Yourself)

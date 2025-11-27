@@ -32,7 +32,9 @@
         </th>
         <th
           class="w-1/4 cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-gray-800"
-          (click)="onSort('email', sortField() === 'email' ? sortOrder() : null)"
+          (click)="
+            onSort('email', sortField() === 'email' ? sortOrder() : null)
+          "
         >
           <div class="flex items-center justify-between">
             <span>Email</span>

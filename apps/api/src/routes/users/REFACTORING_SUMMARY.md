@@ -21,6 +21,7 @@ apps/api/src/routes/
 ```
 
 **Problems:**
+
 - 🔴 Everything in ONE file
 - 🔴 Hard to navigate
 - 🔴 Difficult to test
@@ -76,6 +77,7 @@ apps/api/src/
 ```
 
 **Benefits:**
+
 - ✅ Each file has ONE responsibility
 - ✅ Easy to find and understand
 - ✅ Testable in isolation
@@ -85,12 +87,12 @@ apps/api/src/
 
 ## 📊 File Size Comparison
 
-| Before | After |
-|--------|-------|
-| 1 file × 220 lines | 9 files × ~20-75 lines each |
-| All logic mixed | Clean separation |
-| Hard to test | Easy to test |
-| Merge conflicts likely | Independent files |
+| Before                 | After                       |
+| ---------------------- | --------------------------- |
+| 1 file × 220 lines     | 9 files × ~20-75 lines each |
+| All logic mixed        | Clean separation            |
+| Hard to test           | Easy to test                |
+| Merge conflicts likely | Independent files           |
 
 ---
 
@@ -98,16 +100,17 @@ apps/api/src/
 
 ### **1. Separation of Concerns**
 
-| Layer | Responsibility | Files |
-|-------|---------------|-------|
-| **Service** | Business logic, data management | `user.service.ts` |
-| **Utility** | Reusable helpers | `process-table-request.util.ts` |
-| **Handler** | HTTP request/response | `*-user.ts` |
-| **Router** | Route registration | `index.ts` |
+| Layer       | Responsibility                  | Files                           |
+| ----------- | ------------------------------- | ------------------------------- |
+| **Service** | Business logic, data management | `user.service.ts`               |
+| **Utility** | Reusable helpers                | `process-table-request.util.ts` |
+| **Handler** | HTTP request/response           | `*-user.ts`                     |
+| **Router**  | Route registration              | `index.ts`                      |
 
 ### **2. Single Responsibility Principle**
 
 Each file does **ONE thing well**:
+
 - `get-users.ts` - ONLY handles GET requests
 - `create-user.ts` - ONLY handles user creation
 - `user.service.ts` - ONLY manages user data
@@ -171,19 +174,23 @@ processTableRequest<T>(data, request);
 ## 📚 Architecture Principles Used
 
 ✅ **SOLID Principles**
+
 - Single Responsibility
 - Open/Closed (easy to extend)
 - Dependency Inversion (handlers depend on service abstraction)
 
 ✅ **Clean Architecture**
+
 - Layers (handlers → service → data)
 - Dependency flow (inward)
 
 ✅ **DRY (Don't Repeat Yourself)**
+
 - Reusable `processTableRequest`
 - Shared service instance
 
 ✅ **KISS (Keep It Simple, Stupid)**
+
 - Simple, focused files
 - Clear naming
 
